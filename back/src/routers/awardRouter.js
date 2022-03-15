@@ -7,6 +7,9 @@ const awardRouter = Router();
 
 awardRouter.post("/user/login", async (req, res, next) => {
   // 로그인 토큰 발급용
+  //   토큰 발급은 JWT_SECRET_KEY를 사용해서 발급하고 헤더에 authorization에 저장한다
+  //    토큰 발급은 bearer + token으로 한다
+  //    TODO: 토큰 발급하기 구현부터
 });
 
 // 로그인된 사용자만 수상 내역을 추가할 수 있음
