@@ -10,3 +10,5 @@ class awardService {
     return createdNewAward;
   }
 }
+
+export { awardService };
