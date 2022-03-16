@@ -1,15 +1,35 @@
 import { Router } from "express";
+import { jwt } from "jsonwebtoken";
 
 import { login_required } from "../middlewares/login_required";
 import { awardService } from "../services/awardService";
 
 const awardRouter = Router();
 
-awardRouter.post("/user/login", async (req, res, next) => {
+awardRouter.post("/user/login", login_required, async (req, res, next) => {
   // 로그인 토큰 발급용
   //   토큰 발급은 JWT_SECRET_KEY를 사용해서 발급하고 헤더에 authorization에 저장한다
   //    토큰 발급은 bearer + token으로 한다
-  //    TODO: 토큰 발급하기 구현부터
+  try {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const token = jwt.sign(
+      {
+        email,
+        password,
+      },
+      process.env.JWT_SECRET_KEY
+    );
+    req.session.jwt = `bearer ${token}`;
+
+    return res.status.json({
+      succ: "ture",
+      token,
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
 // 로그인된 사용자만 수상 내역을 추가할 수 있음
@@ -55,3 +75,5 @@ awardRouter.put("/awards/:id", login_required, (req, res, nex) => {
 awardRouter.get("/awardlist/:user_id", login_required, (req, res, next) => {
   // 사용자의 모든 수상내역 가져오기
 });
+
+export { awardRouter };
