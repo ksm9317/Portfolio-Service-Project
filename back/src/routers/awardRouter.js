@@ -74,10 +74,10 @@ awardRouter.post("/award/create", login_required, async (req, res, next) => {
 });
 
 awardRouter.get("/awards/:id", login_required, async (req, res, next) => {
-  // id를 기준으로 사용자의 수상 내역 가져오기
+  // 수상 내역 id를 기준으로 사용자의 수상 내역 가져오기
   try {
-    const user_id = req.params.id;
-    const awards = await awardService.getAwards({ user_id });
+    const id = req.params.id;
+    const awards = await awardService.getAwards({ id });
     res.status(200).json(awards);
   } catch (error) {
     next(error);

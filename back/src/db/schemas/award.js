@@ -3,6 +3,10 @@ import { Schema, model } from "mongoose";
 // 스키마 시작 알파벳은 무조건 UpperCase
 const AwardSchema = new Schema({
   //  제공된 api 명세서를 따름
+  user_id: {
+    type: String,
+    required: true,
+  },
   id: {
     type: String,
     required: true,
