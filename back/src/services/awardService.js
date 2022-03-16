@@ -9,6 +9,10 @@ class awardService {
     createdNewAward.errorMessage = null;
     return createdNewAward;
   }
+
+  static async getAwards() {
+    // 사용자의 모든 수상 내역을 가져온다
+  }
 }
 
 export { awardService };
