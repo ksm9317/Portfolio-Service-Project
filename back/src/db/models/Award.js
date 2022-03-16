@@ -13,6 +13,7 @@ class Award {
     return userAward;
   }
 
+  // 사용자 id를 사용해서 사용자의 모든 수상 내역을 가져오기
   static async findByUserId({ user_id }) {
     const userAward = await AwardModel.find({ user_id });
     return userAward;

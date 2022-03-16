@@ -7,6 +7,7 @@ const AwardSchema = new Schema({
     type: String,
     required: true,
   },
+  // award의 고유 id
   id: {
     type: String,
     required: true,

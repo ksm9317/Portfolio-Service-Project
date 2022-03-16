@@ -1,6 +1,5 @@
 import is from "@sindresorhus/is";
 import { Router } from "express";
-import { jwt } from "jsonwebtoken";
 
 import { login_required } from "../middlewares/login_required";
 import { awardService } from "../services/awardService";
