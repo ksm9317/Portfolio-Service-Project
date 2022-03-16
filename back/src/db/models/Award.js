@@ -19,7 +19,18 @@ class Award {
   }
 
   // 수상 내역 수정하기
-  static async update() {}
+  static async update({ id, fieldToUpdate, newValue }) {
+    const filter = { id };
+    const update = { [fieldToUpdate]: newValue };
+    const option = { returnOriginal: false };
+
+    const updateAward = await AwardModel.findOneAndUpdate(
+      filter,
+      update,
+      option
+    );
+    return updateAward;
+  }
 }
 
 export { Award };

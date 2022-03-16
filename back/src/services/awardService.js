@@ -24,6 +24,33 @@ class awardService {
     const user = await Award.findByUserId({ user_id });
     return user;
   }
+
+  static async setAward({ id, update }) {
+    // 사용자의 수상내역을 수정한다
+    // 받은 id를 가진 수상 내역이 존재하는지 확인하기
+    let award = await Award.findById({ id });
+
+    // db에 존재하지 않는경우 에러 발생
+    if (!award) {
+      const errorMessage = "수상 내역이 없습니다.";
+      return { errorMessage };
+    }
+
+    // title과 description 업데이트
+    if (update.title) {
+      const fieldToUpdate = "title";
+      const newValue = update.title;
+      award = await Award.update({ id, fieldToUpdate, newValue });
+    }
+
+    if (update.description) {
+      const fieldToUpdate = "description";
+      const newValue = update.description;
+      award = await Award.update({ id, fieldToUpdate, newValue });
+    }
+
+    return award;
+  }
 }
 
 export { awardService };
