@@ -76,9 +76,9 @@ awardRouter.post("/award/create", login_required, async (req, res, next) => {
 awardRouter.get("/awards/:id", login_required, async (req, res, next) => {
   // 수상 내역 id를 기준으로 사용자의 수상 내역 가져오기
   try {
-    const id = req.params.id;
-    const awards = await awardService.getAwards({ id });
-    res.status(200).json(awards);
+    const awardId = req.params.id;
+    const award = await awardService.getAward({ awardId });
+    res.status(200).json(award);
   } catch (error) {
     next(error);
   }
@@ -89,8 +89,19 @@ awardRouter.put("/awards/:id", login_required, (req, res, nex) => {
   // id를 기준으로 사용자의 수상 내역 수정하기
 });
 
-awardRouter.get("/awardlist/:user_id", login_required, (req, res, next) => {
-  // 사용자의 모든 수상내역 가져오기
-});
+awardRouter.get(
+  "/awardlist/:user_id",
+  login_required,
+  async (req, res, next) => {
+    // 사용자의 모든 수상내역 가져오기
+    try {
+      const user_id = req.currentUserId;
+      const awards = await awardService.getAwards({ user_id });
+      res.status(200).json(awards);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 export { awardRouter };

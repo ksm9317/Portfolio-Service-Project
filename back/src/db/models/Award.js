@@ -8,8 +8,13 @@ class Award {
   }
 
   // 사용자 id로 수상 내역 찾기
-  static async findById({ id }) {
-    const userAward = await AwardModel.findOne({ id });
+  static async findById({ awardId }) {
+    const userAward = await AwardModel.find({ id: awardId });
+    return userAward;
+  }
+
+  static async findByUserId({ user_id }) {
+    const userAward = await AwardModel.find({ user_id });
     return userAward;
   }
 

@@ -13,9 +13,15 @@ class awardService {
     return createdNewAward;
   }
 
-  static async getAwards({ id }) {
+  static async getAward({ awardId }) {
     // 사용자의 수상 내역을 수상 내역 id를 기준으로 하나 가져옴
-    const user = await Award.findById({ id });
+    const user = await Award.findById({ awardId });
+    return user;
+  }
+
+  static async getAwards({ user_id }) {
+    // 사용자의 수상 내역을 수상 내역 id를 기준으로 하나 가져옴
+    const user = await Award.findByUserId({ user_id });
     return user;
   }
 }
