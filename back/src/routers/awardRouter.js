@@ -62,8 +62,6 @@ awardRouter.post("/award/create", login_required, async (req, res, next) => {
       description,
     });
 
-    console.log(newAward);
-
     if (newAward.errorMessage) {
       throw new Error(newAward.errorMessage);
     }
@@ -77,6 +75,14 @@ awardRouter.post("/award/create", login_required, async (req, res, next) => {
 
 awardRouter.get("/awards/:id", login_required, async (req, res, next) => {
   // id를 기준으로 사용자의 수상 내역 가져오기
+  try {
+    const user_id = req.params.id;
+    const awards = await awardService.getAwards({ user_id });
+    res.status(200).json(awards);
+  } catch (error) {
+    next(error);
+  }
+  // id를 기준으로 사용자 수상 내역 가져오기 완료
 });
 
 awardRouter.put("/awards/:id", login_required, (req, res, nex) => {

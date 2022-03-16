@@ -11,8 +11,10 @@ class awardService {
     return createdNewAward;
   }
 
-  static async getAwards() {
+  static async getAwards({ user_id }) {
     // 사용자의 모든 수상 내역을 가져온다
+    const user = await Award.findById({ user_id });
+    return user;
   }
 }
 
