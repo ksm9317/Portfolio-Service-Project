@@ -29,6 +29,11 @@ class Education {
     );
     return updateEducation;
   }
+
+  static async findBySchool({ school }) {
+    const isSchool = await EducationModel.find({ school });
+    return isSchool;
+  }
 }
 
 export { Education };

@@ -47,6 +47,10 @@ educationRouter.get("/educations/:id", async (req, res, next) => {
     const id = req.params.id;
 
     const education = await educationService.getEducation({ id });
+
+    if (education.errorMessage) {
+      throw new Error(education.errorMessage);
+    }
     res.status(200).json(education);
   } catch (error) {
     next(error);
