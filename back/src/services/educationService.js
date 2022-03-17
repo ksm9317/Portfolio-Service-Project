@@ -19,6 +19,8 @@ class educationService {
 
   static async getEducation({ id }) {
     // education의 id를 기준으로 확인
+    const education = await Education.findById({ id });
+    return education;
   }
 
   static async getEducations({ user_id }) {

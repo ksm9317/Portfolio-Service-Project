@@ -4,6 +4,8 @@ import { login_required } from "../middlewares/login_required";
 import { educationService } from "../services/educationService";
 
 const educationRouter = Router();
+
+// education의 모든 요청은 로그인이 되어 있어야 함
 educationRouter.use(login_required);
 
 educationRouter.post("/education/create", async (req, res, next) => {
@@ -41,6 +43,15 @@ educationRouter.post("/education/create", async (req, res, next) => {
 
 educationRouter.get("/educations/:id", async (req, res, next) => {
   // 학력 id를 기준으로 확인
+  try {
+    const id = req.params.id;
+
+    const education = await educationService.getEducation({ id });
+    res.status(200).json(education);
+  } catch (error) {
+    next(error);
+  }
+  // find education by id finish
 });
 
 educationRouter.put("/educations/:id", async (req, res, next) => {
