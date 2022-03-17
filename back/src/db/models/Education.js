@@ -12,7 +12,18 @@ class Education {
 
   static async findAll({ newEducation }) {}
 
-  static async update({ newEducation }) {}
+  static async update({ id, fieldToUpdate, newValue }) {
+    const filter = { id };
+    const update = { [fieldToUpdate]: newValue };
+    const option = { returnOriginal: false };
+
+    const updateEducation = await EducationModel.findOneAndUpdate(
+      filter,
+      update,
+      option
+    );
+    return updateEducation;
+  }
 }
 
 export { Education };

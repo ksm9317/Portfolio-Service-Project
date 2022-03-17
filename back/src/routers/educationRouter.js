@@ -45,6 +45,31 @@ educationRouter.get("/educations/:id", async (req, res, next) => {
 
 educationRouter.put("/educations/:id", async (req, res, next) => {
   // 학력 id를 기준으로 수정
+  try {
+    const id = req.params.id;
+    const school = req.body.school ?? null;
+    const major = req.body.major ?? null;
+    const position = req.body.position ?? null;
+
+    const updateEducation = {
+      school,
+      major,
+      position,
+    };
+
+    const update = await educationService.setEducations({
+      id,
+      updateEducation,
+    });
+
+    if (update.errorMessage) {
+      throw new Error(update.errorMessage);
+    }
+
+    res.status(200).json(update);
+  } catch (error) {
+    next(error);
+  }
 });
 
 educationRouter.get("/educationlist/:id", async (req, res, next) => {
