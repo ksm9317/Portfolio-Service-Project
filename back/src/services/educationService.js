@@ -1,7 +1,7 @@
 import { Education } from "../db";
 import { v4 as uuidv4 } from "uuid";
 
-class EducationService {
+class educationService {
   static async addEducation({ school, major, position }) {
     // education 추가
   }
@@ -19,4 +19,4 @@ class EducationService {
   }
 }
 
-export { EducationService };
+export { educationService };
