@@ -25,6 +25,8 @@ class educationService {
 
   static async getEducations({ user_id }) {
     // 사용자 id를 기준으로 모든 학력 가져오기
+    const educations = await Education.findByUserId({ user_id });
+    return educations;
   }
 
   static async setEducations({ id, updateEducation }) {
