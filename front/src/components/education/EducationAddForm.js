@@ -1,0 +1,134 @@
+import React, { useState } from "react";
+import { Button, Form, Col, Row } from "react-bootstrap";
+import * as Api from "../../api";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+
+function EducationAddFrom({ setIsAddEducation, user, setUser }) {
+  const [school, setSchool] = useState("");
+  const [major, setMajor] = useState("");
+  const [position, setPosition] = useState("재학중");
+
+  const handleChange = (event) => {
+    setPosition(event.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const res = await Api.post(`education/create`, {
+      user_id: user.id,
+      school,
+      major,
+      position,
+    });
+    // 유저 정보는 response의 data임.
+    const updatedUser = res.data;
+    // 해당 유저 정보로 user을 세팅함.
+    setUser(updatedUser);
+    console.log(updatedUser);
+    // isEditing을 false로 세팅함.
+    setIsAddEducation(false);
+    console.log(setIsAddEducation);
+  };
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Form.Group controlId="school">
+        <Form.Control
+          type="text"
+          placeholder="학교 이름"
+          value={school}
+          onChange={(e) => setSchool(e.target.value)}
+        />
+      </Form.Group>
+
+      <Form.Group controlId="major" className="mt-3">
+        <Form.Control
+          type="text"
+          placeholder="전공"
+          value={major}
+          onChange={(e) => setMajor(e.target.value)}
+        />
+      </Form.Group>
+
+      {/* <Form.Group className="mb-3 mt-3">
+        <Form.Check
+          inline
+          label="재학중"
+          name="position"
+          type="radio"
+          value="재학중"
+          onChange={(e) => setPosition(e.currentTarget.value)}
+        />
+        <Form.Check
+          inline
+          label="학사졸업"
+          name="position"
+          type="radio"
+          value="학사졸업"
+          onChange={(e) => setPosition(e.currentTarget.value)}
+        />
+        <Form.Check
+          inline
+          label="석사졸업"
+          name="position"
+          type="radio"
+          value="석사졸업"
+          onChange={(e) => setPosition(e.currentTarget.value)}
+        />
+        <Form.Check
+          inline
+          label="박사졸업"
+          name="position"
+          type="radio"
+          value="박사졸업"
+          onChange={(e) => setPosition(e.currentTarget.value)}
+        />
+      </Form.Group> */}
+
+      <FormControl>
+        <RadioGroup
+          aria-labelledby="demo-row-controlled-radio-buttons-group"
+          row
+          name="controlled-radio-buttons-group"
+          value={position}
+          onChange={handleChange}
+        >
+          <FormControlLabel value="재학중" control={<Radio />} label="재학중" />
+          <FormControlLabel
+            value="학사졸업"
+            control={<Radio />}
+            label="학사졸업"
+          />
+          <FormControlLabel
+            value="석사졸업"
+            control={<Radio />}
+            label="석사졸업"
+          />
+          <FormControlLabel
+            value="박사졸업"
+            control={<Radio />}
+            label="박사졸업"
+          />
+        </RadioGroup>
+      </FormControl>
+
+      <Form.Group as={Row} className="mt-3 text-center">
+        <Col sm={{ span: 20 }}>
+          <Button variant="primary" type="submit" className="me-3">
+            확인
+          </Button>
+          <Button variant="secondary" onClick={() => setIsAddEducation(false)}>
+            취소
+          </Button>
+        </Col>
+      </Form.Group>
+    </Form>
+  );
+}
+
+export default EducationAddFrom;
