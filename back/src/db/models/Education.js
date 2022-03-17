@@ -12,9 +12,7 @@ class Education {
     return education;
   }
 
-  static async findByUserId({ newEducation }) {}
-
-  static async findAll({ newEducation }) {}
+  static async findByUserId({ user_id }) {}
 
   static async update({ id, fieldToUpdate, newValue }) {
     const filter = { id };
