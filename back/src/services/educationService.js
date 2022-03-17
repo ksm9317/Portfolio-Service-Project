@@ -7,6 +7,13 @@ class educationService {
     // TODO: 학력 존재하는지 확인하기
     // TODO: 학교 이름으로 존재하면 등록되어 있다고 하기
 
+    const existEducation = await Education.findBySchool({ school });
+
+    if (existEducation) {
+      const errorMessage = "해당 학력은 이미 존재합니다.";
+      return { errorMessage };
+    }
+
     // education 고유 id 발급
     const id = uuidv4();
     const newEducation = { user_id, id, school, major, position };
@@ -25,6 +32,8 @@ class educationService {
 
   static async getEducations({ user_id }) {
     // 사용자 id를 기준으로 모든 학력 가져오기
+    const educations = await Education.findByUserId({ user_id });
+    return educations;
   }
 
   static async setEducations({ id, updateEducation }) {
