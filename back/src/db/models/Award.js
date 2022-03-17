@@ -7,6 +7,12 @@ class Award {
     return createNewAward;
   }
 
+  // 수상 내역의 title을 기준으로 검색
+  static async getAwardName({ title }) {
+    const isAward = await AwardModel.find({ title });
+    return isAward;
+  }
+
   // 사용자 id로 수상 내역 찾기
   static async findById({ awardId }) {
     const userAward = await AwardModel.find({ id: awardId });
