@@ -6,7 +6,11 @@ class Education {
     return createNewEducation;
   }
 
-  static async findById({ newEducation }) {}
+  static async findById({ id }) {
+    // id를 기준으로 하나만 찾아야 하므로 findOne을 사용
+    const education = await EducationModel.findOne({ id });
+    return education;
+  }
 
   static async findByUserId({ newEducation }) {}
 
