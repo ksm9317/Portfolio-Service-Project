@@ -5,7 +5,6 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
 
 function EducationAddFrom({ setIsAddEducation, user, setUser }) {
   const [school, setSchool] = useState("");
@@ -55,42 +54,7 @@ function EducationAddFrom({ setIsAddEducation, user, setUser }) {
         />
       </Form.Group>
 
-      {/* <Form.Group className="mb-3 mt-3">
-        <Form.Check
-          inline
-          label="재학중"
-          name="position"
-          type="radio"
-          value="재학중"
-          onChange={(e) => setPosition(e.currentTarget.value)}
-        />
-        <Form.Check
-          inline
-          label="학사졸업"
-          name="position"
-          type="radio"
-          value="학사졸업"
-          onChange={(e) => setPosition(e.currentTarget.value)}
-        />
-        <Form.Check
-          inline
-          label="석사졸업"
-          name="position"
-          type="radio"
-          value="석사졸업"
-          onChange={(e) => setPosition(e.currentTarget.value)}
-        />
-        <Form.Check
-          inline
-          label="박사졸업"
-          name="position"
-          type="radio"
-          value="박사졸업"
-          onChange={(e) => setPosition(e.currentTarget.value)}
-        />
-      </Form.Group> */}
-
-      <FormControl>
+      <FormControl className="mb-3 mt-3">
         <RadioGroup
           aria-labelledby="demo-row-controlled-radio-buttons-group"
           row

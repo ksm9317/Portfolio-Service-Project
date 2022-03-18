@@ -1,19 +1,18 @@
-import { useNavigate } from "react-router-dom";
-import { Card, Row, Button, Col } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 
 function EducationCard({ user, setIsEditing, isEditable }) {
-  //   const navigate = useNavigate();
   return (
-    <Card className="mb-2 ms-3 mr-5" style={{ width: "18rem" }}>
-      <Card.Body>
-        <Card.Title>{user?.schoolName}</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">{user?.major}</Card.Subtitle>
-        <Card.Text>{user?.radioValue}</Card.Text>
-
-        {isEditable && (
-          <Col>
-            <Row className="mt-3 text-center text-info">
-              <Col sm={{ span: 20 }}>
+    <div className="mb-2 ms-3 mr-5">
+      <div>
+        <Card.Text>
+          <div className="justify-content-between align-items-center mb-2 row">
+            <div className="col">
+              {user?.school} <br />
+              <span className="text-muted">{user?.major}</span> <br />
+              <span className="text-muted">{user?.position}</span>
+            </div>
+            <div className="col - lg - 1 col">
+              {isEditable && (
                 <Button
                   variant="outline-info"
                   size="sm"
@@ -21,12 +20,12 @@ function EducationCard({ user, setIsEditing, isEditable }) {
                 >
                   편집
                 </Button>
-              </Col>
-            </Row>
-          </Col>
-        )}
-      </Card.Body>
-    </Card>
+              )}
+            </div>
+          </div>
+        </Card.Text>
+      </div>
+    </div>
   );
 }
 

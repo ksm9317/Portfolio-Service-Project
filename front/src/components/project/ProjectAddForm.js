@@ -53,13 +53,13 @@ function ProjectAddFrom({ setIsAddProject, user, setUser }) {
         <Form.Group className="col-auto">
           <DatePicker
             selected={projectStart}
-            onChange={(date: Date) => setProjectStart(date)}
+            onChange={(date) => setProjectStart(date)}
           />
         </Form.Group>
         <Form.Group className="col-auto">
           <DatePicker
             selected={projectEnd}
-            onChange={(date: Date) => setProjectEnd(date)}
+            onChange={(date) => setProjectEnd(date)}
           />
         </Form.Group>
       </Form.Group>
