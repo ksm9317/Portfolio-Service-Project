@@ -4,9 +4,6 @@ import { v4 as uuidv4 } from "uuid";
 class educationService {
   static async addEducation({ user_id, school, major, position }) {
     // education 추가
-    // TODO: 학력 존재하는지 확인하기
-    // TODO: 학교 이름으로 존재하면 등록되어 있다고 하기
-
     const existEducation = await Education.findBySchool({ school });
 
     if (existEducation) {
