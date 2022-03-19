@@ -6,39 +6,6 @@ import { awardService } from "../services/awardService";
 
 const awardRouter = Router();
 
-// award 에서는 user/login구현할 필요 없음  --> 주석처리 함
-// awardRouter.post("/user/login", async (req, res, next) => {
-//   // 로그인 토큰 발급용
-//   //   토큰 발급은 JWT_SECRET_KEY를 사용해서 발급하고 헤더에 authorization에 저장한다
-//   //    토큰 발급은 bearer + token으로 한다
-//   console.log("award user login");
-//   try {
-//     const email = req.body.email;
-//     const password = req.body.password;
-
-//     const token = jwt.sign(
-//       {
-//         email,
-//         password,
-//       },
-//       process.env.JWT_SECRET_KEY
-//     );
-//     // req.headers.authorization = `bearer ${token}`;
-//     const saveToken = `bearer ${token}`;
-
-//     // TODO: 토큰 생성 확인하기
-//     // fixme: 헤더에 토큰 저장을 어떻게 해야
-
-//     return res.status(200).json({
-//       headers: {
-//         Athorization: saveToken,
-//       },
-//     });
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
 // 로그인된 사용자만 수상 내역을 추가할 수 있음
 awardRouter.post("/award/create", login_required, async (req, res, next) => {
   try {

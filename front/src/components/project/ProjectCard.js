@@ -1,19 +1,21 @@
 import { Card, Button } from "react-bootstrap";
 
-function ProjectCard({ portfolioOwnerId, setIsEditing, isEditable }) {
+function ProjectCard({ user, setIsEditing, isEditable }) {
+  const title = user?.title;
+  const description = user?.description;
+  const from_data = user?.from_data;
+  const to_data = user?.to_data;
+
   return (
     <div className="mb-2 ms-3 mr-5">
       <div>
         <Card.Text>
           <div className="justify-content-between align-items-center mb-2 row">
             <div className="col">
-              {portfolioOwnerId?.title} <br />
+              {title} <br />
+              <span className="text-muted">{description}</span> <br />
               <span className="text-muted">
-                {portfolioOwnerId?.description}
-              </span>{" "}
-              <br />
-              <span className="text-muted">
-                {portfolioOwnerId?.from_data}~{portfolioOwnerId?.to_data}
+                {from_data}~{to_data}
               </span>
             </div>
             <div className="col - lg - 1 col">
