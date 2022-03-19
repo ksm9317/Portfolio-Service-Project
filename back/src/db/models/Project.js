@@ -12,6 +12,11 @@ class Project{
     return getProject;
   }
 
+  static async projectDelete({projectid}){
+    const getDeleteProject = await ProjectModel.findOneAndDelete({id: projectid});
+    return getDeleteProject;
+  }
+
   static async update({projectid,fieldtoUpdate,newValue}){
     const filter = {projectid};
     const update = {[fieldtoUpdate] : newValue};

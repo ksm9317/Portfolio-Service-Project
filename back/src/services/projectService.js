@@ -12,11 +12,14 @@ class projectService{
     }
 
     static async getProject({projectId}){
-        console.log(projectId)
         const project = await Project.findByObjectId({id :projectId});
         return project;
     }
-
+    
+    static async deletProject({projectId}){
+        const project = await Project.projectDelete({id : projectId});
+        return project;
+    }
     
     static async putProject({projectId, update}){
 

@@ -55,6 +55,21 @@ projectRouter.get("/projects/:id", async (req,res,next)=>{
     }
 });
 
+projectRouter.delete("/projects/:id/delete",async (req,res,next)=>{
+    try{
+        const {id} = req.params.id;
+        const deleteProject = await projectService.deletProject({id})
+
+        if (updateProject.errorMessage){
+            throw new Error(updateProject.errorMessage);
+           }
+           
+           res.json(deleteProject);
+    }catch(e){
+        next(e);
+    }
+})
+
 projectRouter.put("/projects/:id", async (req,res,next)=>{
     try{
         const id = req.params.id;
