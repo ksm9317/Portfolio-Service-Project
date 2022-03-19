@@ -89,8 +89,20 @@ projectRouter.put("/projects/:id",(req,res,next)=>{
     }
 });
 
-// projectRouter.get("projectlist/:user_id", (req,res)=>{
+projectRouter.get("projectlist/:user_id", (req,res,next)=>{
+    try {
+        const user_id = req.params.user_id;
+        const projectlist = await projectService.projectList({user_id});
 
-// });
+        if (projectlist.errorMessage){
+            throw new Error(projectlist.errorMessage);
+        }
+        
+        res.send(200).json(projectlist);
+    }catch(error){
+        next(error);
+    }
+    }
+});
 
 export { projectRouter };
