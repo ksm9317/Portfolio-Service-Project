@@ -15,6 +15,10 @@ const CertificateSchema = new Schema(
       required: false,
       default: "설명을 작성하지 않았습니다.",
     },
+    id: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

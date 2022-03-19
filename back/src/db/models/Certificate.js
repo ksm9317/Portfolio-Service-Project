@@ -1,7 +1,5 @@
 import { CertificateModel } from "../schemas/certificate";
 
-const ObjectId = require("mongodb").ObjectId;
-
 class Certificate {
   static async addCertificate({ newPost }) {
     // form에서 입력을 받아
@@ -11,14 +9,18 @@ class Certificate {
 
   static async UpdateOne({ id, title, description }) {
     //id는 글 고유의 id;
+    console.log(id);
     const updatedPost = await CertificateModel.updateOne(
-      { _id: ObjectId(`${id}`) },
+      { certificateid: id },
       {
         title: title,
         description: description,
       }
     );
+    console.log(updatedPost);
+    return updatedPost;
   }
+
   static async findByNameOrId({ title, user_id }) {
     // 수료한 교육의 이름을 받아 찾는 함수입니다. 중복체크등에서 쓰입니다.
     const found = await CertificateModel.findOne({
@@ -43,10 +45,11 @@ class Certificate {
     });
     return deleted;
   }
-  static async findByObjectId({ id }) {
-    console.log(id);
-    const found = await CertificateModel.findOne({ _id: ObjectId(`${id}`) });
-    return found;
+  static async findByObjectId({ certificateid }) {
+    console.log(certificateid);
+    const result = await CertificateModel.findOne({ id: certificateid });
+    console.log(result);
+    return result;
   }
 }
 

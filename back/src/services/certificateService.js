@@ -5,25 +5,9 @@ dotenv.config();
 class certificationService {
   //crud 순으로 재현합니다.
 
-  static async authenticateJWT(req, res, next) {
-    const authHeader = req.headers.authorization;
-    if (authHeader) {
-      const token = authHeader.split(" ")[1];
-      jwt.verify(token, process.env.JWT_SECRET_KEY, (err, user) => {
-        if (err) {
-          return res.sendStatus(403);
-        }
-        req.user = user;
-        next();
-      });
-    } else {
-      res.sendStatus(401);
-    }
-  }
-
-  static async updateCertification({ id, title, description }) {
+  static async updateCertification({ certificateid, title, description }) {
     const updated = await Certificate.UpdateOne({
-      id,
+      certificateid,
       title,
       description,
     });
@@ -33,7 +17,7 @@ class certificationService {
     user_id,
     title,
     description,
-    timestamps,
+    id,
   }) {
     const cert = await Certificate.findByNameOrId({
       title: title,
@@ -45,7 +29,7 @@ class certificationService {
       return { errorMessage };
     }
 
-    const newPost = { user_id, title, description, timestamps };
+    const newPost = { user_id, title, description, id };
     Certificate.addCertificate({ newPost });
     return newPost;
   }
@@ -61,10 +45,10 @@ class certificationService {
     return deleted;
   }
 
-  static async findCertificate({ id }) {
+  static async findCertificate({ certificateid }) {
     // read, return 값은 찾아낸 certificate 객체 전부
-    console.log(id);
-    const foundAll = Certificate.findByObjectId({ id });
+    console.log(certificateid);
+    const foundAll = Certificate.findByObjectId({ id: certificateid });
     console.log(foundAll);
     return foundAll;
   }
