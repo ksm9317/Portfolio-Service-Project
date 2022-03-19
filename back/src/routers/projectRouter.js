@@ -10,7 +10,7 @@ projectRouter.get("/project",(req,res)=>{
     res.send("project입니다.")
 })
 
-projectRouter.get("/project/create", async (req,res)=>{
+projectRouter.get("/project/create", login_required, async (req,res)=>{
    await res.send(`project create입니다. ${projectService}`);
 })
 
@@ -80,7 +80,7 @@ projectRouter.put("/projects/:id", async (req,res,next)=>{
          throw new Error(updateProject.errorMessage);
         }
         
-        res.send(200).json(updateProject);
+        res.json(updateProject);
     }catch(error){
         next(error);
     }
@@ -97,7 +97,7 @@ projectRouter.get("/projectlist/:user_id", async (req,res,next)=>{
             throw new Error(projectlist.errorMessage);
         }
         
-        res.send(200).json(projectlist);
+        res.json(projectlist);
     }catch(error){
         next(error);
     }
