@@ -2,24 +2,25 @@ import React, { useState } from 'react';
 import { Button, Form, Card, Col, Row } from 'react-bootstrap';
 import * as Api from '../../api';
 
-function AwardAddFrom({ setIsAddAward, award, setAward }) {
+function AwardAddForm({ setIsAddAward, portfolioOwnerId, setUser }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const user_id = portfolioOwnerId;
     try {
       // "user/register" 엔드포인트로 post요청함.
-      const res = await Api.post('award/create', {
+      const res = await Api.post(`award/create`, {
+        user_id,
         title,
         description,
       });
       // 유저 정보는 response의 data임.
-      const award = res.data;
+      const updatedUser = res.data;
       // 해당 유저 정보로 user을 세팅함.
-      setAward(award);
-      console.log(award);
+      setUser(updatedUser);
+      console.log(updatedUser);
       // isEditing을 false로 세팅함.
       setIsAddAward(false);
     } catch (err) {
@@ -29,7 +30,7 @@ function AwardAddFrom({ setIsAddAward, award, setAward }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="awardAddTitle" className="mb-3">
+      <Form.Group controlId="title" className="mb-3">
         <Form.Control
           type="text"
           placeholder="수상내역"
@@ -38,7 +39,7 @@ function AwardAddFrom({ setIsAddAward, award, setAward }) {
         />
       </Form.Group>
 
-      <Form.Group controlId="awardAddDescription">
+      <Form.Group controlId="description">
         <Form.Control
           type="text"
           placeholder="상세내역"
@@ -61,4 +62,4 @@ function AwardAddFrom({ setIsAddAward, award, setAward }) {
   );
 }
 
-export default AwardAddFrom;
+export default AwardAddForm;

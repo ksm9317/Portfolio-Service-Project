@@ -1,14 +1,17 @@
 import { Card, Button, Col } from 'react-bootstrap';
 
 function AwardCard({ award, setIsEditing, isEditable }) {
+  const title = award?.title;
+  const description = award?.description;
   return (
     <div className="mb-2 ms-3 mr-5">
       <div>
         <Card.Text>
           <div className="justify-content-between align-items-center mb-2 row">
             <Col>
-              <span>{award?.title}</span> <br />
-              <span className="text-muted">{award?.description}</span> <br />
+              <span>{title}</span>
+              <br />
+              <span>{description}</span>
             </Col>
             {isEditable && (
               <Col lg="1">
