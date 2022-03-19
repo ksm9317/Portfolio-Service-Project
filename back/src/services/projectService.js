@@ -21,8 +21,8 @@ class projectService{
     static async putProject({projectId, update}){
 
     let project = await Project.findByObjectId({id :projectId});
-    console.log(project);
-    
+    //console.log("변경이전",project);
+
         if(!project){
             return "project가 존재하지 않습니다.";
         }
@@ -50,14 +50,18 @@ class projectService{
             const newValue = update.to_data;
             project = await Project.update({projectId,fieldtoUpdate,newValue});
         }
+        //console.log("변경이후 :",project);
 
         return project;
     }
 
+    static async projectList({ user_id }){
+        const project = await Project.findByUserId({ user_id : user_id});
+        console.log(project)
+        return project;
+    }
     
 
 }
-
-
 
 export {projectService}

@@ -3,17 +3,14 @@ import { Router } from "express";
 import { login_required } from "../middlewares/login_required";
 import { projectService } from "../services/projectService";
 
-//
-
-//
-
 const projectRouter = Router();
+//projectRouter.use(login_required);
 
 projectRouter.get("/project",(req,res)=>{
     res.send("project입니다.")
 })
 
-projectRouter.get("/project/create", login_required, async (req,res)=>{
+projectRouter.get("/project/create", async (req,res)=>{
    await res.send(`project create입니다. ${projectService}`);
 })
 
@@ -89,20 +86,21 @@ projectRouter.put("/projects/:id", async (req,res,next)=>{
     }
 });
 
-// projectRouter.get("projectlist/:user_id", (req,res,next)=>{
-//     try {
-//         const user_id = req.params.user_id;
-//         const projectlist = await projectService.projectList({user_id});
+projectRouter.get("/projectlist/:user_id", async (req,res,next)=>{
+    try {
+        const user_id = req.params.user_id;
+        const projectlist = await projectService.projectList({ user_id });
 
-//         if (projectlist.errorMessage){
-//             throw new Error(projectlist.errorMessage);
-//         }
+        //console.log(projectlist);
         
-//         res.send(200).json(projectlist);
-//     }catch(error){
-//         next(error);
-//     }
-//     }
-// });
+        if (projectlist.errorMessage){
+            throw new Error(projectlist.errorMessage);
+        }
+        
+        res.send(200).json(projectlist);
+    }catch(error){
+        next(error);
+    }
+});
 
 export { projectRouter };

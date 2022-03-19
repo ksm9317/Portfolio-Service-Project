@@ -13,7 +13,7 @@ class Project{
   }
 
   static async update({projectid,fieldtoUpdate,newValue}){
-    const filter = {id : projectid};
+    const filter = {projectid};
     const update = {[fieldtoUpdate] : newValue};
     const option = { returnOriginal : false};
 
@@ -22,10 +22,15 @@ class Project{
       update,
       option
     );
-
+    
+    console.log("업데이트 내용",updateProject);
     return updateProject;
   }
 
+  static async findByUserId({ user_id }){
+    const getProjectList = await ProjectModel.find({user_id : user_id});
+    return getProjectList;
+  }
 }
 
 export { Project };
