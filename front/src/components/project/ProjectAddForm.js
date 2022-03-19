@@ -4,7 +4,7 @@ import * as Api from "../../api";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-function ProjectAddFrom({ setIsAddProject, user, setUser }) {
+function ProjectAddFrom({ setIsAddProject, portfolioOwnerId, setUser }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [projectStart, setProjectStart] = useState(new Date());
@@ -13,8 +13,10 @@ function ProjectAddFrom({ setIsAddProject, user, setUser }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const user_id = portfolioOwnerId;
+    console.log(user_id);
     const res = await Api.post(`project/create`, {
-      user_id: user.id,
+      user_id,
       title,
       description,
       from_data: projectStart,

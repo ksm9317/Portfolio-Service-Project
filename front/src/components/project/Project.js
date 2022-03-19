@@ -6,21 +6,13 @@ import ProjectCard from "./ProjectCard";
 
 function Project({ portfolioOwnerId, isEditable }) {
   const [isAddProject, setIsAddProject] = useState(false);
-  const [user, setUser] = useState(portfolioOwnerId);
+  const [user, setUser] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
 
-  // useEffect(() => {
-  //   // "users/유저id" 엔드포인트로 GET 요청을 하고, user를 response의 data로 세팅함.
-  //   Api.get("project", portfolioOwnerId).then((res) => setUser(res.data));
-  // }, [portfolioOwnerId]);
   useEffect(() => {
-    setUser({
-      title: "123",
-      description: "123",
-      from_data: "2022-03-18T01:26:59.343Z",
-      to_data: "2022-03-18T01:26:59.343Z",
-    });
-  }, []);
+    // "users/유저id" 엔드포인트로 GET 요청을 하고, user를 response의 data로 세팅함.
+    Api.get("project", portfolioOwnerId).then((res) => setUser(res.data));
+  }, [portfolioOwnerId]);
 
   return (
     <Card>
@@ -28,7 +20,7 @@ function Project({ portfolioOwnerId, isEditable }) {
         <Card.Title>프로젝트</Card.Title>
         {user !== null ? (
           <ProjectCard
-            user={user}
+            portfolioOwnerId={portfolioOwnerId}
             setIsEditing={setIsEditing}
             isEditable={isEditable}
           />
@@ -43,7 +35,7 @@ function Project({ portfolioOwnerId, isEditable }) {
         {isAddProject ? (
           <ProjectAddFrom
             setIsAddProject={setIsAddProject}
-            user={user}
+            portfolioOwnerId={portfolioOwnerId}
             setUser={setUser}
           />
         ) : (

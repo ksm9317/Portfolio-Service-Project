@@ -6,7 +6,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 
-function EducationAddFrom({ setIsAddEducation, user, setUser }) {
+function EducationAddFrom({ setIsAddEducation, portfolioOwnerId, setUser }) {
   const [school, setSchool] = useState("");
   const [major, setMajor] = useState("");
   const [position, setPosition] = useState("재학중");
@@ -17,9 +17,9 @@ function EducationAddFrom({ setIsAddEducation, user, setUser }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const user_id = portfolioOwnerId;
     const res = await Api.post(`education/create`, {
-      user_id: user.id,
+      user_id,
       school,
       major,
       position,
