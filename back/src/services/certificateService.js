@@ -11,6 +11,7 @@ class certificationService {
       title,
       description,
     });
+    return updated;
   }
   static async addCertification({
     //create, return 값은 생성된 certificate 객체

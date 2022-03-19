@@ -7,15 +7,15 @@ class Certificate {
     return createNewPost;
   }
 
-  static async UpdateOne({ id, title, description }) {
+  static async UpdateOne({ certificateid, title, description }) {
     //id는 글 고유의 id;
-    console.log(id);
-    const updatedPost = await CertificateModel.updateOne(
-      { certificateid: id },
+    const updatedPost = await CertificateModel.findOneAndUpdate(
+      { id: certificateid },
       {
         title: title,
         description: description,
-      }
+      },
+      { returnOriginal: false }
     );
     console.log(updatedPost);
     return updatedPost;
