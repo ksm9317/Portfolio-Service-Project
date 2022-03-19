@@ -79,8 +79,8 @@ projectRouter.put("/projects/:id", async (req,res,next)=>{
 
         const updateProject = await projectService.putProject({id,update});
 
-        if (project.errorMessage){
-            throw new Error(project.errorMessage);
+        if (updateProject.errorMessage){
+         throw new Error(updateProject.errorMessage);
         }
         
         res.send(200).json(updateProject);
