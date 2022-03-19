@@ -26,11 +26,11 @@ projectRouter.post("/project/create", async (req,res,next) => {
             );
         }
         // req 데이터 받아오기
-            const user_id = req.body.userid;
+            const user_id = req.body.user_id;
             const title = req.body.title;
             const description = req.body.description;
-            const from_data = req.body.fromdata;
-            const to_data = req.body.todata;
+            const from_data = req.body.from_data;
+            const to_data = req.body.to_data;
 
         //db추가하기
             const newProject =  await projectService.addProject({
@@ -66,8 +66,27 @@ projectRouter.get("/projects/:id", async (req,res,next)=>{
     }
 });
 
-projectRouter.put("/projects/:id",(req,res)=>{
+projectRouter.put("/projects/:id",(req,res,next)=>{
+    try{
+        const id = req.params.id;
 
+        const title = req.body.title ?? null;
+        const description = req.body.description ?? null;
+        const from_data = req.body.from_data ?? null;
+        const to_data = req.body.to_data ?? null;
+
+        const update = {title,description,from_data,to_data};
+
+        const updateProject = await projectService.putProject({id,update});
+
+        if (project.errorMessage){
+            throw new Error(project.errorMessage);
+        }
+        
+        res.send(200).json(updateProject);
+    }catch(error){
+        next(error);
+    }
 });
 
 // projectRouter.get("projectlist/:user_id", (req,res)=>{
