@@ -13,7 +13,7 @@ projectRouter.get("/project",(req,res)=>{
     res.send("project입니다.")
 })
 
-projectRouter.get("/project/create", async (req,res)=>{
+projectRouter.get("/project/create", login_required, async (req,res)=>{
    await res.send(`project create입니다. ${projectService}`);
 })
 
@@ -66,7 +66,7 @@ projectRouter.get("/projects/:id", async (req,res,next)=>{
     }
 });
 
-projectRouter.put("/projects/:id",(req,res,next)=>{
+projectRouter.put("/projects/:id", async (req,res,next)=>{
     try{
         const id = req.params.id;
 
@@ -89,20 +89,20 @@ projectRouter.put("/projects/:id",(req,res,next)=>{
     }
 });
 
-projectRouter.get("projectlist/:user_id", (req,res,next)=>{
-    try {
-        const user_id = req.params.user_id;
-        const projectlist = await projectService.projectList({user_id});
+// projectRouter.get("projectlist/:user_id", (req,res,next)=>{
+//     try {
+//         const user_id = req.params.user_id;
+//         const projectlist = await projectService.projectList({user_id});
 
-        if (projectlist.errorMessage){
-            throw new Error(projectlist.errorMessage);
-        }
+//         if (projectlist.errorMessage){
+//             throw new Error(projectlist.errorMessage);
+//         }
         
-        res.send(200).json(projectlist);
-    }catch(error){
-        next(error);
-    }
-    }
-});
+//         res.send(200).json(projectlist);
+//     }catch(error){
+//         next(error);
+//     }
+//     }
+// });
 
 export { projectRouter };
