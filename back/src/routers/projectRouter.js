@@ -4,16 +4,8 @@ import { login_required } from "../middlewares/login_required";
 import { projectService } from "../services/projectService";
 
 const projectRouter = Router();
-//projectRouter.use(login_required);
 
-projectRouter.get("/project",(req,res)=>{
-    res.send("project입니다.")
-})
-
-projectRouter.get("/project/create", login_required, async (req,res)=>{
-   await res.send(`project create입니다. ${projectService}`);
-})
-
+projectRouter.use(login_required);
 
 projectRouter.post("/project/create", async (req,res,next) => {
     try {
