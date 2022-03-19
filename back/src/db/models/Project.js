@@ -1,17 +1,12 @@
-import {ProjectModel} from "../schemas/project";
-import { UserModel } from "../schemas/user";
-
+import { ProjectModel } from "../schemas/project";
 
 class Project{
 
-    static async findById({ user_id }) {
-        const user = await UserModel.findOne({ id: user_id });
-        return user;
-      }
-
-      static async findById({ user_id }) {
-        const userPortfolio = await ProjectModel.find({ id: user_id });
-        return user;
-      }
-
+  static async create({ newProject }) {
+    const createdNewProject = await ProjectModel.create(newProject);
+    return createdNewProject;
+  }
+      
 }
+
+export { Project };

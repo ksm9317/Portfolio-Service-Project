@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { User } from "./models/User";
-import { Project } from "./models/User";
+import { Project } from "./models/Project";
 
 
 const DB_URL =

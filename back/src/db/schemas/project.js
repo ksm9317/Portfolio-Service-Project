@@ -1,32 +1,32 @@
 import { Schema, model } from "mongoose";
 
-const ProjectSchema = new Schema({ 
-  //user_id
-    user_id:{
+const ProjectSchema = new Schema(
+  {
+    user_id: {
       type: String,
-      required:true,
+      required: true,
     },
-    //title
     title: {
-      type : String,
-      required : true,
+      type: String,
+      required: true,
     },
-    //description
-    decription: {
-      type : String,
-      required : true,
+    description: {
+      type: String,
+      required: true,
     },
-    //from_data
     from_data: {
-      type : String,
-      required : true,
+      type: String,
+      required: true,
     },
-    //to_data
     to_data: {
-      type : String,
-      required : true,
-    }
-  });
+      type: String,
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
 const ProjectModel = model("Project", ProjectSchema);
 
