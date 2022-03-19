@@ -85,6 +85,18 @@ educationRouter.put("/educations/:id", async (req, res, next) => {
 
 educationRouter.get("/educationlist/:id", async (req, res, next) => {
   // 사용자 id를 기준으로 확인
+  try {
+    const user_id = req.currentUserId;
+    const educations = await educationService.getEducations({ user_id });
+
+    if (educations.errorMessage) {
+      throw new Error(educations.errorMessage);
+    }
+
+    res.status(200).json(educations);
+  } catch (error) {
+    next(error);
+  }
 });
 
 export { educationRouter };
