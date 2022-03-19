@@ -52,13 +52,23 @@ projectRouter.post("/project/create", async (req,res,next) => {
         }
 });
 
-// projectRouter.get("projects/:id",(req,res)=>{
+projectRouter.get("/projects/:id", async (req,res,next)=>{
+    try{
+    const projectId = req.params.id;
+    const project = await projectService.getProject({projectId});
 
-// });
+    if (project.errorMessage){
+        throw new Error(project.errorMessage);
+    }
+        res.status(200).json(project);
+    } catch(error){
+        next(error);
+    }
+});
 
-// projectRouter.put("projects/:id",(req,res)=>{
+projectRouter.put("/projects/:id",(req,res)=>{
 
-// });
+});
 
 // projectRouter.get("projectlist/:user_id", (req,res)=>{
 
