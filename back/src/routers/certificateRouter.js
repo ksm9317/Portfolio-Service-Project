@@ -31,10 +31,6 @@ certificateRouter.get(
     const user_id = req.params.user_id;
     console.log(user_id);
     const result = await certificationService.returnAllCertificate({ user_id });
-    if (result.length == 0) {
-      res.send(`아직 ${user_id} 님이 작성하신 수상 이력이 없습니다.`);
-      return;
-    }
     res.status(200).json(result);
   }
 );
