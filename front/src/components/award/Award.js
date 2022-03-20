@@ -6,48 +6,42 @@ import AwardCard from './AwardCard';
 
 function Award({ portfolioOwnerId, isEditable }) {
   const [isAddAward, setIsAddAward] = useState(false);
-  const [user, setUser] = useState([]);
+  const [list, setList] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    // "users/유저id" 엔드포인트로 GET 요청을 하고, user를 response의 data로 세팅함.
-    Api.get(`awardlist`, portfolioOwnerId).then((res) => setUser(res.data));
+    const fetch = async () => {
+      const res = await Api.get(`awardlist/${portfolioOwnerId}`);
+      setList(res.data);
+    };
+    fetch();
   }, [portfolioOwnerId]);
-  // useEffect(() => {
-  //   setUser({
-  //     title: 'title',
-  //     description: 'description',
-  //   });
-  // }, []);
-
   return (
     <Card>
       <Card.Body>
         <Card.Title>수상이력</Card.Title>
-
-        {user !== null ? (
-          <AwardCard
-            user={user}
-            setIsEditing={setIsEditing}
-            isEditable={isEditable}
-          />
-        ) : (
-          <></>
-        )}
+        {list &&
+          list.map((award) => (
+            <AwardCard
+              portfolioOwnerId={portfolioOwnerId}
+              list={award}
+              isEditable={isEditable}
+              setIsEditing={setIsEditing}
+              setList={setList}
+            />
+          ))}
 
         <div className="mt-3 text-center mb-4 row">
           <div className="col-sm-20">
-            <Button onClick={(e) => setIsAddAward(true)}>+</Button>
+            <Button onClick={(e) => setIsAddAward(true)}> + </Button>
           </div>
         </div>
-        {isAddAward ? (
+        {isAddAward && (
           <AwardAddForm
             setIsAddAward={setIsAddAward}
             portfolioOwnerId={portfolioOwnerId}
-            setUser={setUser}
+            setList={setList}
           />
-        ) : (
-          <></>
         )}
       </Card.Body>
     </Card>

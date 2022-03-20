@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Button, Form, Card, Col, Row } from 'react-bootstrap';
+import { Button, Form, Col, Row } from 'react-bootstrap';
 import * as Api from '../../api';
 
-function AwardAddForm({ setIsAddAward, portfolioOwnerId, setUser }) {
+function AwardAddForm({ setIsAddAward, portfolioOwnerId, setList }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
@@ -11,16 +11,15 @@ function AwardAddForm({ setIsAddAward, portfolioOwnerId, setUser }) {
     const user_id = portfolioOwnerId;
     try {
       // "user/register" 엔드포인트로 post요청함.
-      const res = await Api.post(`award/create`, {
+      await Api.post(`award/create`, {
         user_id,
         title,
         description,
       });
-      // 유저 정보는 response의 data임.
-      const updatedUser = res.data;
-      // 해당 유저 정보로 user을 세팅함.
-      setUser(updatedUser);
-      console.log(updatedUser);
+      // "awardlist"에서 awards 목록 다시 받아옴
+      await Api.get('awardlist', portfolioOwnerId).then((res) =>
+        setList(res.data)
+      );
       // isEditing을 false로 세팅함.
       setIsAddAward(false);
       console.log(setIsAddAward);

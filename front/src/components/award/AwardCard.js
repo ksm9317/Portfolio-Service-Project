@@ -1,8 +1,14 @@
 import { Card, Button } from 'react-bootstrap';
 
-function AwardCard({ user, setIsEditing, isEditable }) {
-  const title = user?.title;
-  const description = user?.description;
+function AwardCard({
+  list,
+  setIsEditing,
+  isEditable,
+  setList,
+  portfolioOwnerId,
+}) {
+  const title = list?.title;
+  const description = list?.description;
   return (
     <div className="mb-2 ms-3 mr-5">
       <div>
@@ -12,8 +18,9 @@ function AwardCard({ user, setIsEditing, isEditable }) {
               {title} <br />
               <span className="text-muted">{description}</span>
             </div>
+
             <div className="col - lg - 1 col">
-            {isEditable && (
+              {isEditable && (
                 <Button
                   variant="outline-info"
                   size="sm"
