@@ -23,20 +23,25 @@ function Education({ portfolioOwnerId, isEditable }) {
           user.map((education) => (
             <EducationCard
               key={education.id}
+              portfolioOwnerId={portfolioOwnerId}
               education={education}
               setIsEditing={setIsEditing}
+              setUser={setUser}
+              isEditing={isEditing}
               isEditable={isEditable}
             />
           ))
         ) : (
           <></>
         )}
-
-        <div className="mt-3 text-center mb-4 row">
-          <div className="col-sm-20">
-            <Button onClick={(e) => setIsAddEducation(true)}>+</Button>
+        {isEditable && (
+          <div className="mt-3 text-center mb-4 row">
+            <div className="col-sm-20">
+              <Button onClick={(e) => setIsAddEducation(true)}>+</Button>
+            </div>
           </div>
-        </div>
+        )}
+
         {isAddEducation ? (
           <EducationAddFrom
             setIsAddEducation={setIsAddEducation}

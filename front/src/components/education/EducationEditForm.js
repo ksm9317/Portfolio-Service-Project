@@ -6,10 +6,15 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 
-function EducationAddFrom({ setIsAddEducation, portfolioOwnerId, setUser }) {
-  const [school, setSchool] = useState("");
-  const [major, setMajor] = useState("");
-  const [position, setPosition] = useState("재학중");
+function EducationEditFrom({
+  portfolioOwnerId,
+  current,
+  setUser,
+  setIsEditing,
+}) {
+  const [school, setSchool] = useState(current?.school);
+  const [major, setMajor] = useState(current?.major);
+  const [position, setPosition] = useState(current?.position);
 
   const handleChange = (event) => {
     setPosition(event.target.value);
@@ -18,7 +23,7 @@ function EducationAddFrom({ setIsAddEducation, portfolioOwnerId, setUser }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user_id = portfolioOwnerId;
-    await Api.post(`education/create`, {
+    await Api.put(`educations/${current.currentId}`, {
       user_id,
       school,
       major,
@@ -30,7 +35,7 @@ function EducationAddFrom({ setIsAddEducation, portfolioOwnerId, setUser }) {
     setUser(res.data);
     console.log(res.data);
     // isEditing을 false로 세팅함.
-    setIsAddEducation(false);
+    setIsEditing(false);
   };
 
   return (
@@ -85,7 +90,7 @@ function EducationAddFrom({ setIsAddEducation, portfolioOwnerId, setUser }) {
           <Button variant="primary" type="submit" className="me-3">
             확인
           </Button>
-          <Button variant="secondary" onClick={() => setIsAddEducation(false)}>
+          <Button variant="secondary" onClick={() => setIsEditing(false)}>
             취소
           </Button>
         </Col>
@@ -94,4 +99,4 @@ function EducationAddFrom({ setIsAddEducation, portfolioOwnerId, setUser }) {
   );
 }
 
-export default EducationAddFrom;
+export default EducationEditFrom;
