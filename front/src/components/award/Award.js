@@ -11,7 +11,7 @@ function Award({ portfolioOwnerId, isEditable }) {
 
   useEffect(() => {
     // "users/유저id" 엔드포인트로 GET 요청을 하고, user를 response의 data로 세팅함.
-    Api.get(`awards`, portfolioOwnerId).then((res) => setUser(res.data));
+    Api.get(`awardlist`, portfolioOwnerId).then((res) => setUser(res.data));
   }, [portfolioOwnerId]);
   // useEffect(() => {
   //   setUser({
@@ -27,7 +27,7 @@ function Award({ portfolioOwnerId, isEditable }) {
 
         {user !== null ? (
           <AwardCard
-            award={user}
+            user={user}
             setIsEditing={setIsEditing}
             isEditable={isEditable}
           />

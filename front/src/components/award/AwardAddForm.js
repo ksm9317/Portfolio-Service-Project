@@ -23,6 +23,7 @@ function AwardAddForm({ setIsAddAward, portfolioOwnerId, setUser }) {
       console.log(updatedUser);
       // isEditing을 false로 세팅함.
       setIsAddAward(false);
+      console.log(setIsAddAward);
     } catch (err) {
       console.log('post 실패하였습니다.', err);
     }
