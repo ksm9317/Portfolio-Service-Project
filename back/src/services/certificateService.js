@@ -25,6 +25,7 @@ class certificationService {
     title,
     description,
     id,
+    date,
   }) {
     const cert = await Certificate.findByNameOrId({
       title: title,
@@ -36,7 +37,7 @@ class certificationService {
       return { errorMessage };
     }
 
-    const newPost = { user_id, title, description, id };
+    const newPost = { user_id, title, description, id, date };
     Certificate.addCertificate({ newPost });
     return newPost;
   }
