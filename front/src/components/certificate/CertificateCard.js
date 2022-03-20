@@ -1,42 +1,34 @@
-import { Card, Row, Button, Col } from 'react-bootstrap';
-import { useState } from 'react';
-import CertificateAddForm from './CertificateAddForm';
-import CertificateList from './CertificateList';
+import { Card, Button } from 'react-bootstrap';
 
-function CertificateCard({ isEditable }) {
-  const [add, setAdd] = useState(false);
-  const [list, setList] = useState([]);
-
+function CertificateCard({ user, setIsEditing, isEditable }) {
+  const certificate = user?.certificate;
+  const description = user?.description;
+  const date = user?.date;
   return (
-    <Col>
-      <Card>
-        <Card.Body>
-          <Card.Title>자격증</Card.Title>
-          <CertificateList list={list} setList={setList}></CertificateList>
-          {isEditable && (
-            <Row className="mt-3 mb-4 text-center text-info">
-              <Col sm={{ span: 20 }}>
+    <div className="mb-2 ms-3 mr-5">
+      <div>
+        <Card.Text>
+          <div className="justify-content-between align-items-center mb-2 row">
+            <div className="col">
+              {certificate} <br />
+              <span className="text-muted">{description}</span> <br />
+              <span className="text-muted">{date}</span>
+            </div>
+            <div className="col - lg - 1 col">
+              {isEditable && (
                 <Button
-                  variant="primary"
-                  size="md"
-                  onClick={() => setAdd(true)}
+                  variant="outline-info"
+                  size="sm"
+                  onClick={() => setIsEditing(true)}
                 >
-                  +
+                  편집
                 </Button>
-                {add ? (
-                  <CertificateAddForm
-                    setList={setList}
-                    setAdd={setAdd}
-                  ></CertificateAddForm>
-                ) : (
-                  ''
-                )}
-              </Col>
-            </Row>
-          )}
-        </Card.Body>
-      </Card>
-    </Col>
+              )}
+            </div>
+          </div>
+        </Card.Text>
+      </div>
+    </div>
   );
 }
 
