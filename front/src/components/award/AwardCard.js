@@ -1,4 +1,4 @@
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Col } from 'react-bootstrap';
 
 function AwardCard({
   list,
@@ -14,13 +14,12 @@ function AwardCard({
       <div>
         <Card.Text>
           <div className="justify-content-between align-items-center mb-2 row">
-            <div className="col">
-              {title} <br />
+            <Col>
+              <span>{title}</span> <br />
               <span className="text-muted">{description}</span>
-            </div>
-
-            <div className="col - lg - 1 col">
-              {isEditable && (
+            </Col>
+            {isEditable && (
+              <Col lg="1">
                 <Button
                   variant="outline-info"
                   size="sm"
@@ -28,8 +27,8 @@ function AwardCard({
                 >
                   편집
                 </Button>
-              )}
-            </div>
+              </Col>
+            )}
           </div>
         </Card.Text>
       </div>
