@@ -77,7 +77,7 @@ educationRouter.put("/educations/:id", async (req, res, next) => {
       throw new Error(update.errorMessage);
     }
 
-    res.status(200).json(update);
+    res.status(201).json(update);
   } catch (error) {
     next(error);
   }
