@@ -56,9 +56,9 @@ class certificationService {
   static async findCertificate({ certificateid }) {
     // read, return 값은 찾아낸 certificate 객체 전부
     console.log(certificateid);
-    const foundAll = Certificate.findByObjectId({ id: certificateid });
-    console.log(foundAll);
-    return foundAll;
+    const found = await Certificate.findByObjectId({ certificateid });
+    console.log(found);
+    return found;
   }
 }
 

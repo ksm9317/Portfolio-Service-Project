@@ -41,6 +41,7 @@ certificateRouter.get(
 
 certificateRouter.get("/certeficates/:id", login_required, async (req, res) => {
   const certificateid = req.params.id;
+  console.log(certificateid);
   const result = await certificationService.findCertificate({ certificateid });
   res.status(200).json(result);
 });
