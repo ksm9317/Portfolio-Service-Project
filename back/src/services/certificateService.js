@@ -5,11 +5,17 @@ dotenv.config();
 class certificationService {
   //crud 순으로 재현합니다.
 
-  static async updateCertification({ certificateid, title, description }) {
+  static async updateCertification({
+    certificateid,
+    title,
+    description,
+    date,
+  }) {
     const updated = await Certificate.UpdateOne({
       certificateid,
       title,
       description,
+      date,
     });
     return updated;
   }
@@ -40,9 +46,9 @@ class certificationService {
     const foundAll = Certificate.findAllPosts({ user_id });
     return foundAll;
   }
-  static async deleteOneCertificate({ user_id, title }) {
+  static async deleteOneCertificate({ certificateid }) {
     // delete, return값은 지우는데 성공했는지 boolean 값
-    const deleted = Certificate.deletePost({ user_id, title });
+    const deleted = Certificate.deletePost({ certificateid });
     return deleted;
   }
 

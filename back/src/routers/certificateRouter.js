@@ -9,7 +9,7 @@ certificateRouter.post(
   login_required,
   async (req, res) => {
     //create 함수입니다. 프론트엔드로부터 수료한 상장(certName)과 설명(certDescription), 그리고 지은이(author)를 json 객체로 전달받습니다.
-    const { title, user_id, description } = req.body;
+    const { title, user_id, description, date } = req.body;
     const id = uuidv4();
     console.log(id);
     const result = await certificationService.addCertification({
@@ -17,8 +17,9 @@ certificateRouter.post(
       title,
       user_id,
       description,
+      date,
     });
-    res.send(result);
+    res.status(200).json(result);
   }
 );
 
@@ -34,31 +35,30 @@ certificateRouter.get(
       res.send(`아직 ${user_id} 님이 작성하신 수상 이력이 없습니다.`);
       return;
     }
-    res.send(result);
+    res.status(200).json(result);
   }
 );
 
 certificateRouter.get("/certeficates/:id", login_required, async (req, res) => {
   const certificateid = req.params.id;
   const result = await certificationService.findCertificate({ certificateid });
-  res.send(result);
+  res.status(200).json(result);
 });
 
 certificateRouter.delete(
-  "/certificate/:id/delete",
+  "/certificates/:id/delete",
   login_required,
   async (req, res) => {
     //delete 함수입니다. 지은이와 상장의 이름만 전달받습니다.
-    const { user_id, title } = req.body;
+    const certificateid = req.params.id;
     const result = await certificationService.deleteOneCertificate({
-      user_id,
-      title,
+      certificateid,
     });
     if (result === null) {
-      res.send(`There is no Author with the name ${user_id}`);
+      res.send(`There is no Comment anymore`);
       return;
     }
-    res.send(result);
+    res.status(200).json(result);
   }
 );
 
@@ -75,7 +75,7 @@ certificateRouter.put("/certificates/:id", login_required, async (req, res) => {
     res.send("rejected");
     return;
   }
-  res.send(result);
+  res.status(200).json(result);
 });
 
 export { certificateRouter };

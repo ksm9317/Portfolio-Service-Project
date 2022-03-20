@@ -6,8 +6,9 @@ class educationService {
     // education 추가
     const existEducation = await Education.findBySchool({ school });
 
-    if (existEducation) {
+    if (existEducation.length !== 0) {
       const errorMessage = "해당 학력은 이미 존재합니다.";
+      alert(errorMessage);
       return { errorMessage };
     }
 
