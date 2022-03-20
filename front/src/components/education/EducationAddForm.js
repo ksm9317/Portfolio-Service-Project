@@ -18,20 +18,19 @@ function EducationAddFrom({ setIsAddEducation, portfolioOwnerId, setUser }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user_id = portfolioOwnerId;
-    const res = await Api.post(`education/create`, {
+    await Api.post(`education/create`, {
       user_id,
       school,
       major,
       position,
     });
     // 유저 정보는 response의 data임.
-    const updatedUser = res.data;
     // 해당 유저 정보로 user을 세팅함.
+    const updatedUser = await Api.get("educationlist", user_id);
     setUser(updatedUser);
     console.log(updatedUser);
     // isEditing을 false로 세팅함.
     setIsAddEducation(false);
-    console.log(setIsAddEducation);
   };
 
   return (

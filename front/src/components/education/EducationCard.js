@@ -1,9 +1,10 @@
 import { Card, Button } from "react-bootstrap";
 
-function EducationCard({ user, setIsEditing, isEditable }) {
-  const school = user?.school;
-  const major = user?.major;
-  const position = user?.position;
+function EducationCard({ education, setIsEditing, isEditable }) {
+  const school = education?.school;
+  const major = education?.major;
+  const position = education?.position;
+
   return (
     <div className="mb-2 ms-3 mr-5">
       <div>

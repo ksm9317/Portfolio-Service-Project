@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, Card, Col, Row } from "react-bootstrap";
+import { Button, Form, Col, Row } from "react-bootstrap";
 import * as Api from "../../api";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -14,13 +14,15 @@ function ProjectAddFrom({ setIsAddProject, portfolioOwnerId, setUser }) {
     e.preventDefault();
 
     const user_id = portfolioOwnerId;
-    console.log(user_id);
+    const from_data = projectStart.toISOString().split("T")[0];
+    const to_data = projectEnd.toISOString().split("T")[0];
+
     const res = await Api.post(`project/create`, {
       user_id,
       title,
       description,
-      from_data: projectStart,
-      to_data: projectEnd,
+      from_data,
+      to_data,
     });
     // 유저 정보는 response의 data임.
     const updatedUser = res.data;
