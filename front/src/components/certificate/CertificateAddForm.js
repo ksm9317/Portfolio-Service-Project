@@ -7,39 +7,43 @@ import 'react-datepicker/dist/react-datepicker.css';
 function CertificateAddForm({
   setIsAddCertificate,
   portfolioOwnerId,
-  setUser,
+  serList,
 }) {
-  const [certificate, setCertificate] = useState();
+  const [title, setTitle] = useState();
   const [description, setDescription] = useState();
   const [date, setDate] = useState(new Date());
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user_id = portfolioOwnerId;
-    const res = await Api.post(`certificate/create`, {
-      user_id,
-      certificate,
-      description,
-      date,
-    });
-    // 유저 정보는 response의 data임.
-    const updatedUser = res.data;
-    // 해당 유저 정보로 user을 세팅함.
-    setUser(updatedUser);
-    console.log(updatedUser);
-    // isEditing을 false로 세팅함.
-    setIsAddCertificate(false);
-    console.log(setIsAddCertificate);
+    try {
+      // post요청
+      await Api.post(`certificate/create`, {
+        user_id,
+        title,
+        description,
+        date,
+      });
+      // "certificatelist"에서 certificates 목록 다시 받아옴
+      await Api.get('certificatelist', portfolioOwnerId).then((res) =>
+        serList(res.data)
+      );
+      // isEditing을 false로 세팅함.
+      setIsAddCertificate(false);
+      console.log(setIsAddCertificate);
+    } catch (err) {
+      console.log('post 실패하였습니다.', err);
+    }
   };
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="certificate">
+      <Form.Group controlId="title" className="mb-3">
         <Form.Control
           type="text"
-          placeholder="자격증"
-          value={certificate}
-          onChange={(e) => setCertificate(e.target.value)}
+          placeholder="수상내역"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
         />
       </Form.Group>
 
@@ -53,12 +57,6 @@ function CertificateAddForm({
       </Form.Group>
 
       <Form.Group controlId="date" className="mt-3">
-        {/* <Form.Control
-          type="text"
-          placeholder="취득일"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-        /> */}
         <DatePicker selected={date} onChange={(e) => setDate(e)} />
       </Form.Group>
 

@@ -1,16 +1,22 @@
 import { Card, Button } from 'react-bootstrap';
 
-function CertificateCard({ user, setIsEditing, isEditable }) {
-  const certificate = user?.certificate;
-  const description = user?.description;
-  const date = user?.date;
+function CertificateCard({
+  list,
+  setIsEditing,
+  isEditable,
+  serList,
+  portfolioOwnerId,
+}) {
+  const title = list?.title;
+  const description = list?.description;
+  const date = list?.date;
   return (
     <div className="mb-2 ms-3 mr-5">
       <div>
         <Card.Text>
           <div className="justify-content-between align-items-center mb-2 row">
             <div className="col">
-              {certificate} <br />
+              {title} <br />
               <span className="text-muted">{description}</span> <br />
               <span className="text-muted">{date}</span>
             </div>
