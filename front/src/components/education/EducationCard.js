@@ -1,20 +1,14 @@
 import { Card, Button } from "react-bootstrap";
 import EducationEditForm from "./EducationEditForm";
+import { useState } from "react";
 
-function EducationCard({
-  portfolioOwnerId,
-  education,
-  setIsEditing,
-  setUser,
-  isEditing,
-  isEditable,
-}) {
+function EducationCard({ portfolioOwnerId, education, setUser, isEditable }) {
   const currentId = education?.id;
-  console.log(currentId);
   const school = education?.school;
   const major = education?.major;
   const position = education?.position;
   const current = { currentId, school, major, position };
+  const [isEditing, setIsEditing] = useState(false);
 
   return (
     <div className="mb-2 ms-3 mr-5">
@@ -39,7 +33,9 @@ function EducationCard({
                   <Button
                     variant="outline-info"
                     size="sm"
-                    onClick={() => setIsEditing(true)}
+                    onClick={() => {
+                      setIsEditing(true);
+                    }}
                   >
                     편집
                   </Button>

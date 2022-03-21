@@ -7,7 +7,6 @@ import EducationCard from "./EducationCard";
 function Education({ portfolioOwnerId, isEditable }) {
   const [isAddEducation, setIsAddEducation] = useState(false);
   const [user, setUser] = useState([]);
-  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     // "users/유저id" 엔드포인트로 GET 요청을 하고, user를 response의 data로 세팅함.
@@ -25,9 +24,7 @@ function Education({ portfolioOwnerId, isEditable }) {
               key={education.id}
               portfolioOwnerId={portfolioOwnerId}
               education={education}
-              setIsEditing={setIsEditing}
               setUser={setUser}
-              isEditing={isEditing}
               isEditable={isEditable}
             />
           ))

@@ -29,12 +29,9 @@ function EducationEditFrom({
       major,
       position,
     });
-    // 유저 정보는 response의 data임.
-    // 해당 유저 정보로 user을 세팅함.
     const res = await Api.get("educationlist", user_id);
     setUser(res.data);
     console.log(res.data);
-    // isEditing을 false로 세팅함.
     setIsEditing(false);
   };
 

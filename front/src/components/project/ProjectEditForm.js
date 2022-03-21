@@ -4,11 +4,11 @@ import * as Api from "../../api";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-function ProjectAddFrom({ setIsAddProject, portfolioOwnerId, setUser }) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [projectStart, setProjectStart] = useState(new Date());
-  const [projectEnd, setProjectEnd] = useState(new Date());
+function ProjectEditFrom({ portfolioOwnerId, current, setUser, setIsEditing }) {
+  const [title, setTitle] = useState(current?.title);
+  const [description, setDescription] = useState(current?.description);
+  const [projectStart, setProjectStart] = useState(current?.projectStart);
+  const [projectEnd, setProjectEnd] = useState(current?.projectEnd);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,7 +17,7 @@ function ProjectAddFrom({ setIsAddProject, portfolioOwnerId, setUser }) {
     const from_data = projectStart.toISOString().split("T")[0];
     const to_data = projectEnd.toISOString().split("T")[0];
 
-    await Api.post(`project/create`, {
+    await Api.put(`projects/${current.currentId}`, {
       user_id,
       title,
       description,
@@ -25,11 +25,10 @@ function ProjectAddFrom({ setIsAddProject, portfolioOwnerId, setUser }) {
       to_data,
     });
     // 유저 정보는 response의 data임.
-    const res = await Api.get("educationlist", user_id);
+    const res = await Api.get("projectlist", user_id);
     setUser(res.data);
     console.log(res.data);
-    // isEditing을 false로 세팅함.
-    setIsAddProject(false);
+    setIsEditing(false);
   };
 
   return (
@@ -72,7 +71,7 @@ function ProjectAddFrom({ setIsAddProject, portfolioOwnerId, setUser }) {
           <Button variant="primary" type="submit" className="me-3">
             확인
           </Button>
-          <Button variant="secondary" onClick={() => setIsAddProject(false)}>
+          <Button variant="secondary" onClick={() => setIsEditing(false)}>
             취소
           </Button>
         </Col>
@@ -81,4 +80,4 @@ function ProjectAddFrom({ setIsAddProject, portfolioOwnerId, setUser }) {
   );
 }
 
-export default ProjectAddFrom;
+export default ProjectEditFrom;

@@ -7,7 +7,6 @@ import ProjectCard from "./ProjectCard";
 function Project({ portfolioOwnerId, isEditable }) {
   const [isAddProject, setIsAddProject] = useState(false);
   const [user, setUser] = useState([]);
-  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     // "users/유저id" 엔드포인트로 GET 요청을 하고, user를 response의 data로 세팅함.
@@ -22,8 +21,9 @@ function Project({ portfolioOwnerId, isEditable }) {
           user.map((project) => (
             <ProjectCard
               key={project.id}
+              portfolioOwnerId={portfolioOwnerId}
               project={project}
-              setIsEditing={setIsEditing}
+              setUser={setUser}
               isEditable={isEditable}
             />
           ))
