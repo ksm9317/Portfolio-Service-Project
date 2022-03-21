@@ -6,7 +6,7 @@ class awardService {
   static async addAward({ user_id, title, description }) {
     // 수상 내역이 존재하는지 확인
     const existAward = await Award.getAwardName({ title });
-    if (existAward) {
+    if (existAward && existAward.user_id === user_id) {
       const errorMessage = "해당 수상 내역은 이미 존재합니다.";
       return { errorMessage };
     }

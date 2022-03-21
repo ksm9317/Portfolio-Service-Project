@@ -9,7 +9,7 @@ class Award {
 
   // 수상 내역의 title을 기준으로 검색
   static async getAwardName({ title }) {
-    const isAward = await AwardModel.find({ title });
+    const isAward = await AwardModel.findOne({ title });
     return isAward;
   }
 

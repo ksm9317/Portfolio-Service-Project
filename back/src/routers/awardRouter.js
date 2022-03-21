@@ -6,51 +6,45 @@ import { awardService } from "../services/awardService";
 
 const awardRouter = Router();
 
-// award 에서는 user/login구현할 필요 없음  --> 주석처리 함
-// awardRouter.post("/user/login", async (req, res, next) => {
-//   // 로그인 토큰 발급용
-//   //   토큰 발급은 JWT_SECRET_KEY를 사용해서 발급하고 헤더에 authorization에 저장한다
-//   //    토큰 발급은 bearer + token으로 한다
-//   console.log("award user login");
-//   try {
-//     const email = req.body.email;
-//     const password = req.body.password;
+awardRouter.get("/getUserId", login_required, async (req, res, next) => {
+  try {
+    const user_id = req.currentUserId;
+    res.status(200).json(user_id);
+  } catch (error) {
+    next(error);
+  }
+});
 
-//     const token = jwt.sign(
-//       {
-//         email,
-//         password,
-//       },
-//       process.env.JWT_SECRET_KEY
-//     );
-//     // req.headers.authorization = `bearer ${token}`;
-//     const saveToken = `bearer ${token}`;
+awardRouter.post("/award/getUser", login_required, async (req, res, next) => {
+  try {
+    const user_id = req.currentUserId;
+    const body = req.body;
+    const title = req.body.title;
+    const description = req.body.description;
 
-//     // TODO: 토큰 생성 확인하기
-//     // fixme: 헤더에 토큰 저장을 어떻게 해야
+    // 데이터를 award db에 추가하기
+    const newAward = await awardService.addAward({
+      user_id,
+      title,
+      description,
+    });
 
-//     return res.status(200).json({
-//       headers: {
-//         Athorization: saveToken,
-//       },
-//     });
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+    if (newAward.errorMessage) {
+      throw new Error(newAward.errorMessage);
+    }
+
+    res.status(200).json(newAward);
+  } catch (e) {
+    next(e);
+  }
+});
 
 // 로그인된 사용자만 수상 내역을 추가할 수 있음
 awardRouter.post("/award/create", login_required, async (req, res, next) => {
   try {
-    //   Content-type Error
-    if (is.emptyObject(req.body)) {
-      throw new Error(
-        "headers의 Content-Type을 application/json으로 설정해주세요"
-      );
-    }
-
     // req에서 수상 내역으로 저장할 데이터 받아오기
     const user_id = req.currentUserId;
+    console.log(user_id);
     const title = req.body.title;
     const description = req.body.description;
 
@@ -127,6 +121,18 @@ awardRouter.get(
       }
 
       res.status(200).json(awards);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+awardRouter.delete(
+  "/awardDelete/:id",
+  login_required,
+  async (req, res, next) => {
+    try {
+      const id = req.params.id;
     } catch (error) {
       next(error);
     }
