@@ -3,7 +3,7 @@ import ProjectEditForm from "./ProjectEditForm";
 import { useState } from "react";
 
 function ProjectCard({ portfolioOwnerId, project, setUser, isEditable }) {
-  const currentId = project?.id;
+  const currentId = project?._id;
   const title = project?.title;
   const description = project?.description;
   const from_data = project?.from_data;

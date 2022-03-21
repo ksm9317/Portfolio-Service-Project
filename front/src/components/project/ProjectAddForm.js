@@ -25,7 +25,7 @@ function ProjectAddFrom({ setIsAddProject, portfolioOwnerId, setUser }) {
       to_data,
     });
     // 유저 정보는 response의 data임.
-    const res = await Api.get("educationlist", user_id);
+    const res = await Api.get("projectlist", user_id);
     setUser(res.data);
     console.log(res.data);
     // isEditing을 false로 세팅함.

@@ -16,7 +16,7 @@ function ProjectEditFrom({ portfolioOwnerId, current, setUser, setIsEditing }) {
     const user_id = portfolioOwnerId;
     const from_data = projectStart.toISOString().split("T")[0];
     const to_data = projectEnd.toISOString().split("T")[0];
-
+    console.log(current.currentId);
     await Api.put(`projects/${current.currentId}`, {
       user_id,
       title,
@@ -28,6 +28,8 @@ function ProjectEditFrom({ portfolioOwnerId, current, setUser, setIsEditing }) {
     const res = await Api.get("projectlist", user_id);
     setUser(res.data);
     console.log(res.data);
+    console.log("from_data", from_data);
+    console.log("to_data", to_data);
     setIsEditing(false);
   };
 
