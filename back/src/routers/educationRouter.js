@@ -22,7 +22,7 @@ educationRouter.post("/education/create", async (req, res, next) => {
     const school = req.body.school;
     const major = req.body.major;
     const position = req.body.position;
-
+    console.log(user_id, school, major, position);
     const newEducation = await educationService.addEducation({
       user_id,
       school,
@@ -77,7 +77,7 @@ educationRouter.put("/educations/:id", async (req, res, next) => {
       throw new Error(update.errorMessage);
     }
 
-    res.status(200).json(update);
+    res.status(201).json(update);
   } catch (error) {
     next(error);
   }
