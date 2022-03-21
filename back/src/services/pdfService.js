@@ -35,7 +35,6 @@ class pdfService {
     });
     const educations = await educationService.getEducations({ user_id });
     const projects = await projectService.projectList({ user_id });
-    console.log(certificates);
     //required data has been set
 
     const browser = await puppeteer.launch();
