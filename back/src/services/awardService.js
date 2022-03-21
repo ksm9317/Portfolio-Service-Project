@@ -6,14 +6,7 @@ class awardService {
   static async addAward({ user_id, title, description }) {
     // 수상 내역이 존재하는지 확인
     // title로 전체 검색
-    const existAward = await Award.getAwardName({ title });
-    let isUser_id = null;
-    // user_id 일치하면 존재함
-    existAward.forEach((element) => {
-      if (element.user_id === user_id) {
-        isUser_id = true;
-      }
-    });
+    const isUser_id = await Award.getAwardName({ user_id, title });
 
     if (isUser_id) {
       const errorMessage = "해당 수상 내역은 이미 존재합니다.";
@@ -22,23 +15,21 @@ class awardService {
 
     // 수상 내역의 고유 id 부여 --> user_id와 다름
     const id = uuidv4();
-    const newAward = { id, user_id, title, description };
+    const newAward = { user_id, id, title, description };
 
     const createdNewAward = await Award.create({ newAward });
     createdNewAward.errorMessage = null;
     return createdNewAward;
   }
 
-  static async getAward({ awardId }) {
+  static getAward({ awardId }) {
     // 사용자의 수상 내역을 수상 내역 id를 기준으로 하나 가져옴
-    const user = await Award.findById({ awardId });
-    return user;
+    return Award.findById({ awardId });
   }
 
-  static async getAwards({ user_id }) {
+  static getAwards({ user_id }) {
     // 사용자의 수상 내역을 수상 내역 id를 기준으로 하나 가져옴
-    const user = await Award.findByUserId({ user_id });
-    return user;
+    return Award.findByUserId({ user_id });
   }
 
   static async setAward({ id, update }) {

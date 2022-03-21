@@ -1,4 +1,3 @@
-import is from "@sindresorhus/is";
 import { Router } from "express";
 
 import { login_required } from "../middlewares/login_required";
@@ -11,8 +10,7 @@ awardRouter.post("/award/create", login_required, async (req, res, next) => {
   try {
     // req에서 수상 내역으로 저장할 데이터 받아오기
     const user_id = req.currentUserId;
-    const title = req.body.title;
-    const description = req.body.description;
+    const { title, description } = req.body;
 
     // 데이터를 award db에 추가하기
     const newAward = await awardService.addAward({

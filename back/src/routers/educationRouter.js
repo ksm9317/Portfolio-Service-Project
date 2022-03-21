@@ -22,7 +22,6 @@ educationRouter.post("/education/create", async (req, res, next) => {
     const school = req.body.school;
     const major = req.body.major;
     const position = req.body.position;
-    console.log(user_id, school, major, position);
     const newEducation = await educationService.addEducation({
       user_id,
       school,
