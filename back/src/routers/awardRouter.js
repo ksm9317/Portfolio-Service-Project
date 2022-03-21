@@ -32,7 +32,7 @@ awardRouter.post("/award/create", login_required, async (req, res, next) => {
       throw new Error(newAward.errorMessage);
     }
 
-    res.status(200).json(newAward);
+    res.status(201).json(newAward);
   } catch (e) {
     next(e);
   }
