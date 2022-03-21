@@ -3,6 +3,7 @@ import * as Api from '../../api';
 import { Button, Card } from 'react-bootstrap';
 import AwardAddForm from './AwardAddForm';
 import AwardCard from './AwardCard';
+import AwardEditForm from './AwardEditForm';
 
 function Award({ portfolioOwnerId, isEditable }) {
   const [isAddAward, setIsAddAward] = useState(false);
@@ -20,20 +21,39 @@ function Award({ portfolioOwnerId, isEditable }) {
     <Card>
       <Card.Body>
         <Card.Title>수상이력</Card.Title>
-        {list &&
-          list.map((award) => (
-            <AwardCard
-              portfolioOwnerId={portfolioOwnerId}
-              list={award}
-              isEditable={isEditable}
-              setIsEditing={setIsEditing}
-              setList={setList}
-            />
-          ))}
+        {isEditing ? (
+          <>
+            {list &&
+              list.map((award) => (
+                <AwardEditForm
+                  key={award.id}
+                  portfolioOwnerId={portfolioOwnerId}
+                  setIsEditing={setIsEditing}
+                  list={award}
+                  setList={setList}
+                />
+              ))}
+          </>
+        ) : (
+          <>
+            {list &&
+              list.map((award) => (
+                <AwardCard
+                  portfolioOwnerId={portfolioOwnerId}
+                  isEditable={isEditable}
+                  setIsEditing={setIsEditing}
+                  list={award}
+                  setList={setList}
+                />
+              ))}
+          </>
+        )}
 
         <div className="mt-3 text-center mb-4 row">
           <div className="col-sm-20">
-            <Button onClick={(e) => setIsAddAward(true)}> + </Button>
+            {isEditable && (
+              <Button onClick={(e) => setIsAddAward(true)}> + </Button>
+            )}
           </div>
         </div>
         {isAddAward && (
