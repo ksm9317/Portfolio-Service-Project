@@ -5,8 +5,17 @@ class awardService {
   // 사용자의 수상 내역을 받아 model로 전송
   static async addAward({ user_id, title, description }) {
     // 수상 내역이 존재하는지 확인
+    // title로 전체 검색
     const existAward = await Award.getAwardName({ title });
-    if (existAward && existAward.user_id === user_id) {
+    let isUser_id = null;
+    // user_id 일치하면 존재함
+    existAward.forEach((element) => {
+      if (element.user_id === user_id) {
+        isUser_id = true;
+      }
+    });
+
+    if (isUser_id) {
       const errorMessage = "해당 수상 내역은 이미 존재합니다.";
       return { errorMessage };
     }
@@ -61,3 +70,6 @@ class awardService {
 }
 
 export { awardService };
+/* 
+
+*/

@@ -6,45 +6,11 @@ import { awardService } from "../services/awardService";
 
 const awardRouter = Router();
 
-awardRouter.get("/getUserId", login_required, async (req, res, next) => {
-  try {
-    const user_id = req.currentUserId;
-    res.status(200).json(user_id);
-  } catch (error) {
-    next(error);
-  }
-});
-
-awardRouter.post("/award/getUser", login_required, async (req, res, next) => {
-  try {
-    const user_id = req.currentUserId;
-    const body = req.body;
-    const title = req.body.title;
-    const description = req.body.description;
-
-    // 데이터를 award db에 추가하기
-    const newAward = await awardService.addAward({
-      user_id,
-      title,
-      description,
-    });
-
-    if (newAward.errorMessage) {
-      throw new Error(newAward.errorMessage);
-    }
-
-    res.status(200).json(newAward);
-  } catch (e) {
-    next(e);
-  }
-});
-
 // 로그인된 사용자만 수상 내역을 추가할 수 있음
 awardRouter.post("/award/create", login_required, async (req, res, next) => {
   try {
     // req에서 수상 내역으로 저장할 데이터 받아오기
     const user_id = req.currentUserId;
-    console.log(user_id);
     const title = req.body.title;
     const description = req.body.description;
 
