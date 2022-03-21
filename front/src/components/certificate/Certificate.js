@@ -3,6 +3,7 @@ import * as Api from '../../api';
 import { Button, Card } from 'react-bootstrap';
 import CertificateAddForm from './CertificateAddForm';
 import CertificateCard from './CertificateCard';
+import CertificateEditForm from './CertificateEditForm';
 
 function Certificate({ portfolioOwnerId, isEditable }) {
   const [isAddCertificate, setIsAddCertificate] = useState(false);
@@ -21,20 +22,39 @@ function Certificate({ portfolioOwnerId, isEditable }) {
     <Card>
       <Card.Body>
         <Card.Title>자격증</Card.Title>
-        {list &&
-          list.map((certificate) => (
-            <CertificateCard
-              portfolioOwnerId={portfolioOwnerId}
-              list={certificate}
-              isEditable={isEditable}
-              setIsEditing={setIsEditing}
-              setList={setList}
-            />
-          ))}
+        {isEditing ? (
+          <>
+            {list &&
+              list.map((certificate) => (
+                <CertificateEditForm
+                  key={certificate.id}
+                  portfolioOwnerId={portfolioOwnerId}
+                  setIsEditing={setIsEditing}
+                  list={certificate}
+                  setList={setList}
+                />
+              ))}
+          </>
+        ) : (
+          <>
+            {list &&
+              list.map((certificate) => (
+                <CertificateCard
+                  portfolioOwnerId={portfolioOwnerId}
+                  isEditable={isEditable}
+                  setIsEditing={setIsEditing}
+                  list={certificate}
+                  setList={setList}
+                />
+              ))}
+          </>
+        )}
 
         <div className="mt-3 text-center mb-4 row">
           <div className="col-sm-20">
-            <Button onClick={(e) => setIsAddCertificate(true)}>+</Button>
+            {isEditable && (
+              <Button onClick={(e) => setIsAddCertificate(true)}> + </Button>
+            )}
           </div>
         </div>
         {isAddCertificate && (
