@@ -9,13 +9,6 @@ const awardRouter = Router();
 // 로그인된 사용자만 수상 내역을 추가할 수 있음
 awardRouter.post("/award/create", login_required, async (req, res, next) => {
   try {
-    //   Content-type Error
-    if (is.emptyObject(req.body)) {
-      throw new Error(
-        "headers의 Content-Type을 application/json으로 설정해주세요"
-      );
-    }
-
     // req에서 수상 내역으로 저장할 데이터 받아오기
     const user_id = req.currentUserId;
     const title = req.body.title;
@@ -32,7 +25,7 @@ awardRouter.post("/award/create", login_required, async (req, res, next) => {
       throw new Error(newAward.errorMessage);
     }
 
-    res.status(200).json(newAward);
+    res.status(201).json(newAward);
   } catch (e) {
     next(e);
   }
@@ -94,6 +87,18 @@ awardRouter.get(
       }
 
       res.status(200).json(awards);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+awardRouter.delete(
+  "/awardDelete/:id",
+  login_required,
+  async (req, res, next) => {
+    try {
+      const id = req.params.id;
     } catch (error) {
       next(error);
     }

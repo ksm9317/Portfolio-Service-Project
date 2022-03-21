@@ -5,8 +5,15 @@ class educationService {
   static async addEducation({ user_id, school, major, position }) {
     // education 추가
     const existEducation = await Education.findBySchool({ school });
+    let isExist = null;
+    existEducation.forEach((element) => {
+      if (element.user_id === user_id) {
+        isExist = true;
+        return;
+      }
+    });
 
-    if (existEducation.length !== 0) {
+    if (isExist) {
       const errorMessage = "해당 학력은 이미 존재합니다.";
       alert(errorMessage);
       return { errorMessage };
