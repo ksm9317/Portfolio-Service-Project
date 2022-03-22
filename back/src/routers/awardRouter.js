@@ -77,7 +77,7 @@ awardRouter.get(
   async (req, res, next) => {
     // 사용자의 모든 수상내역 가져오기
     try {
-      const user_id = req.currentUserId;
+      const user_id = req.params.user_id;
       const awards = await awardService.getAwards({ user_id });
 
       if (awards.errorMessage) {
