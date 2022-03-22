@@ -28,7 +28,7 @@ hbs.registerHelper("dataFormant", function (value, format) {
 });
 
 class pdfService {
-  static async pdfConverter({ user_id, name, email, tel }) {
+  static async pdfConverter({ user_id, name, email, tel, description }) {
     const awards = await awardService.getAwards({ user_id });
     const certificates = await certificationService.returnAllCertificate({
       user_id,
@@ -48,6 +48,7 @@ class pdfService {
       certificates,
       educations,
       projects,
+      description,
     });
     await page.setContent(content);
     await page.emulateMediaType("screen");

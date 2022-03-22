@@ -435,7 +435,7 @@ body {
     <div class="intro-section about">
       <h1 class="title">About me</h1>
       <p class="paragraph">
-          Here comes our description
+		  {{description}}
       </p>
     </div>
     <div class="intro-section contact">
@@ -447,15 +447,6 @@ body {
       <div class="info-section">
         <i class="fas fa-paper-plane"></i>
         <span>{{email}}</span>
-      </div>
-    </div>
-    <div class="intro-section follow">
-      <h1 class="title">Follow</h1>
-      <div class="info-section link">
-        <i class="fab fa-github"></i>
-        <a target="_blank" rel="author" href="https://github.com/chih-hsi-chen">
-          <span>hosahn13@github.com</span>
-        </a>
       </div>
     </div>
   </div>
@@ -505,42 +496,20 @@ body {
         <div class="title-icon">
           <i class="fas fa-tools"></i>
         </div>
-        <span>Developement Tools</span>
+        <span>Projects</span>
       </div>
       <div class="detail-content">
         <ul class="tool-list">
+			{{#each projects as |projects|}}
           <li>
             <svg viewbox="0 0 100 100">
               <circle cx="50" cy="50" r="45"></circle>
               <circle class="cbar" cx="50" cy="50" r="45" style="--percent: 0.6"></circle>
             </svg>
-            <span class="tl-name">Photoshop</span>
+            <span class="tl-name">{{projects.title}}</span>
             <span class="tl-exp">60%</span>
           </li>
-          <li>
-            <svg viewbox="0 0 100 100">
-              <circle cx="50" cy="50" r="45"></circle>
-              <circle class="cbar" cx="50" cy="50" r="45" style="--percent: 0.8"></circle>
-            </svg>
-            <span class="tl-name">Sublime</span>
-            <span class="tl-exp">80%</span>
-          </li>
-          <li>
-            <svg viewbox="0 0 100 100">
-              <circle cx="50" cy="50" r="45"></circle>
-              <circle class="cbar" cx="50" cy="50" r="45" style="--percent: 0.7"></circle>
-            </svg>
-            <span class="tl-name">Git</span>
-            <span class="tl-exp">70%</span>
-          </li>
-          <li>
-            <svg viewbox="0 0 100 100">
-              <circle cx="50" cy="50" r="45"></circle>
-              <circle class="cbar" cx="50" cy="50" r="45" style="--percent: 0.74"></circle>
-            </svg>
-            <span class="tl-name">NPM</span>
-            <span class="tl-exp">74%</span>
-          </li>
+		   {{/each}}
         </ul>
       </div>
 
@@ -550,31 +519,17 @@ body {
         <div class="title-icon">
           <i class="fas fa-heart"></i>
         </div>
-        <span>Interests</span>
+        <span>Awards</span>
       </div>
       <div class="detail-content">
         <div class="outer-frame">
           <ul class="favor-list">
+			  {{#each awards as |awards|}}
             <li>
               <i class="fas fa-gamepad"></i>
-              <span>Game</span>
+              <span>{{awards.title}}</span>
             </li>
-            <li>
-              <i class="fas fa-paw"></i>
-              <span>Pet</span>
-            </li>
-            <li>
-              <i class="far fa-headphones-alt"></i>
-              <span>Music</span>
-            </li>
-            <li>
-              <i class="fas fa-book-spells"></i>
-              <span>Self-learning</span>
-            </li>
-            <li>
-              <i class="fas fa-user-edit"></i>
-              <span>Blog</span>
-            </li>
+			 {{/each}}
           </ul>
         </div>
       </div>

@@ -1,14 +1,21 @@
 import { Router } from "express";
 import { pdfService } from "../services/pdfService";
+import { login_required } from "../middlewares/login_required";
 const path = require("path");
 
 const pdfRouter = Router();
 
-pdfRouter.get("/pdf/:user_id", async (req, res) => {
+pdfRouter.get("/pdf/:user_id", login_required, async (req, res) => {
   try {
     const user_id = req.params.user_id;
-    const { name, email, tel } = req.body;
-    const data = await pdfService.pdfConverter({ user_id, name, email, tel });
+    const { name, email, tel, description } = req.body;
+    const data = await pdfService.pdfConverter({
+      user_id,
+      name,
+      email,
+      tel,
+      description,
+    });
     console.log(data);
     res.contentType("application/pdf");
     console.log(__dirname);

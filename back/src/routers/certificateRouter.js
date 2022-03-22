@@ -84,7 +84,7 @@ certificateRouter.delete(
 );
 
 certificateRouter.put("/certificates/:id", login_required, async (req, res) => {
-  const { title, description } = req.body;
+  const { title, description, date } = req.body;
   const certificateid = req.params.id;
   console.log(certificateid);
   try {
@@ -92,6 +92,7 @@ certificateRouter.put("/certificates/:id", login_required, async (req, res) => {
       title,
       certificateid,
       description,
+      date,
     });
     if (result === null) {
       res.send("rejected");
