@@ -8,6 +8,7 @@ import User from './user/User';
 import Education from './education/Education';
 import Project from './project/Project';
 import Award from './award/Award';
+import Certificate from './certificate/Certificate';
 
 function Portfolio() {
   const navigate = useNavigate();
@@ -69,6 +70,10 @@ function Portfolio() {
             isEditable={portfolioOwner.id === userState.user?.id}
           />
           <Award
+            portfolioOwnerId={portfolioOwner.id}
+            isEditable={portfolioOwner.id === userState.user?.id}
+          />
+          <Certificate
             portfolioOwnerId={portfolioOwner.id}
             isEditable={portfolioOwner.id === userState.user?.id}
           />
