@@ -2,30 +2,24 @@ import React, { useState } from 'react';
 import { Button, Form, Col, Row } from 'react-bootstrap';
 import * as Api from '../../api';
 
-function AwardAddForm({ setIsAddAward, portfolioOwnerId, setList }) {
+function AwardAddForm({ setIsAddAward, portfolioOwnerId, setUser }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user_id = portfolioOwnerId;
-    try {
-      // "user/register" 엔드포인트로 post요청함.
-      await Api.post(`award/create`, {
-        user_id,
-        title,
-        description,
-      });
-      // "awardlist"에서 awards 목록 다시 받아옴
-      await Api.get('awardlist', portfolioOwnerId).then((res) =>
-        setList(res.data)
-      );
-      // isEditing을 false로 세팅함.
-      setIsAddAward(false);
-      console.log(setIsAddAward);
-    } catch (err) {
-      console.log('post 실패하였습니다.', err);
-    }
+    await Api.post(`award/create`, {
+      user_id,
+      title,
+      description,
+    });
+
+    const res = await Api.get('awardlist', user_id);
+    setUser(res.data);
+    console.log(res.data);
+    // isEditing을 false로 세팅함.
+    setIsAddAward(false);
   };
 
   return (

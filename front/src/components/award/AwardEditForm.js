@@ -2,24 +2,22 @@ import React, { useState } from 'react';
 import { Button, Form, Col, Row } from 'react-bootstrap';
 import * as Api from '../../api';
 
-function AwardEditForm({ setIsEditing, portfolioOwnerId, list, setList }) {
-  const [title, setTitle] = useState(list.title);
-  const [description, setDescription] = useState(list.description);
+function AwardEditForm({ portfolioOwnerId, current, setUser, setIsEditing }) {
+  const [title, setTitle] = useState(current?.title);
+  const [description, setDescription] = useState(current?.description);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    await Api.put(`awards/${list.id}`, {
+    const user_id = portfolioOwnerId;
+    await Api.put(`awards/${current.currentId}`, {
+      user_id,
       title,
       description,
     });
-    // "awardlist"에서 awards 목록 다시 받아옴
-    await Api.get('awardlist', portfolioOwnerId).then((res) =>
-      setList(res.data)
-    );
-    // isEditing을 false로 세팅함.
+    const res = await Api.get('awardlist', user_id);
+    setUser(res.data);
+    console.log(res.data);
     setIsEditing(false);
-    console.log(setIsEditing);
   };
 
   return (
@@ -27,7 +25,6 @@ function AwardEditForm({ setIsEditing, portfolioOwnerId, list, setList }) {
       <Form.Group controlId="title" className="mb-3">
         <Form.Control
           type="text"
-          //   placeholder="수상내역"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
@@ -36,7 +33,6 @@ function AwardEditForm({ setIsEditing, portfolioOwnerId, list, setList }) {
       <Form.Group controlId="description">
         <Form.Control
           type="text"
-          //   placeholder="상세내역"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />

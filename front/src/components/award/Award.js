@@ -3,65 +3,43 @@ import * as Api from '../../api';
 import { Button, Card } from 'react-bootstrap';
 import AwardAddForm from './AwardAddForm';
 import AwardCard from './AwardCard';
-import AwardEditForm from './AwardEditForm';
 
 function Award({ portfolioOwnerId, isEditable }) {
   const [isAddAward, setIsAddAward] = useState(false);
-  const [list, setList] = useState([]);
-  const [isEditing, setIsEditing] = useState(false);
+  const [user, setUser] = useState([]);
 
   useEffect(() => {
-    const fetch = async () => {
-      const res = await Api.get(`awardlist/${portfolioOwnerId}`);
-      setList(res.data);
-    };
-    fetch();
+    // "users/유저id" 엔드포인트로 GET 요청을 하고, user를 response의 data로 세팅함.
+    Api.get('awardlist', portfolioOwnerId).then((res) => setUser(res.data));
   }, [portfolioOwnerId]);
+
   return (
     <Card>
       <Card.Body>
         <Card.Title>수상이력</Card.Title>
-        {isEditing ? (
-          <>
-            {list &&
-              list.map((award) => (
-                <AwardEditForm
-                  key={award.id}
-                  portfolioOwnerId={portfolioOwnerId}
-                  setIsEditing={setIsEditing}
-                  list={award}
-                  setList={setList}
-                />
-              ))}
-          </>
-        ) : (
-          <>
-            {list &&
-              list.map((award) => (
-                <AwardCard
-                  portfolioOwnerId={portfolioOwnerId}
-                  isEditable={isEditable}
-                  setIsEditing={setIsEditing}
-                  list={award}
-                  setList={setList}
-                />
-              ))}
-          </>
-        )}
-
-        <div className="mt-3 text-center mb-4 row">
-          <div className="col-sm-20">
-            {isEditable && (
-              <Button onClick={(e) => setIsAddAward(true)}> + </Button>
-            )}
-          </div>
-        </div>
+        {user !== null &&
+          user.map((award) => (
+            <AwardCard
+              key={award.id}
+              portfolioOwnerId={portfolioOwnerId}
+              award={award}
+              setUser={setUser}
+              isEditable={isEditable}
+            />
+          ))}
         {isAddAward && (
           <AwardAddForm
             setIsAddAward={setIsAddAward}
             portfolioOwnerId={portfolioOwnerId}
-            setList={setList}
+            setUser={setUser}
           />
+        )}
+        {isEditable && (
+          <div className="mt-3 text-center mb-4 row">
+            <div className="col-sm-20">
+              <Button onClick={(e) => setIsAddAward(true)}>+</Button>
+            </div>
+          </div>
         )}
       </Card.Body>
     </Card>
