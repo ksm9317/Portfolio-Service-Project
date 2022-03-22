@@ -4,9 +4,9 @@ import { v4 as uuidv4 } from "uuid";
 class educationService {
   static async addEducation({ user_id, school, major, position }) {
     // education 추가
-    const existEducation = await Education.findBySchool({ school });
+    const isExist = await Education.findBySchool({ user_id, school });
 
-    if (existEducation.length !== 0) {
+    if (isExist) {
       const errorMessage = "해당 학력은 이미 존재합니다.";
       return { errorMessage };
     }
@@ -23,14 +23,12 @@ class educationService {
 
   static async getEducation({ id }) {
     // education의 id를 기준으로 확인
-    const education = await Education.findById({ id });
-    return education;
+    return await Education.findById({ id });
   }
 
   static async getEducations({ user_id }) {
     // 사용자 id를 기준으로 모든 학력 가져오기
-    const educations = await Education.findByUserId({ user_id });
-    return educations;
+    return Education.findByUserId({ user_id });
   }
 
   static async setEducations({ id, updateEducation }) {
