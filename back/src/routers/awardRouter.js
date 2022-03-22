@@ -100,9 +100,13 @@ awardRouter.delete(
       const id = req.params.id;
       const user_id = req.currentUserId;
 
-      await awardService.deleteAwrd({ id, user_id });
+      const del = await awardService.deleteAwrd({ id, user_id });
 
-      res.status(200);
+      if (del.errorMessage) {
+        throw new Error(del.errorMessage);
+      }
+
+      res.status(200).json({ status: "succ" });
     } catch (error) {
       next(error);
     }
