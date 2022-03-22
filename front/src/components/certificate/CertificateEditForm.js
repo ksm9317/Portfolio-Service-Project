@@ -5,30 +5,35 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 function CertificateEditForm({
-  setIsEditing,
   portfolioOwnerId,
-  list,
-  setList,
+  current,
+  setUser,
+  setIsEditing,
 }) {
-  const [title, setTitle] = useState(list.title);
-  const [description, setDescription] = useState(list.description);
-  const [date, setDate] = useState(new Date());
+  const [title, setTitle] = useState(current?.title);
+  const [description, setDescription] = useState(current?.description);
+  const [date, setDate] = useState(new Date(current?.date));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    await Api.put(`certificates/${list.id}`, {
-      title,
-      description,
-      date,
-    });
-    // "certificatelist"에서 certificates 목록 다시 받아옴
-    await Api.get('certificatelist', portfolioOwnerId).then((res) =>
-      setList(res.data)
-    );
-    // isEditing을 false로 세팅함.
-    setIsEditing(false);
-    console.log(setIsEditing);
+    const user_id = portfolioOwnerId;
+    try {
+      // put요청
+      await Api.put(`certificates/${current.currentId}`, {
+        user_id,
+        title,
+        description,
+        date,
+      });
+      // "certificatelist"에서 certificates 목록 다시 받아옴
+      await Api.get('certificatelist', portfolioOwnerId).then((res) =>
+        setUser(res.data)
+      );
+      // isEditing을 false로 세팅함.
+      setIsEditing(false);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -50,7 +55,7 @@ function CertificateEditForm({
       </Form.Group>
 
       <Form.Group controlId="date" className="mt-3">
-        <DatePicker selected={date} onChange={(e) => setDate(e)} />
+        <DatePicker selected={date} value={date} onChange={(e) => setDate(e)} />
       </Form.Group>
 
       <Form.Group as={Row} className="mt-3 text-center">

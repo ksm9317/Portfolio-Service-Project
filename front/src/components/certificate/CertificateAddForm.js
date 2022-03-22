@@ -7,10 +7,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 function CertificateAddForm({
   setIsAddCertificate,
   portfolioOwnerId,
-  setList,
+  setUser,
 }) {
-  const [title, setTitle] = useState();
-  const [description, setDescription] = useState();
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [date, setDate] = useState(new Date());
 
   const handleSubmit = async (e) => {
@@ -26,13 +26,12 @@ function CertificateAddForm({
       });
       // "certificatelist"에서 certificates 목록 다시 받아옴
       await Api.get('certificatelist', portfolioOwnerId).then((res) =>
-        setList(res.data)
+        setUser(res.data)
       );
       // isEditing을 false로 세팅함.
       setIsAddCertificate(false);
-      console.log(setIsAddCertificate);
     } catch (err) {
-      console.log('post 실패하였습니다.', err);
+      console.log(err);
     }
   };
 
@@ -41,7 +40,7 @@ function CertificateAddForm({
       <Form.Group controlId="title" className="mb-3">
         <Form.Control
           type="text"
-          placeholder="수상내역"
+          placeholder="자격증"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
