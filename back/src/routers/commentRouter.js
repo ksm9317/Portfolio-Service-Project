@@ -27,4 +27,26 @@ commentRouter.post(
   }
 );
 
+commentRouter.get(
+  "/commentList/:user_id",
+  login_required,
+  async (req, res, next) => {
+    try {
+      const commentTo = req.params.user_id;
+
+      const commentList = await commentService.getAllComments({
+        commentTo,
+      });
+
+      if (commentList.errorMessage) {
+        throw new Error(commentList.errorMessage);
+      }
+
+      res.status(200).json(commentList);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
 export { commentRouter };

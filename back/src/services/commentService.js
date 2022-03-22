@@ -10,6 +10,10 @@ class commentService {
     const addComment = await Comment.create({ newComment });
     return addComment;
   }
+
+  static getAllComments({ commentTo }) {
+    return Comment.findAllComment({ commentTo });
+  }
 }
 
 export { commentService };

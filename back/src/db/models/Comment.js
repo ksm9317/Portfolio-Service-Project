@@ -5,8 +5,8 @@ class Comment {
     return CommnetModel.create(newComment);
   }
 
-  static async getAllComments({ commnetTo }) {
-    return CommnetModel.find({ commnetTo });
+  static async findAllComment({ commentTo }) {
+    return CommnetModel.find({ commentTo });
   }
 }
 
