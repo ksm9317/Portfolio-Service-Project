@@ -8,6 +8,7 @@ import { errorMiddleware } from "./middlewares/errorMiddleware";
 import { certificateRouter } from "./routers/certificateRouter";
 import { educationRouter } from "./routers/educationRouter";
 import { pdfRouter } from "./routers/pdfRouter";
+import { commentRouter } from "./routers/commentRouter";
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.get("/", (req, res) => {
 
 // router, service 구현 (userAuthRouter는 맨 위에 있어야 함.)
 app.use(userAuthRouter);
+app.use(commentRouter);
 app.use(projectRouter);
 
 app.use(educationRouter);
