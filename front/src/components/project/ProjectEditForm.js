@@ -7,8 +7,12 @@ import "react-datepicker/dist/react-datepicker.css";
 function ProjectEditFrom({ portfolioOwnerId, current, setUser, setIsEditing }) {
   const [title, setTitle] = useState(current?.title);
   const [description, setDescription] = useState(current?.description);
-  const [projectStart, setProjectStart] = useState(current?.projectStart);
-  const [projectEnd, setProjectEnd] = useState(current?.projectEnd);
+  const [projectStart, setProjectStart] = useState(
+    current?.projectStart ? new Date(current?.projectStart) : new Date()
+  );
+  const [projectEnd, setProjectEnd] = useState(
+    current?.projectStart ? new Date(current?.projectStart) : new Date()
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
