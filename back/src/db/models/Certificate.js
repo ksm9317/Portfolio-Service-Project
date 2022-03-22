@@ -3,22 +3,16 @@ import { CertificateModel } from "../schemas/certificate";
 class Certificate {
   static async addCertificate({ newPost }) {
     // form에서 입력을 받아
-    const createNewPost = await CertificateModel.create(newPost);
-    return createNewPost;
+    return await CertificateModel.create(newPost);
   }
 
   static async UpdateOne({ certificateid, title, description, date }) {
     //id는 글 고유의 id;
     const updatedPost = await CertificateModel.findOneAndUpdate(
       { id: certificateid },
-      {
-        title: title,
-        description: description,
-        date: date,
-      },
+      { title, description, date },
       { returnOriginal: false }
     );
-    console.log(updatedPost);
     return updatedPost;
   }
 
@@ -29,8 +23,7 @@ class Certificate {
       title: title,
       user_id: user_id,
     });
-    if (found) return true; //찾았으면 true
-    return false;
+    return found !== null;
   }
 
   static async findAllPosts({ user_id }) {

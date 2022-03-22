@@ -24,6 +24,10 @@ class projectService{
     static async putProject({projectId, update}){
 
     let project = await Project.findByObjectId({id :projectId});
+    let user_id_info = update.user_id;
+    user_id_info = project.user_id;
+    const fieldtoUpdate_user = "user_id";
+    project = await Project.update({projectId,fieldtoUpdate_user,user_id_info});
 
         if(!project){
             return "project가 존재하지 않습니다.";

@@ -38,7 +38,7 @@ class certificationService {
     }
 
     const newPost = { user_id, title, description, id, date };
-    Certificate.addCertificate({ newPost });
+    await Certificate.addCertificate({ newPost });
     return newPost;
   }
 

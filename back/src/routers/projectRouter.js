@@ -78,15 +78,16 @@ projectRouter.put("/projects/:id", async (req,res,next)=>{
         const description = req.body.description ?? null;
         const from_data = req.body.from_data ?? null;
         const to_data = req.body.to_data ?? null;
-
-        const update = {title,description,from_data,to_data};
+        const user_id = null;
+        const update = {user_id,title,description,from_data,to_data};
 
         const updateProject = await projectService.putProject({id,update});
 
         if (updateProject.errorMessage){
          throw new Error(updateProject.errorMessage);
         }
-        
+
+        //console.log(updateProject);
         res.json(updateProject);
     }catch(error){
         next(error);

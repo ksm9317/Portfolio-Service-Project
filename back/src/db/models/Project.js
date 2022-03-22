@@ -28,7 +28,7 @@ class Project{
       option
     );
     
-    console.log("업데이트 내용",updateProject);
+    //console.log("업데이트 내용",updateProject);
     return updateProject;
   }
 
