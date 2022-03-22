@@ -6,7 +6,7 @@ import ProjectCard from "./ProjectCard";
 
 function Project({ portfolioOwnerId, isEditable }) {
   const [isAddProject, setIsAddProject] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
@@ -19,11 +19,14 @@ function Project({ portfolioOwnerId, isEditable }) {
       <Card.Body>
         <Card.Title>프로젝트</Card.Title>
         {user !== null ? (
-          <ProjectCard
-            portfolioOwnerId={portfolioOwnerId}
-            setIsEditing={setIsEditing}
-            isEditable={isEditable}
-          />
+          user.map((project) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              setIsEditing={setIsEditing}
+              isEditable={isEditable}
+            />
+          ))
         ) : (
           <></>
         )}

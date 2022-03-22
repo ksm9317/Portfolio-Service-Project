@@ -22,7 +22,6 @@ educationRouter.post("/education/create", async (req, res, next) => {
     const school = req.body.school;
     const major = req.body.major;
     const position = req.body.position;
-
     const newEducation = await educationService.addEducation({
       user_id,
       school,
@@ -77,7 +76,7 @@ educationRouter.put("/educations/:id", async (req, res, next) => {
       throw new Error(update.errorMessage);
     }
 
-    res.status(200).json(update);
+    res.status(201).json(update);
   } catch (error) {
     next(error);
   }
@@ -86,7 +85,7 @@ educationRouter.put("/educations/:id", async (req, res, next) => {
 educationRouter.get("/educationlist/:id", async (req, res, next) => {
   // 사용자 id를 기준으로 확인
   try {
-    const user_id = req.currentUserId;
+    const user_id = req.params.id;
     const educations = await educationService.getEducations({ user_id });
 
     if (educations.errorMessage) {

@@ -5,11 +5,17 @@ dotenv.config();
 class certificationService {
   //crud 순으로 재현합니다.
 
-  static async updateCertification({ certificateid, title, description }) {
+  static async updateCertification({
+    certificateid,
+    title,
+    description,
+    date,
+  }) {
     const updated = await Certificate.UpdateOne({
       certificateid,
       title,
       description,
+      date,
     });
     return updated;
   }
@@ -19,6 +25,7 @@ class certificationService {
     title,
     description,
     id,
+    date,
   }) {
     const cert = await Certificate.findByNameOrId({
       title: title,
@@ -30,8 +37,8 @@ class certificationService {
       return { errorMessage };
     }
 
-    const newPost = { user_id, title, description, id };
-    Certificate.addCertificate({ newPost });
+    const newPost = { user_id, title, description, id, date };
+    await Certificate.addCertificate({ newPost });
     return newPost;
   }
 
@@ -40,18 +47,18 @@ class certificationService {
     const foundAll = Certificate.findAllPosts({ user_id });
     return foundAll;
   }
-  static async deleteOneCertificate({ user_id, title }) {
+  static async deleteOneCertificate({ certificateid }) {
     // delete, return값은 지우는데 성공했는지 boolean 값
-    const deleted = Certificate.deletePost({ user_id, title });
+    const deleted = Certificate.deletePost({ certificateid });
     return deleted;
   }
 
   static async findCertificate({ certificateid }) {
     // read, return 값은 찾아낸 certificate 객체 전부
     console.log(certificateid);
-    const foundAll = Certificate.findByObjectId({ id: certificateid });
-    console.log(foundAll);
-    return foundAll;
+    const found = await Certificate.findByObjectId({ certificateid });
+    console.log(found);
+    return found;
   }
 }
 
