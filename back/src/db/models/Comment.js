@@ -5,8 +5,12 @@ class Comment {
     return CommnetModel.create(newComment);
   }
 
-  static async findAllComment({ commentTo }) {
+  static findAllComment({ commentTo }) {
     return CommnetModel.find({ commentTo });
+  }
+
+  static delete({ id, commenter }) {
+    return CommnetModel.deleteOne({ id, commenter });
   }
 }
 
