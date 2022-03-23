@@ -4,7 +4,12 @@ import * as Api from "../../api";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-function ProjectEditFrom({ portfolioOwnerId, current, setUser, setIsEditing }) {
+function ProjectEditFrom({
+  portfolioOwnerId,
+  current,
+  setProjectList,
+  setIsEditing,
+}) {
   const [title, setTitle] = useState(current?.title);
   const [description, setDescription] = useState(current?.description);
   const [projectStart, setProjectStart] = useState(
@@ -30,10 +35,8 @@ function ProjectEditFrom({ portfolioOwnerId, current, setUser, setIsEditing }) {
     });
     // 유저 정보는 response의 data임.
     const res = await Api.get("projectlist", user_id);
-    setUser(res.data);
+    setProjectList(res.data);
     console.log(res.data);
-    console.log("from_data", from_data);
-    console.log("to_data", to_data);
     setIsEditing(false);
   };
 

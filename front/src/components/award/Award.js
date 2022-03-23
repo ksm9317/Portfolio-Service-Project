@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import * as Api from '../../api';
-import { Button, Card } from 'react-bootstrap';
-import AwardAddForm from './AwardAddForm';
-import AwardCard from './AwardCard';
+import React, { useState, useEffect } from "react";
+import * as Api from "../../api";
+import { Button, Card } from "react-bootstrap";
+import AwardAddForm from "./AwardAddForm";
+import AwardCard from "./AwardCard";
 
 function Award({ portfolioOwnerId, isEditable }) {
   const [isAddAward, setIsAddAward] = useState(false);
@@ -10,11 +10,11 @@ function Award({ portfolioOwnerId, isEditable }) {
 
   useEffect(() => {
     // "users/유저id" 엔드포인트로 GET 요청을 하고, user를 response의 data로 세팅함.
-    Api.get('awardlist', portfolioOwnerId).then((res) => setUser(res.data));
+    Api.get("awardlist", portfolioOwnerId).then((res) => setUser(res.data));
   }, [portfolioOwnerId]);
 
   return (
-    <Card>
+    <Card className="mb-3">
       <Card.Body>
         <Card.Title>수상이력</Card.Title>
         {user !== null &&

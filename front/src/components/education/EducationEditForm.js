@@ -9,7 +9,7 @@ import FormControl from "@mui/material/FormControl";
 function EducationEditFrom({
   portfolioOwnerId,
   current,
-  setUser,
+  setEducationList,
   setIsEditing,
 }) {
   const [school, setSchool] = useState(current?.school);
@@ -30,7 +30,7 @@ function EducationEditFrom({
       position,
     });
     const res = await Api.get("educationlist", user_id);
-    setUser(res.data);
+    setEducationList(res.data);
     console.log(res.data);
     setIsEditing(false);
   };

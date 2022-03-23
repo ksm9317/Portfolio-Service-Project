@@ -6,40 +6,44 @@ import ProjectCard from "./ProjectCard";
 
 function Project({ portfolioOwnerId, isEditable }) {
   const [isAddProject, setIsAddProject] = useState(false);
-  const [user, setUser] = useState([]);
+  const [projectList, setProjectList] = useState([]);
 
   useEffect(() => {
-    // "users/유저id" 엔드포인트로 GET 요청을 하고, user를 response의 data로 세팅함.
-    Api.get("projectlist", portfolioOwnerId).then((res) => setUser(res.data));
+    // "projectlist/유저id" 엔드포인트로 GET 요청을 하고, projectlist를 response의 data로 세팅함.
+    Api.get("projectlist", portfolioOwnerId).then((res) =>
+      setProjectList(res.data)
+    );
   }, [portfolioOwnerId]);
 
   return (
-    <Card>
+    <Card className="mb-3">
       <Card.Body>
         <Card.Title>프로젝트</Card.Title>
-        {user !== null ? (
-          user.map((project) => (
+        {projectList !== null ? (
+          projectList.map((project) => (
             <ProjectCard
               key={project.id}
               portfolioOwnerId={portfolioOwnerId}
               project={project}
-              setUser={setUser}
+              setProjectList={setProjectList}
               isEditable={isEditable}
             />
           ))
         ) : (
           <></>
         )}
-        <div className="mt-3 text-center mb-4 row">
-          <div className="col-sm-20">
-            <Button onClick={(e) => setIsAddProject(true)}>+</Button>
+        {isEditable && (
+          <div className="mt-3 text-center mb-4 row">
+            <div className="col-sm-20">
+              <Button onClick={(e) => setIsAddProject(true)}>+</Button>
+            </div>
           </div>
-        </div>
+        )}
         {isAddProject ? (
           <ProjectAddFrom
             setIsAddProject={setIsAddProject}
             portfolioOwnerId={portfolioOwnerId}
-            setUser={setUser}
+            setProjectList={setProjectList}
           />
         ) : (
           <></>

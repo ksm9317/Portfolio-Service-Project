@@ -2,7 +2,12 @@ import { Card, Button } from "react-bootstrap";
 import EducationEditForm from "./EducationEditForm";
 import { useState } from "react";
 
-function EducationCard({ portfolioOwnerId, education, setUser, isEditable }) {
+function EducationCard({
+  portfolioOwnerId,
+  education,
+  setEducationList,
+  isEditable,
+}) {
   const currentId = education?.id;
   const school = education?.school;
   const major = education?.major;
@@ -17,7 +22,7 @@ function EducationCard({ portfolioOwnerId, education, setUser, isEditable }) {
           <EducationEditForm
             portfolioOwnerId={portfolioOwnerId}
             current={current}
-            setUser={setUser}
+            setEducationList={setEducationList}
             setIsEditing={setIsEditing}
           />
         ) : (

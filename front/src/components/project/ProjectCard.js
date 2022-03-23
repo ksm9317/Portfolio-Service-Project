@@ -2,7 +2,12 @@ import { Card, Button } from "react-bootstrap";
 import ProjectEditForm from "./ProjectEditForm";
 import { useState } from "react";
 
-function ProjectCard({ portfolioOwnerId, project, setUser, isEditable }) {
+function ProjectCard({
+  portfolioOwnerId,
+  project,
+  setProjectList,
+  isEditable,
+}) {
   const currentId = project?._id;
   const title = project?.title;
   const description = project?.description;
@@ -18,7 +23,7 @@ function ProjectCard({ portfolioOwnerId, project, setUser, isEditable }) {
           <ProjectEditForm
             portfolioOwnerId={portfolioOwnerId}
             current={current}
-            setUser={setUser}
+            setProjectList={setProjectList}
             setIsEditing={setIsEditing}
           />
         ) : (
@@ -33,16 +38,27 @@ function ProjectCard({ portfolioOwnerId, project, setUser, isEditable }) {
               </div>
               <div className="col - lg - 1 col">
                 {isEditable && (
-                  <Button
-                    variant="outline-info"
-                    size="sm"
-                    onClick={() => {
-                      setIsEditing(true);
-                      console.log(currentId);
-                    }}
-                  >
-                    편집
-                  </Button>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <Button
+                      variant="outline-info"
+                      size="sm"
+                      onClick={() => {
+                        setIsEditing(true);
+                      }}
+                    >
+                      편집
+                    </Button>
+
+                    <Button
+                      variant="outline-info"
+                      size="sm"
+                      onClick={() => {
+                        console.log("삭제 요청");
+                      }}
+                    >
+                      삭제
+                    </Button>
+                  </div>
                 )}
               </div>
             </div>

@@ -4,7 +4,7 @@ import * as Api from "../../api";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-function ProjectAddFrom({ setIsAddProject, portfolioOwnerId, setUser }) {
+function ProjectAddFrom({ setIsAddProject, portfolioOwnerId, setProjectList }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [projectStart, setProjectStart] = useState(new Date());
@@ -26,7 +26,7 @@ function ProjectAddFrom({ setIsAddProject, portfolioOwnerId, setUser }) {
     });
     // 유저 정보는 response의 data임.
     const res = await Api.get("projectlist", user_id);
-    setUser(res.data);
+    setProjectList(res.data);
     console.log(res.data);
     // isEditing을 false로 세팅함.
     setIsAddProject(false);

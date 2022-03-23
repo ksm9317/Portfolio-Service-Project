@@ -6,7 +6,11 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 
-function EducationAddFrom({ setIsAddEducation, portfolioOwnerId, setUser }) {
+function EducationAddFrom({
+  setIsAddEducation,
+  portfolioOwnerId,
+  setEducationList,
+}) {
   const [school, setSchool] = useState("");
   const [major, setMajor] = useState("");
   const [position, setPosition] = useState("재학중");
@@ -27,7 +31,7 @@ function EducationAddFrom({ setIsAddEducation, portfolioOwnerId, setUser }) {
     // 유저 정보는 response의 data임.
     // 해당 유저 정보로 user을 세팅함.
     const res = await Api.get("educationlist", user_id);
-    setUser(res.data);
+    setEducationList(res.data);
     console.log(res.data);
     // isEditing을 false로 세팅함.
     setIsAddEducation(false);
