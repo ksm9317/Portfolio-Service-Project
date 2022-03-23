@@ -74,4 +74,24 @@ commentRouter.delete(
     }
   }
 );
+
+commentRouter.put("/comment/:id", login_required, async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const content = req.body.content ?? null;
+
+    const updateComment = await commentService.setComment({
+      id,
+      update: { content },
+    });
+
+    if (updateComment.errorMessage) {
+      throw new Error(updateComment.errorMessage);
+    }
+
+    res.status(200).json(updateComment);
+  } catch (error) {
+    next(error);
+  }
+});
 export { commentRouter };
