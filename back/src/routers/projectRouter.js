@@ -44,6 +44,7 @@ projectRouter.post("/project/create", async (req,res,next) => {
 projectRouter.get("/projects/:id", async (req,res,next)=>{
     try{
     const projectId = req.params.id;
+    //console.log("Router",projectId);
     const project = await projectService.getProject({projectId});
 
     if (project.errorMessage){
@@ -57,8 +58,8 @@ projectRouter.get("/projects/:id", async (req,res,next)=>{
 
 projectRouter.delete("/projects/:id/delete",async (req,res,next)=>{
     try{
-        const {id} = req.params.id;
-        const deleteProject = await projectService.deletProject({id})
+        const projectId = req.params.id;
+        const deleteProject = await projectService.deletProject({projectId})
 
         if (updateProject.errorMessage){
             throw new Error(updateProject.errorMessage);
@@ -79,9 +80,9 @@ projectRouter.put("/projects/:id", async (req,res,next)=>{
         const from_data = req.body.from_data ?? null;
         const to_data = req.body.to_data ?? null;
 
-        const update = {title,description,from_data,to_data};
+        const update = {id,title,description,from_data,to_data};
 
-        const updateProject = await projectService.putProject({id,update});
+        const updateProject = await projectService.putProject({update});
 
         if (updateProject.errorMessage){
          throw new Error(updateProject.errorMessage);
@@ -98,8 +99,7 @@ projectRouter.get("/projectlist/:user_id", async (req,res,next)=>{
         const user_id = req.params.user_id;
         const projectlist = await projectService.projectList({ user_id });
 
-        //console.log(projectlist);
-        
+     
         if (projectlist.errorMessage){
             throw new Error(projectlist.errorMessage);
         }
