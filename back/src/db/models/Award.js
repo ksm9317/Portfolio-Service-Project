@@ -34,6 +34,10 @@ class Award {
     );
     return updateAward;
   }
+
+  static async delete({ id, user_id }) {
+    return AwardModel.deleteOne({ id, user_id });
+  }
 }
 
 export { Award };
