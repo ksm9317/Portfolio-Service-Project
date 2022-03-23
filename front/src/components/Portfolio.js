@@ -9,7 +9,7 @@ import Education from "./education/Education";
 import Project from "./project/Project";
 import Award from "./award/Award";
 import Certificate from "./certificate/Certificate";
-import CommentForm from "./comment/CommentForm";
+import CommentList from "./comment/CommentList";
 
 function Portfolio() {
   const navigate = useNavigate();
@@ -64,7 +64,11 @@ function Portfolio() {
             portfolioOwnerId={portfolioOwner.id}
             isEditable={portfolioOwner.id === userState.user?.id}
           />
-          <CommentForm portfolioOwnerId={portfolioOwner.id} />
+          <CommentList
+            portfolioOwnerId={portfolioOwner.id}
+            currentUserId={userState.user?.id}
+            isEditable={portfolioOwner.id === userState.user?.id}
+          />
         </Col>
         <Col>
           <Education

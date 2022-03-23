@@ -1,6 +1,7 @@
 import { Card, Button } from "react-bootstrap";
 import ProjectEditForm from "./ProjectEditForm";
 import { useState } from "react";
+import * as Api from "../../api";
 
 function ProjectCard({
   portfolioOwnerId,
@@ -15,6 +16,15 @@ function ProjectCard({
   const to_data = project?.to_data;
   const current = { currentId, title, description, from_data, to_data };
   const [isEditing, setIsEditing] = useState(false);
+
+  // const handleSubmit = async (e) => {
+  //   //삭제 버튼을 누른 education의 id를 이용하여 삭제 요청을 보냄
+  //   e.preventDefault();
+  //   const user_id = portfolioOwnerId;
+  //   await Api.delete(`educationDelete/${current?.currentId}`);
+  //   const res = await Api.get("educationlist", user_id);
+  //   setProjectList(res.data);
+  // };
 
   return (
     <div className="mb-2 ms-3 mr-5">
@@ -38,8 +48,9 @@ function ProjectCard({
               </div>
               <div className="col - lg - 1 col">
                 {isEditable && (
-                  <div style={{ display: "flex", justifyContent: "center" }}>
+                  <div style={{ display: "flex" }}>
                     <Button
+                      style={{ margin: "auto" }}
                       variant="outline-info"
                       size="sm"
                       onClick={() => {
@@ -50,9 +61,11 @@ function ProjectCard({
                     </Button>
 
                     <Button
+                      style={{ margin: "auto" }}
                       variant="outline-info"
                       size="sm"
                       onClick={() => {
+                        // handleSubmit(e);
                         console.log("삭제 요청");
                       }}
                     >
