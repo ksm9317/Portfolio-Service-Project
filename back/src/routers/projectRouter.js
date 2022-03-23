@@ -42,7 +42,7 @@ projectRouter.post("/project/create", async (req, res, next) => {
 projectRouter.get("/projects/:id", async (req, res, next) => {
   try {
     const projectId = req.params.id;
-    const project = await projectService.getProject({projectId});
+    const project = await projectService.getProject({ projectId });
 
     if (project.errorMessage) {
       throw new Error(project.errorMessage);
@@ -53,21 +53,20 @@ projectRouter.get("/projects/:id", async (req, res, next) => {
   }
 });
 
+projectRouter.delete("/projects/:id/delete", async (req, res, next) => {
+  try {
+    const projectId = req.params.id;
+    const deleteProject = await projectService.deletProject({ projectId });
 
-projectRouter.delete("/projects/:id/delete",async (req,res,next)=>{
-    try{
-            const projectId = req.params.id;
-            const deleteProject = await projectService.deletProject({projectId})
+    if (deleteProject.errorMessage) {
+      throw new Error(deleteProject.errorMessage);
+    }
 
-            if (updateProject.errorMessage){
-                throw new Error(updateProject.errorMessage);
-            }
-            
-            res.json(deleteProject);
-        }catch(e){
-            next(e);
-        }
-    });
+    res.json(deleteProject);
+  } catch (e) {
+    next(e);
+  }
+});
 
 projectRouter.put("/projects/:id", async (req, res, next) => {
   try {
@@ -77,35 +76,34 @@ projectRouter.put("/projects/:id", async (req, res, next) => {
     const description = req.body.description ?? null;
     const from_data = req.body.from_data ?? null;
     const to_data = req.body.to_data ?? null;
-    const update = {id,title,description,from_data,to_data,user_id};
+    const update = { id, title, description, from_data, to_data, user_id };
 
-    const updateProject = await projectService.putProject({update});
+    const updateProject = await projectService.putProject({ update });
 
     if (updateProject.errorMessage) {
       throw new Error(updateProject.errorMessage);
     }
 
-    console.log(updateProject);
+    // console.log(updateProject);
     res.json(updateProject);
   } catch (error) {
     next(error);
   }
 });
 
-projectRouter.get("/projectlist/:user_id", async (req,res,next)=>{
-    try {
-        const user_id = req.params.user_id;
-        const projectlist = await projectService.projectList({ user_id });
+projectRouter.get("/projectlist/:user_id", async (req, res, next) => {
+  try {
+    const user_id = req.params.user_id;
+    const projectlist = await projectService.projectList({ user_id });
 
-     
-        if (projectlist.errorMessage){
-            throw new Error(projectlist.errorMessage);
-        }
-        
-        res.json(projectlist);
-    }catch(error){
-        next(error);
+    if (projectlist.errorMessage) {
+      throw new Error(projectlist.errorMessage);
     }
+
+    res.json(projectlist);
+  } catch (error) {
+    next(error);
+  }
 });
 
 export { projectRouter };
