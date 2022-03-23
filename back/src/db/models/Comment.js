@@ -9,7 +9,9 @@ class Comment {
     return CommnetModel.find({ commentTo });
   }
 
-  static async;
+  static delete({ id, commenter }) {
+    return CommnetModel.deleteOne({ id, commenter });
+  }
 }
 
 export { Comment };

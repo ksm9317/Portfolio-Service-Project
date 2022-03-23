@@ -49,4 +49,24 @@ commentRouter.get(
   }
 );
 
+commentRouter.delete(
+  "/deleteComment/:id",
+  login_required,
+  async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      const commenter = req.currentUserId;
+
+      const del = await commentService.deleteCommnet({ id, commenter });
+
+      if (del.errorMessage) {
+        throw new Error(del.errorMessage);
+      }
+
+      res.status(200).json({ status: "succ" });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 export { commentRouter };
