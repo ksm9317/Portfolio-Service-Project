@@ -31,6 +31,10 @@ class Education {
   static findBySchool({ user_id, school }) {
     return EducationModel.findOne({ user_id, school });
   }
+
+  static async delete({ id, user_id }) {
+    return EducationModel.deleteOne({ id, user_id });
+  }
 }
 
 export { Education };

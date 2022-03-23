@@ -92,11 +92,21 @@ awardRouter.get(
 );
 
 awardRouter.delete(
+  // 수상 내역의 id를 삭제합니다.
   "/awardDelete/:id",
   login_required,
   async (req, res, next) => {
     try {
       const id = req.params.id;
+      const user_id = req.currentUserId;
+
+      const del = await awardService.deleteAwrd({ id, user_id });
+
+      if (del.errorMessage) {
+        throw new Error(del.errorMessage);
+      }
+
+      res.status(200).json({ status: "succ" });
     } catch (error) {
       next(error);
     }

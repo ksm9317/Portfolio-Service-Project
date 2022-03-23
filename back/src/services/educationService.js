@@ -2,6 +2,9 @@ import { Education } from "../db";
 import { v4 as uuidv4 } from "uuid";
 
 class educationService {
+  static deleteEducation({ id, user_id }) {
+    return Education.delete({ id, user_id });
+  }
   static async addEducation({ user_id, school, major, position }) {
     // education 추가
     const isExist = await Education.findBySchool({ user_id, school });
