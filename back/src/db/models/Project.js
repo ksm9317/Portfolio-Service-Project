@@ -7,29 +7,29 @@ class Project{
     return createdNewProject;
   };
 
-  static async findByObjectId({projectid}){
-    const getProject = await ProjectModel.findOne({id : projectid});
+  static async findByObjectId({_id}){
+    const getProject = await ProjectModel.findOne({_id});
     return getProject;
   }
 
-  static async projectDelete({projectid}){
-    const getDeleteProject = await ProjectModel.findOneAndDelete({id: projectid});
+  static async projectDelete({projectId}){
+    console.log("projectDelete",projectId);
+    const getDeleteProject = await ProjectModel.findOneAndDelete({"_id":projectId});
     return getDeleteProject;
   }
 
-  static async update({projectid,fieldtoUpdate,newValue}){
-    const filter = {projectid};
+  static async update({projectId,fieldtoUpdate,newValue}){
+    //console.log("update",projectId);
+    const filter = {"_id" : projectId};
     const update = {[fieldtoUpdate] : newValue};
     const option = { returnOriginal : false};
-
+    
     const updateProject = await ProjectModel.findOneAndUpdate(
       filter,
       update,
       option
     );
-    
-    //console.log("업데이트 내용",updateProject);
-    return updateProject;
+     return updateProject;
   }
 
   static async findByUserId({ user_id }){

@@ -12,46 +12,43 @@ class projectService{
     }
 
     static async getProject({projectId}){
-        const project = await Project.findByObjectId({id :projectId});
+        const project = await Project.findByObjectId({"_id" :projectId});
         return project;
     }
     
     static async deletProject({projectId}){
-        const project = await Project.projectDelete({id : projectId});
+        const project = await Project.projectDelete({projectId});
         return project;
     }
     
-    static async putProject({projectId, update}){
-
-    let project = await Project.findByObjectId({id :projectId});
-    let user_id_info = update.user_id;
-    user_id_info = project.user_id;
-    const fieldtoUpdate_user = "user_id";
-    project = await Project.update({projectId,fieldtoUpdate_user,user_id_info});
-
-        if(!project){
-            return "project가 존재하지 않습니다.";
-        }
-
+    static async putProject({update}){
+    let project = await Project.findByObjectId({"_id" : update.id});
+    const projectId = update.id;
+    
+    
         if (update.title){
+            const projectId = update.id;
             const fieldtoUpdate="title";
             const newValue = update.title;
             project = await Project.update({projectId,fieldtoUpdate,newValue});
         }
 
         if (update.description){
+            const projectId = update.id;
             const fieldtoUpdate="description";
             const newValue = update.description;
             project = await Project.update({projectId,fieldtoUpdate,newValue});
         }
 
         if (update.from_data){
+            const projectId = update.id;
             const fieldtoUpdate="from_data";
             const newValue = update.from_data;
             project = await Project.update({projectId,fieldtoUpdate,newValue});
         }
 
         if (update.to_data){
+            const projectId = update.id;
             const fieldtoUpdate="to_data";
             const newValue = update.to_data;
             project = await Project.update({projectId,fieldtoUpdate,newValue});
