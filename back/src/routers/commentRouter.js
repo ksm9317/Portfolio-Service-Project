@@ -6,10 +6,13 @@ import { login_required } from "../middlewares/login_required";
 const commentRouter = Router();
 
 commentRouter.post(
+  // 새 댓글 추가하기
   "/comment/create/:user_id",
   login_required,
   async (req, res, next) => {
+    // 댓글을 받을 사람
     const commentTo = req.params.user_id;
+    // 로그인한 사람
     const commenter = req.currentUserId;
     const content = req.body.content;
 
@@ -28,6 +31,7 @@ commentRouter.post(
 );
 
 commentRouter.get(
+  // comment를 받는 사람 기준으로 모든 댓글 조회하기
   "/commentList/:user_id",
   login_required,
   async (req, res, next) => {
@@ -50,6 +54,7 @@ commentRouter.get(
 );
 
 commentRouter.delete(
+  // 댓글을 단 사람과 해당 댓글의 id를 이용해서 삭제
   "/deleteComment/:id",
   login_required,
   async (req, res, next) => {
