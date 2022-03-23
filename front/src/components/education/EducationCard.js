@@ -17,15 +17,12 @@ function EducationCard({
   const [isEditing, setIsEditing] = useState(false);
 
   const handleSubmit = async (e) => {
+    //삭제 버튼을 누른 education의 id를 이용하여 삭제 요청을 보냄
     e.preventDefault();
     const user_id = portfolioOwnerId;
     await Api.delete(`educationDelete/${current?.currentId}`);
-    // 유저 정보는 response의 data임.
-    // 해당 유저 정보로 user을 세팅함.
     const res = await Api.get("educationlist", user_id);
     setEducationList(res.data);
-    console.log(res.data);
-    // isEditing을 false로 세팅함.
   };
 
   return (
