@@ -62,7 +62,7 @@ certificateRouter.get("/certeficates/:id", login_required, async (req, res) => {
 });
 
 certificateRouter.delete(
-  "/certificates/:id/delete",
+  "/certificates/:id/",
   login_required,
   async (req, res) => {
     try {
