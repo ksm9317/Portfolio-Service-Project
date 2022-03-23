@@ -14,6 +14,10 @@ class commentService {
   static getAllComments({ commentTo }) {
     return Comment.findAllComment({ commentTo });
   }
+
+  static deleteCommnet({ id, commenter }) {
+    return Comment.delete({ id, commenter });
+  }
 }
 
 export { commentService };
