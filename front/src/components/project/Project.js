@@ -22,7 +22,7 @@ function Project({ portfolioOwnerId, isEditable }) {
         {projectList !== null ? (
           projectList.map((project) => (
             <ProjectCard
-              key={project.id}
+              key={project._id}
               portfolioOwnerId={portfolioOwnerId}
               project={project}
               setProjectList={setProjectList}

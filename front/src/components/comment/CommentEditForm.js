@@ -23,15 +23,11 @@ function CommentEditForm({
     e.preventDefault();
 
     const user_id = portfolioOwnerId;
-    const from_data = projectStart.toISOString().split("T")[0];
-    const to_data = projectEnd.toISOString().split("T")[0];
     console.log(current.currentId);
     await Api.put(`projects/${current.currentId}`, {
       user_id,
       title,
       description,
-      from_data,
-      to_data,
     });
     // 유저 정보는 response의 data임.
     const res = await Api.get("projectlist", user_id);

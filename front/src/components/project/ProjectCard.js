@@ -17,14 +17,16 @@ function ProjectCard({
   const current = { currentId, title, description, from_data, to_data };
   const [isEditing, setIsEditing] = useState(false);
 
-  // const handleSubmit = async (e) => {
-  //   //삭제 버튼을 누른 education의 id를 이용하여 삭제 요청을 보냄
-  //   e.preventDefault();
-  //   const user_id = portfolioOwnerId;
-  //   await Api.delete(`educationDelete/${current?.currentId}`);
-  //   const res = await Api.get("educationlist", user_id);
-  //   setProjectList(res.data);
-  // };
+  const handleSubmit = async (e) => {
+    //삭제 버튼을 누른 education의 id를 이용하여 삭제 요청을 보냄
+    e.preventDefault();
+    const user_id = portfolioOwnerId;
+    ///projects/:id/delete
+    console.log(current?.currentId);
+    await Api.delete(`projects/${current?.currentId}/delete`);
+    const res = await Api.get("projectlist", user_id);
+    setProjectList(res.data);
+  };
 
   return (
     <div className="mb-2 ms-3 mr-5">
@@ -64,9 +66,8 @@ function ProjectCard({
                       style={{ margin: "auto" }}
                       variant="outline-info"
                       size="sm"
-                      onClick={() => {
-                        // handleSubmit(e);
-                        console.log("삭제 요청");
+                      onClick={(e) => {
+                        handleSubmit(e);
                       }}
                     >
                       삭제
