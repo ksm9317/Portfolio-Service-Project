@@ -5,9 +5,10 @@ const path = require("path");
 
 const pdfRouter = Router();
 
-pdfRouter.post("/pdf/:user_id", login_required, async (req, res) => {
+pdfRouter.post("/pdf/create", login_required, async (req, res) => {
   try {
     const user_id = req.params.user_id;
+    console.log(user_id);
     const { name, email, tel, description } = req.body;
     const data = await pdfService.pdfConverter({
       user_id,
