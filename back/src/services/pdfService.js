@@ -36,7 +36,7 @@ class pdfService {
     const educations = await educationService.getEducations({ user_id });
     const projects = await projectService.projectList({ user_id });
     //required data has been set
-
+    console.log(educations);
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     const filename = "myResume.pdf";

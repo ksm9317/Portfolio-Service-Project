@@ -1,12 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { Card, Row, Button, Col } from "react-bootstrap";
 import { useState } from "react";
-import ExportToPdf from "../pdf/ExportToPdf"
+import ExportToPdf from "../pdf/ExportToPdf";
 
-function UserCard({ user, setIsEditing, isEditable, isNetwork, portfolioOwnerId }) {
+function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
   const navigate = useNavigate();
   const [isPdf, setIsPdf] = useState(false);
-
   return (
     <Card className="mb-2 ms-3 mr-5" style={{ width: "18rem" }}>
       <Card.Body>
@@ -22,12 +21,7 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork, portfolioOwnerId 
         <Card.Subtitle className="mb-2 text-muted">{user?.email}</Card.Subtitle>
         <Card.Text>{user?.description}</Card.Text>
 
-        {isPdf && (
-          <ExportToPdf
-            setIsPdf={setIsPdf}
-            portfolioOwnerId={portfolioOwnerId}
-          />
-        )}
+        {isPdf && <ExportToPdf setIsPdf={setIsPdf} user_id={user.id} />}
 
         {isEditable && (
           <Col>

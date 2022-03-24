@@ -459,16 +459,13 @@ body {
         <span>Eduation</span>
       </div>
       <div class="detail-content">
+		{{#each educations as |educations|}}
         <div class="timeline-block">
-          <h1>Department of Computer Science</h1>
-          <p>National Tsing Hua University, Taiwan</p>
-          <time>2015 - 2019</time>
+          <h1>{{educations.school}}</h1>
+          <p>{{educations.major}}</p>
+          <time>{{educations.position}}</time>
         </div>
-        <div class="timeline-block">
-          <h1>Institute of Computer Science and Engineering</h1>
-          <p>National Chiao Tung University, Taiwan</p>
-          <time>2020 - present</time>
-        </div>
+		 {{/each}}
       </div>
     </div>
     <div class="detail-section pg-skill">
@@ -507,7 +504,6 @@ body {
               <circle class="cbar" cx="50" cy="50" r="45" style="--percent: 0.6"></circle>
             </svg>
             <span class="tl-name">{{projects.title}}</span>
-            <span class="tl-exp">60%</span>
           </li>
 		   {{/each}}
         </ul>
