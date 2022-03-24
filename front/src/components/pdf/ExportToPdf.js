@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Button, Form, Col, Row, Card } from "react-bootstrap";
-import * as Api from "../../api";
+import React, { useState, useEffect } from 'react';
+import { Button, Form, Col, Row, Card } from 'react-bootstrap';
+import * as Api from '../../api';
 
-function ExportToPdf({ setIsPdf, user_id }) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [tel, setTel] = useState("");
-  const [description, setDescription] = useState("");
+function ExportToPdf({ setIsPdf, user_id, saved }) {
+  const [name, setName] = useState(saved?.savedName);
+  const [email, setEmail] = useState(saved?.savedEmail);
+  const [tel, setTel] = useState('');
+  const [description, setDescription] = useState(saved?.savedDescription);
 
   //이메일이 abc@example.com 형태인지 regex를 이용해 확인함.
   const validateEmail = (email) => {
@@ -29,12 +29,12 @@ function ExportToPdf({ setIsPdf, user_id }) {
   //핸드폰 "-" 자동입력.
   useEffect(() => {
     if (tel.length > 3 && tel.length < 7) {
-      setTel(tel.replace(/(\d{3})(\d{1})/, "$1-$2"));
+      setTel(tel.replace(/(\d{3})(\d{1})/, '$1-$2'));
     } else if (tel.length > 7 && tel.length < 11) {
-      setTel(tel.replace(/(\d{3})(\d{1})/, "$1-$2"));
+      setTel(tel.replace(/(\d{3})(\d{1})/, '$1-$2'));
     } else if (tel.length === 13) {
       setTel(
-        tel.replace(/-/g, "").replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3")
+        tel.replace(/-/g, '').replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3')
       );
     }
   }, [tel]);
@@ -50,15 +50,15 @@ function ExportToPdf({ setIsPdf, user_id }) {
         tel,
         description,
       },
-      { responseType: "blob" }
+      { responseType: 'blob' }
     );
     setIsPdf(false);
     //data를 임시 url로 변경
     const url = window.URL.createObjectURL(new Blob([response.data]));
     //임시 url을 a로 할당
-    const link = document.createElement("a");
+    const link = document.createElement('a');
     link.href = url;
-    link.setAttribute("download", "resume.pdf"); //or any other extension
+    link.setAttribute('download', 'resume.pdf'); //or any other extension
     document.body.appendChild(link);
     link.click();
   };
