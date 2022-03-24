@@ -13,7 +13,6 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
 
   return (
     <Card className="mb-2 mr-5">
-      {/* <Card className="mb-2 ms-3 mr-5" style={{ width: "18rem" }}> */}
       <Card.Body>
         <Row className="justify-content-md-center">
           <Card.Img

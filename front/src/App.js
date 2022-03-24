@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useReducer, createContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import * as Api from "./api";
-import { loginReducer } from "./reducer";
+import './App.css';
+import * as Api from './api';
+import { loginReducer } from './reducer';
 
 import Header from "./components/Header";
 import LoginForm from "./components/user/LoginForm";
