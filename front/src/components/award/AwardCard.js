@@ -1,6 +1,7 @@
 import { Card, Button, Col } from 'react-bootstrap';
 import AwardEditForm from './AwardEditForm';
 import { useState } from 'react';
+import * as Api from '../../api';
 
 function AwardCard({ portfolioOwnerId, award, setUser, isEditable }) {
   const currentId = award?.id;
@@ -8,6 +9,19 @@ function AwardCard({ portfolioOwnerId, award, setUser, isEditable }) {
   const description = award?.description;
   const current = { currentId, title, description };
   const [isEditing, setIsEditing] = useState(false);
+
+  const handleDelete = async () => {
+    try {
+      await Api.delete('awardDelete', award?.id);
+      setUser((current) => {
+        const deleted = current.filter((e) => e.id !== award.id);
+        return deleted;
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <div className="mb-2 ms-3 mr-5">
       <div>
@@ -26,13 +40,20 @@ function AwardCard({ portfolioOwnerId, award, setUser, isEditable }) {
                 <span className="text-muted">{description}</span>
               </Col>
               {isEditable && (
-                <Col lg="1">
+                <Col className="text-center col-2">
                   <Button
                     variant="outline-info"
                     size="sm"
                     onClick={() => setIsEditing(true)}
                   >
                     편집
+                  </Button>
+                  <Button
+                    variant="outline-info"
+                    size="sm"
+                    onClick={handleDelete}
+                  >
+                    삭제
                   </Button>
                 </Col>
               )}

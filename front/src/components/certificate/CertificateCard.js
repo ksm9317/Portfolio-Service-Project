@@ -1,6 +1,7 @@
 import { Card, Button, Col } from 'react-bootstrap';
 import CertificateEditForm from './CertificateEditForm';
 import { useState } from 'react';
+import * as Api from '../../api';
 
 function CertificateCard({
   portfolioOwnerId,
@@ -14,6 +15,19 @@ function CertificateCard({
   const date = certificate?.date;
   const current = { currentId, title, description, date };
   const [isEditing, setIsEditing] = useState(false);
+
+  const handleDelete = async () => {
+    try {
+      await Api.delete('certificates', certificate?.id);
+      setUser((current) => {
+        const deleted = current.filter((e) => e.id !== certificate.id);
+        return deleted;
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <div className="mb-2 ms-3 mr-5">
       <div>
@@ -33,13 +47,20 @@ function CertificateCard({
                 <span className="text-muted">{date.substring(0, 10)}</span>
               </Col>
               {isEditable && (
-                <Col lg="1">
+                <Col className="text-center col-2">
                   <Button
                     variant="outline-info"
                     size="sm"
                     onClick={() => setIsEditing(true)}
                   >
                     편집
+                  </Button>
+                  <Button
+                    variant="outline-info"
+                    size="sm"
+                    onClick={handleDelete}
+                  >
+                    삭제
                   </Button>
                 </Col>
               )}

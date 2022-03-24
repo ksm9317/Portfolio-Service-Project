@@ -55,7 +55,7 @@ function CertificateEditForm({
       </Form.Group>
 
       <Form.Group controlId="date" className="mt-3">
-        <DatePicker selected={date} value={date} onChange={(e) => setDate(e)} />
+        <DatePicker selected={date} onChange={(e) => setDate(e)} />
       </Form.Group>
 
       <Form.Group as={Row} className="mt-3 text-center">

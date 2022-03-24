@@ -18,6 +18,17 @@ class commentService {
   static deleteCommnet({ id, commenter }) {
     return Comment.delete({ id, commenter });
   }
+
+  static async setComment({ id, update }) {
+    let comment = await Comment.findById({ id });
+
+    if (update.content) {
+      const fieldToUpdate = "content";
+      const newValue = update.content;
+      comment = await Comment.update({ id, fieldToUpdate, newValue });
+    }
+    return comment;
+  }
 }
 
 export { commentService };
