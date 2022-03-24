@@ -18,7 +18,7 @@ async function get(endpoint, params = "") {
   });
 }
 
-async function post(endpoint, data) {
+async function post(endpoint, data, config = {}) {
   // JSON.stringify 함수: Javascript 객체를 JSON 형태로 변환함.
   // 예시: {name: "Kim"} => {"name": "Kim"}
   const bodyData = JSON.stringify(data);
@@ -30,6 +30,7 @@ async function post(endpoint, data) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${sessionStorage.getItem("userToken")}`,
     },
+    ...config,
   });
 }
 

@@ -47,16 +47,28 @@ function ExportToPdf({ setIsPdf, portfolioOwnerId }) {
     e.preventDefault();
     const user_id = portfolioOwnerId;
 
-    await Api.post(`pdf/create`, {
-      user_id,
-      name,
-      email,
-      tel,
-      description,
-    })
+    const response = await Api.post(
+      `pdf/create`,
+      {
+        user_id,
+        name,
+        email,
+        tel,
+        description,
+      },
+      { responseType: 'blob' }
+    );
     setIsPdf(false);
-  };  
-  
+    //data를 임시 url로 변경
+    const url = window.URL.createObjectURL(new Blob([response.data]));
+    //임시 url을 a로 할당
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'resume.pdf'); //or any other extension
+    document.body.appendChild(link);
+    link.click();
+  };
+
   return (
     <Card className="mb-2">
       <Card.Body>
