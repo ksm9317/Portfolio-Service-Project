@@ -5,7 +5,7 @@ import CommentCard from "./CommentCard";
 
 function CommentList({ portfolioOwnerId, currentUserId, isEditable }) {
   const [commentList, setCommentList] = useState(null);
-  const [comments, setComments] = useState(null);
+  const [content, setContent] = useState(null);
   useEffect(() => {
     // "commentList/유저id" 엔드포인트로 GET 요청을 하고, commentList response의 data로 세팅함.
     Api.get("commentList", portfolioOwnerId).then((res) =>
@@ -15,9 +15,17 @@ function CommentList({ portfolioOwnerId, currentUserId, isEditable }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(portfolioOwnerId);
-    console.log(currentUserId);
-    console.log(isEditable);
+
+    const user_id = portfolioOwnerId;
+    await Api.post(`comment/create/${user_id}`, {
+      commentTo: user_id,
+      commenter: currentUserId,
+      content,
+    });
+
+    const res = await Api.get("commentList", user_id);
+    setCommentList(res.data);
+    setContent("");
   };
   return (
     <Card className="mb-3">
@@ -32,7 +40,6 @@ function CommentList({ portfolioOwnerId, currentUserId, isEditable }) {
               currentUserId={currentUserId}
               comment={comment}
               setCommentList={setCommentList}
-              isEditable={isEditable}
             />
           ))
         ) : (
@@ -45,8 +52,8 @@ function CommentList({ portfolioOwnerId, currentUserId, isEditable }) {
               <Form.Control
                 type="text"
                 placeholder="댓글을 입력해주세요."
-                value={comments}
-                onChange={(e) => setComments(e.target.value)}
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
               />
               <Button
                 variant="primary"

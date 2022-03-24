@@ -21,8 +21,6 @@ function ProjectCard({
     //삭제 버튼을 누른 education의 id를 이용하여 삭제 요청을 보냄
     e.preventDefault();
     const user_id = portfolioOwnerId;
-    ///projects/:id/delete
-    console.log(current?.currentId);
     await Api.delete(`projects/${current?.currentId}/delete`);
     const res = await Api.get("projectlist", user_id);
     setProjectList(res.data);
