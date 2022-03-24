@@ -5,7 +5,7 @@ const path = require("path");
 
 const pdfRouter = Router();
 
-pdfRouter.get("/pdf/:user_id", login_required, async (req, res) => {
+pdfRouter.post("/pdf/create", login_required, async (req, res) => {
   try {
     const user_id = req.params.user_id;
     const { name, email, tel, description } = req.body;
