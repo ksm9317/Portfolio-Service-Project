@@ -12,7 +12,6 @@ certificateRouter.post(
     try {
       const { title, user_id, description, date } = req.body;
       const id = uuidv4();
-      console.log(id);
       const result = await certificationService.addCertification({
         id,
         title,
@@ -35,7 +34,6 @@ certificateRouter.get(
     //read 함수입니다. 프론트엔드로부터 지은이만 전달받습니다.
     try {
       const user_id = req.params.user_id;
-      console.log(user_id);
       const result = await certificationService.returnAllCertificate({
         user_id,
       });
@@ -50,7 +48,6 @@ certificateRouter.get(
 certificateRouter.get("/certeficates/:id", login_required, async (req, res) => {
   try {
     const certificateid = req.params.id;
-    console.log(certificateid);
     const result = await certificationService.findCertificate({
       certificateid,
     });
@@ -86,7 +83,6 @@ certificateRouter.delete(
 certificateRouter.put("/certificates/:id", login_required, async (req, res) => {
   const { title, description, date } = req.body;
   const certificateid = req.params.id;
-  console.log(certificateid);
   try {
     const result = await certificationService.updateCertification({
       title,
