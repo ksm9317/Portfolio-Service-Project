@@ -5,7 +5,7 @@ import CommentCard from "./CommentCard";
 
 function CommentList({ portfolioOwnerId, currentUserId, isEditable }) {
   const [commentList, setCommentList] = useState(null);
-  const [content, setContent] = useState(null);
+  const [content, setContent] = useState("");
   const [commenterName, setCommenterName] = useState(null);
 
   useEffect(() => {
