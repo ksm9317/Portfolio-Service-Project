@@ -23,12 +23,14 @@ function EducationEditFrom({
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user_id = portfolioOwnerId;
+    //id를 이용하여 수정 요청을 보냄
     await Api.put(`educations/${current.currentId}`, {
       user_id,
       school,
       major,
       position,
     });
+    // 프로젝트 정보는 response의 data임.
     const res = await Api.get("educationlist", user_id);
     setEducationList(res.data);
     console.log(res.data);

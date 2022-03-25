@@ -29,7 +29,7 @@ function EducationAddFrom({
       position,
     });
     // 유저 정보는 response의 data임.
-    // 해당 유저 정보로 user을 세팅함.
+    // 해당 유저 정보로 education을 세팅함.
     const res = await Api.get("educationlist", user_id);
     setEducationList(res.data);
     console.log(res.data);

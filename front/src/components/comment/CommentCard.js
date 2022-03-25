@@ -1,5 +1,5 @@
 import { Card, Button } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import CommentEditForm from "./CommentEditForm";
 import * as Api from "../../api";
 
@@ -11,13 +11,6 @@ function CommentCard({
   isEditable,
 }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [commenterName, setCommenterName] = useState(null);
-  useEffect(() => {
-    // "commentList/유저id" 엔드포인트로 GET 요청을 하고, commentList response의 data로 세팅함.
-    Api.get("users", currentUserId).then((res) =>
-      setCommenterName(res.data.name)
-    );
-  }, [currentUserId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +22,7 @@ function CommentCard({
   return (
     <div className="mb-2 ms-3 mr-5">
       <div>
-        {!isEditable ? (
+        {isEditing ? (
           <CommentEditForm
             portfolioOwnerId={portfolioOwnerId}
             currentUserId={currentUserId}
@@ -41,10 +34,10 @@ function CommentCard({
           <Card.Text>
             <div className="justify-content-between align-items-center mb-2 row">
               <div className="col">
-                {commenterName}:{comment.content} <br />
+                {comment.name}:{comment.content} <br />
               </div>
               <div className="col - lg - 1 col">
-                {(isEditable || currentUserId === comment.commenter) && (
+                {currentUserId === comment.commenter && (
                   <div style={{ display: "flex" }}>
                     <Button
                       style={{ margin: "auto" }}
