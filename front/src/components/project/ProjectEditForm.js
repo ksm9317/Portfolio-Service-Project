@@ -25,7 +25,7 @@ function ProjectEditFrom({
     const user_id = portfolioOwnerId;
     const from_data = projectStart.toISOString().split("T")[0];
     const to_data = projectEnd.toISOString().split("T")[0];
-    console.log(current.currentId);
+    //id를 이용하여 수정 요청을 보냄
     await Api.put(`projects/${current.currentId}`, {
       user_id,
       title,
@@ -33,7 +33,7 @@ function ProjectEditFrom({
       from_data,
       to_data,
     });
-    // 유저 정보는 response의 data임.
+    // 프로젝트 정보는 response의 data임.
     const res = await Api.get("projectlist", user_id);
     setProjectList(res.data);
     console.log(res.data);

@@ -3,7 +3,7 @@ import * as Api from "../../api";
 import { Button, Card, Form } from "react-bootstrap";
 import CommentCard from "./CommentCard";
 
-function CommentList({ portfolioOwnerId, currentUserId, isEditable }) {
+function CommentList({ portfolioOwnerId, currentUserId }) {
   const [commentList, setCommentList] = useState(null);
   const [content, setContent] = useState(null);
   useEffect(() => {
@@ -56,9 +56,9 @@ function CommentList({ portfolioOwnerId, currentUserId, isEditable }) {
                 onChange={(e) => setContent(e.target.value)}
               />
               <Button
-                variant="primary"
+                variant="outline-primary"
                 type="submit"
-                style={{ margin: "auto", display: "flex" }}
+                style={{ margin: "10px auto", display: "flex" }}
               >
                 게시
               </Button>

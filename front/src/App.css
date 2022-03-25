@@ -1,3 +1,11 @@
 body .card {
   border-radius: 1rem;
 }
+
+div > button {
+  margin-right: 10px;
+}
+
+#root {
+  background-color: #f8f9fb;
+}

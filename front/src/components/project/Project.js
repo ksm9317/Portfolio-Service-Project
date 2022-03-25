@@ -35,7 +35,12 @@ function Project({ portfolioOwnerId, isEditable }) {
         {isEditable && (
           <div className="mt-3 text-center mb-4 row">
             <div className="col-sm-20">
-              <Button onClick={(e) => setIsAddProject(true)}>+</Button>
+              <Button
+                variant="outline-primary"
+                onClick={(e) => setIsAddProject(true)}
+              >
+                +
+              </Button>
             </div>
           </div>
         )}

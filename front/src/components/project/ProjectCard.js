@@ -1,4 +1,4 @@
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Col } from "react-bootstrap";
 import ProjectEditForm from "./ProjectEditForm";
 import { useState } from "react";
 import * as Api from "../../api";
@@ -46,33 +46,26 @@ function ProjectCard({
                   {from_data}~{to_data}
                 </span>
               </div>
-              <div className="col - lg - 1 col">
-                {isEditable && (
-                  <div style={{ display: "flex" }}>
-                    <Button
-                      style={{ margin: "auto" }}
-                      variant="outline-info"
-                      size="sm"
-                      onClick={() => {
-                        setIsEditing(true);
-                      }}
-                    >
-                      편집
-                    </Button>
-
-                    <Button
-                      style={{ margin: "auto" }}
-                      variant="outline-info"
-                      size="sm"
-                      onClick={(e) => {
-                        handleSubmit(e);
-                      }}
-                    >
-                      삭제
-                    </Button>
-                  </div>
-                )}
-              </div>
+              {isEditable && (
+                <Col className="text-center col-2">
+                  <Button
+                    variant="outline-info"
+                    size="sm"
+                    onClick={() => setIsEditing(true)}
+                  >
+                    편집
+                  </Button>
+                  <Button
+                    variant="outline-info"
+                    size="sm"
+                    onClick={(e) => {
+                      handleSubmit(e);
+                    }}
+                  >
+                    삭제
+                  </Button>
+                </Col>
+              )}
             </div>
           </Card.Text>
         )}
