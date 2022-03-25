@@ -2,10 +2,10 @@ import { Comment } from "../db";
 import { v4 as uuidv4 } from "uuid";
 
 class commentService {
-  static async addComment({ commentTo, commenter, content }) {
+  static async addComment({ commentTo, commenter, content, name }) {
     //   comment의 고유 id
     const id = uuidv4();
-    const newComment = { commentTo, commenter, id, content };
+    const newComment = { commentTo, commenter, id, content, name };
 
     const addComment = await Comment.create({ newComment });
     return addComment;
