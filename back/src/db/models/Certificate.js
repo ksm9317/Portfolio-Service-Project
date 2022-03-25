@@ -40,9 +40,7 @@ class Certificate {
     return deleted;
   }
   static async findByObjectId({ certificateid }) {
-    console.log(certificateid);
     const result = await CertificateModel.findOne({ id: certificateid });
-    console.log(result);
     return result;
   }
 }
