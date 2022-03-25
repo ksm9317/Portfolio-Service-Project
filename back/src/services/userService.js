@@ -18,7 +18,7 @@ class userAuthService {
 
     // id 는 유니크 값 부여
     const id = uuidv4();
-    const newUser = { id, name, email, password: hashedPassword };
+    const newUser = { id, name, email, password: hashedPassword, admin: false };
 
     // db에 저장
     const createdNewUser = await User.create({ newUser });
@@ -57,9 +57,9 @@ class userAuthService {
     const name = user.name;
     const description = user.description;
     const admin = user.admin;
-    
-    if(admin === true){
-      console.log("관리자 로그인입니다",user.admin);
+
+    if (admin === true) {
+      console.log("관리자 로그인입니다", user.admin);
     }
 
     const loginUser = {

@@ -2,6 +2,10 @@ import { Schema, model } from "mongoose";
 
 const UserSchema = new Schema(
   {
+    admin: {
+      type: Boolean,
+      required: true,
+    },
     id: {
       type: String,
       required: true,
@@ -25,7 +29,7 @@ const UserSchema = new Schema(
     },
     admin: {
       type: Boolean,
-      default : false,
+      default: false,
     },
   },
   {
