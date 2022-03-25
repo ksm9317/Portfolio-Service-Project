@@ -40,10 +40,10 @@ function AwardEditForm({ portfolioOwnerId, current, setUser, setIsEditing }) {
 
       <Form.Group as={Row} className="mt-3 text-center">
         <Col sm={{ span: 20 }}>
-          <Button variant="primary" type="submit" className="me-3">
+          <Button variant="outline-success" type="submit" className="me-3">
             확인
           </Button>
-          <Button variant="secondary" onClick={() => setIsEditing(false)}>
+          <Button variant="outline-danger" onClick={() => setIsEditing(false)}>
             취소
           </Button>
         </Col>

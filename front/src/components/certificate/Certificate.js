@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import * as Api from "../../api";
-import { Button, Card } from "react-bootstrap";
-import CertificateAddForm from "./CertificateAddForm";
-import CertificateCard from "./CertificateCard";
+import React, { useState, useEffect } from 'react';
+import * as Api from '../../api';
+import { Button, Card } from 'react-bootstrap';
+import CertificateAddForm from './CertificateAddForm';
+import CertificateCard from './CertificateCard';
 
 function Certificate({ portfolioOwnerId, isEditable }) {
   //isAddAward 항목 추가 상태를 결정
@@ -18,9 +18,9 @@ function Certificate({ portfolioOwnerId, isEditable }) {
   }, [portfolioOwnerId]);
 
   return (
-    <Card className="mb-3">
+    <Card className="mb-3 me-3">
       <Card.Body>
-        <Card.Title>자격증</Card.Title>
+        <Card.Title className="comTitle">CERTIFICATE</Card.Title>
         {user !== null &&
           user.map((certificate) => (
             <CertificateCard
@@ -42,7 +42,8 @@ function Certificate({ portfolioOwnerId, isEditable }) {
           <div className="mt-3 text-center mb-4 row">
             <div className="col-sm-20">
               <Button
-                variant="outline-primary"
+                className="plus"
+                variant="dark"
                 onClick={(e) => setIsAddCertificate(true)}
               >
                 +

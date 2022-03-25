@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import * as Api from "../../api";
-import { Button, Card } from "react-bootstrap";
-import EducationAddFrom from "./EducationAddForm";
-import EducationCard from "./EducationCard";
+import React, { useState, useEffect } from 'react';
+import * as Api from '../../api';
+import { Button, Card } from 'react-bootstrap';
+import EducationAddFrom from './EducationAddForm';
+import EducationCard from './EducationCard';
 
 function Education({ portfolioOwnerId, isEditable }) {
   const [isAddEducation, setIsAddEducation] = useState(false);
@@ -10,15 +10,15 @@ function Education({ portfolioOwnerId, isEditable }) {
 
   useEffect(() => {
     // "educationlist/유저id" 엔드포인트로 GET 요청을 하고, educationlist를 response의 data로 세팅함.
-    Api.get("educationlist", portfolioOwnerId).then((res) =>
+    Api.get('educationlist', portfolioOwnerId).then((res) =>
       setEducationList(res.data)
     );
   }, [portfolioOwnerId]);
 
   return (
-    <Card className="mb-3">
+    <Card className="mb-3 me-3">
       <Card.Body>
-        <Card.Title>학력</Card.Title>
+        <Card.Title className="comTitle">EDUCATION</Card.Title>
 
         {educationlist !== null ? (
           educationlist.map((education) => (
@@ -33,19 +33,6 @@ function Education({ portfolioOwnerId, isEditable }) {
         ) : (
           <></>
         )}
-        {isEditable && (
-          <div className="mt-3 text-center mb-4 row">
-            <div className="col-sm-20">
-              <Button
-                variant="outline-primary"
-                onClick={(e) => setIsAddEducation(true)}
-              >
-                +
-              </Button>
-            </div>
-          </div>
-        )}
-
         {isAddEducation ? (
           <EducationAddFrom
             setIsAddEducation={setIsAddEducation}
@@ -54,6 +41,19 @@ function Education({ portfolioOwnerId, isEditable }) {
           />
         ) : (
           <></>
+        )}
+        {isEditable && (
+          <div className="mt-3 text-center mb-4 row">
+            <div className="col-sm-20">
+              <Button
+                className="plus"
+                variant="outline-dark"
+                onClick={(e) => setIsAddEducation(true)}
+              >
+                +
+              </Button>
+            </div>
+          </div>
         )}
       </Card.Body>
     </Card>

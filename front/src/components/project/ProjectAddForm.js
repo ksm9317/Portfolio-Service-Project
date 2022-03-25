@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Button, Form, Col, Row } from "react-bootstrap";
-import * as Api from "../../api";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import React, { useState } from 'react';
+import { Button, Form, Col, Row } from 'react-bootstrap';
+import * as Api from '../../api';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 function ProjectAddFrom({ setIsAddProject, portfolioOwnerId, setProjectList }) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [projectStart, setProjectStart] = useState(new Date());
   const [projectEnd, setProjectEnd] = useState(new Date());
 
@@ -14,8 +14,8 @@ function ProjectAddFrom({ setIsAddProject, portfolioOwnerId, setProjectList }) {
     e.preventDefault();
 
     const user_id = portfolioOwnerId;
-    const from_data = projectStart.toISOString().split("T")[0];
-    const to_data = projectEnd.toISOString().split("T")[0];
+    const from_data = projectStart.toISOString().split('T')[0];
+    const to_data = projectEnd.toISOString().split('T')[0];
 
     await Api.post(`project/create`, {
       user_id,
@@ -25,7 +25,7 @@ function ProjectAddFrom({ setIsAddProject, portfolioOwnerId, setProjectList }) {
       to_data,
     });
     // 유저 정보는 response의 data임.
-    const res = await Api.get("projectlist", user_id);
+    const res = await Api.get('projectlist', user_id);
     setProjectList(res.data);
     console.log(res.data);
     // isEditing을 false로 세팅함.
@@ -69,10 +69,13 @@ function ProjectAddFrom({ setIsAddProject, portfolioOwnerId, setProjectList }) {
 
       <Form.Group as={Row} className="mt-3 text-center">
         <Col sm={{ span: 20 }}>
-          <Button variant="primary" type="submit" className="me-3">
+          <Button variant="outline-success" type="submit" className="me-3">
             확인
           </Button>
-          <Button variant="secondary" onClick={() => setIsAddProject(false)}>
+          <Button
+            variant="outline-danger"
+            onClick={() => setIsAddProject(false)}
+          >
             취소
           </Button>
         </Col>

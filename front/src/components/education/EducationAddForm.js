@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import { Button, Form, Col, Row } from "react-bootstrap";
-import * as Api from "../../api";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
+import React, { useState } from 'react';
+import { Button, Form, Col, Row } from 'react-bootstrap';
+import * as Api from '../../api';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
 
 function EducationAddFrom({
   setIsAddEducation,
   portfolioOwnerId,
   setEducationList,
 }) {
-  const [school, setSchool] = useState("");
-  const [major, setMajor] = useState("");
-  const [position, setPosition] = useState("재학중");
+  const [school, setSchool] = useState('');
+  const [major, setMajor] = useState('');
+  const [position, setPosition] = useState('재학중');
 
   const handleChange = (event) => {
     setPosition(event.target.value);
@@ -30,7 +30,7 @@ function EducationAddFrom({
     });
     // 유저 정보는 response의 data임.
     // 해당 유저 정보로 user을 세팅함.
-    const res = await Api.get("educationlist", user_id);
+    const res = await Api.get('educationlist', user_id);
     setEducationList(res.data);
     console.log(res.data);
     // isEditing을 false로 세팅함.
@@ -86,10 +86,13 @@ function EducationAddFrom({
 
       <Form.Group as={Row} className="mt-3 text-center">
         <Col sm={{ span: 20 }}>
-          <Button variant="primary" type="submit" className="me-3">
+          <Button variant="outline-success" type="submit" className="me-3">
             확인
           </Button>
-          <Button variant="secondary" onClick={() => setIsAddEducation(false)}>
+          <Button
+            variant="outline-danger"
+            onClick={() => setIsAddEducation(false)}
+          >
             취소
           </Button>
         </Col>

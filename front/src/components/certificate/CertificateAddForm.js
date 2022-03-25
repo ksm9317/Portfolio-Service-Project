@@ -61,11 +61,11 @@ function CertificateAddForm({
 
       <Form.Group as={Row} className="mt-3 text-center">
         <Col sm={{ span: 20 }}>
-          <Button variant="primary" type="submit" className="me-3">
+          <Button variant="outline-success" type="submit" className="me-3">
             확인
           </Button>
           <Button
-            variant="secondary"
+            variant="outline-danger"
             onClick={() => setIsAddCertificate(false)}
           >
             취소

@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { Button, Form, Col, Row } from "react-bootstrap";
-import * as Api from "../../api";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
+import React, { useState } from 'react';
+import { Button, Form, Col, Row } from 'react-bootstrap';
+import * as Api from '../../api';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
 
 function EducationEditFrom({
   portfolioOwnerId,
@@ -29,7 +29,7 @@ function EducationEditFrom({
       major,
       position,
     });
-    const res = await Api.get("educationlist", user_id);
+    const res = await Api.get('educationlist', user_id);
     setEducationList(res.data);
     console.log(res.data);
     setIsEditing(false);
@@ -84,10 +84,10 @@ function EducationEditFrom({
 
       <Form.Group as={Row} className="mt-3 text-center">
         <Col sm={{ span: 20 }}>
-          <Button variant="primary" type="submit" className="me-3">
+          <Button variant="outline-success" type="submit" className="me-3">
             확인
           </Button>
-          <Button variant="secondary" onClick={() => setIsEditing(false)}>
+          <Button variant="outline-danger" onClick={() => setIsEditing(false)}>
             취소
           </Button>
         </Col>
