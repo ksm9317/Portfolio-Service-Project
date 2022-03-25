@@ -20,6 +20,7 @@ function Portfolio() {
   // 아래 코드를 보면, isFetchCompleted가 false이면 "loading..."만 반환되어서, 화면에 이 로딩 문구만 뜨게 됨.
   const [isFetchCompleted, setIsFetchCompleted] = useState(false);
   const userState = useContext(UserStateContext);
+  const [admin, setAdmin] = useState(false);
 
   const fetchPorfolioOwner = async (ownerId) => {
     // 유저 id를 가지고 "/users/유저id" 엔드포인트로 요청해 사용자 정보를 불러옴.
@@ -50,6 +51,7 @@ function Portfolio() {
       // 해당 유저 id로 fetchPorfolioOwner 함수를 실행함.
       fetchPorfolioOwner(ownerId);
     }
+    setAdmin(userState.user.admin);
   }, [params, userState, navigate]);
 
   if (!isFetchCompleted) {
@@ -62,30 +64,30 @@ function Portfolio() {
         <Col md="auto">
           <User
             portfolioOwnerId={portfolioOwner.id}
-            isEditable={portfolioOwner.id === userState.user?.id}
+            isEditable={portfolioOwner.id === userState.user?.id || admin}
           />
           <CommentList
             portfolioOwnerId={portfolioOwner.id}
             currentUserId={userState.user?.id}
-            isEditable={portfolioOwner.id === userState.user?.id}
+            isEditable={portfolioOwner.id === userState.user?.id || admin}
           />
         </Col>
         <Col>
           <Education
             portfolioOwnerId={portfolioOwner.id}
-            isEditable={portfolioOwner.id === userState.user?.id}
+            isEditable={portfolioOwner.id === userState.user?.id || admin}
           />
           <Award
             portfolioOwnerId={portfolioOwner.id}
-            isEditable={portfolioOwner.id === userState.user?.id}
+            isEditable={portfolioOwner.id === userState.user?.id || admin}
           />
           <Project
             portfolioOwnerId={portfolioOwner.id}
-            isEditable={portfolioOwner.id === userState.user?.id}
+            isEditable={portfolioOwner.id === userState.user?.id || admin}
           />
           <Certificate
             portfolioOwnerId={portfolioOwner.id}
-            isEditable={portfolioOwner.id === userState.user?.id}
+            isEditable={portfolioOwner.id === userState.user?.id || admin}
           />
         </Col>
       </Row>

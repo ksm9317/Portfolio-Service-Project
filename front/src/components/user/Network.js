@@ -25,9 +25,11 @@ function Network() {
   return (
     <Container fluid>
       <Row xs="auto" className="jusify-content-center">
-        {users.map((user) => (
-          <UserCard key={user.id} user={user} isNetwork />
-        ))}
+        {users
+          .filter((u) => u.admin === false)
+          .map((user) => (
+            <UserCard key={user.id} user={user} isNetwork />
+          ))}
       </Row>
     </Container>
   );

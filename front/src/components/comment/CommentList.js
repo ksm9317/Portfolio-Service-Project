@@ -3,15 +3,20 @@ import * as Api from "../../api";
 import { Button, Card, Form } from "react-bootstrap";
 import CommentCard from "./CommentCard";
 
-function CommentList({ portfolioOwnerId, currentUserId }) {
+function CommentList({ portfolioOwnerId, currentUserId, isEditable }) {
   const [commentList, setCommentList] = useState(null);
   const [content, setContent] = useState(null);
+  const [commenterName, setCommenterName] = useState(null);
+
   useEffect(() => {
     // "commentList/유저id" 엔드포인트로 GET 요청을 하고, commentList response의 data로 세팅함.
     Api.get("commentList", portfolioOwnerId).then((res) =>
       setCommentList(res.data)
     );
-  }, [portfolioOwnerId]);
+    Api.get("users", currentUserId).then((res) =>
+      setCommenterName(res.data.name)
+    );
+  }, [portfolioOwnerId, currentUserId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,11 +25,13 @@ function CommentList({ portfolioOwnerId, currentUserId }) {
     await Api.post(`comment/create/${user_id}`, {
       commentTo: user_id,
       commenter: currentUserId,
+      commenterName,
       content,
     });
 
     const res = await Api.get("commentList", user_id);
     setCommentList(res.data);
+    console.log(res.data);
     setContent("");
   };
   return (
@@ -40,6 +47,7 @@ function CommentList({ portfolioOwnerId, currentUserId }) {
               currentUserId={currentUserId}
               comment={comment}
               setCommentList={setCommentList}
+              isEditable={isEditable}
             />
           ))
         ) : (

@@ -8,6 +8,7 @@ function EducationCard({
   education,
   setEducationList,
   isEditable,
+  admin,
 }) {
   const currentId = education?.id;
   const school = education?.school;
@@ -15,7 +16,7 @@ function EducationCard({
   const position = education?.position;
   const current = { currentId, school, major, position };
   const [isEditing, setIsEditing] = useState(false);
-
+  console.log(admin);
   const handleSubmit = async (e) => {
     //삭제 버튼을 누른 education의 id를 이용하여 삭제 요청을 보냄
     e.preventDefault();
