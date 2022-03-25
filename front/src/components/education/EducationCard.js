@@ -1,7 +1,7 @@
-import { Card, Button, Col } from "react-bootstrap";
-import EducationEditForm from "./EducationEditForm";
-import { useState } from "react";
-import * as Api from "../../api";
+import { Card, Button, Col } from 'react-bootstrap';
+import EducationEditForm from './EducationEditForm';
+import { useState } from 'react';
+import * as Api from '../../api';
 
 function EducationCard({
   portfolioOwnerId,
@@ -21,7 +21,7 @@ function EducationCard({
     e.preventDefault();
     const user_id = portfolioOwnerId;
     await Api.delete(`educationDelete/${current?.currentId}`);
-    const res = await Api.get("educationlist", user_id);
+    const res = await Api.get('educationlist', user_id);
     setEducationList(res.data);
   };
 
@@ -39,23 +39,23 @@ function EducationCard({
           <Card.Text>
             <div className="justify-content-between align-items-center mb-2 row">
               <div className="col">
-                {school} <br />
-                <span className="text-muted">{major}</span> <br />
-                <span className="text-muted">{position}</span>
+                <span className="main"># {school}</span> <br />
+                <span className="sub text-muted">- {major}</span> <br />
+                <span className="sub text-muted">- {position}</span>
               </div>
               {isEditable && (
                 <Col className="text-center col-2">
                   <Button
-                    style={{ marginRight: "10px" }}
-                    variant="outline-info"
-                    size="sm"
+                    style={{ marginRight: '10px' }}
+                    variant="outline-dark"
+                    size="s"
                     onClick={() => setIsEditing(true)}
                   >
                     편집
                   </Button>
                   <Button
-                    variant="outline-info"
-                    size="sm"
+                    variant="secondary"
+                    size="s"
                     onClick={(e) => {
                       handleSubmit(e);
                     }}

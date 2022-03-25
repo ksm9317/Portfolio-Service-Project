@@ -36,23 +36,19 @@ function AwardCard({ portfolioOwnerId, award, setUser, isEditable }) {
           <Card.Text>
             <div className="justify-content-between align-items-center mb-2 row">
               <Col>
-                <span>{title}</span> <br />
-                <span className="text-muted">{description}</span>
+                <span className="main"># {title}</span> <br />
+                <span className="sub text-muted ">- {description}</span>
               </Col>
               {isEditable && (
                 <Col className="text-center col-2">
                   <Button
-                    variant="outline-info"
-                    size="sm"
+                    variant="outline-dark"
+                    size="s"
                     onClick={() => setIsEditing(true)}
                   >
                     편집
                   </Button>
-                  <Button
-                    variant="outline-info"
-                    size="sm"
-                    onClick={handleDelete}
-                  >
+                  <Button variant="secondary" size="s" onClick={handleDelete}>
                     삭제
                   </Button>
                 </Col>

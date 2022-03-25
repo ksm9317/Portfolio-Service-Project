@@ -1,7 +1,7 @@
-import { Card, Button, Col } from "react-bootstrap";
-import ProjectEditForm from "./ProjectEditForm";
-import { useState } from "react";
-import * as Api from "../../api";
+import { Card, Button, Col } from 'react-bootstrap';
+import ProjectEditForm from './ProjectEditForm';
+import { useState } from 'react';
+import * as Api from '../../api';
 
 function ProjectCard({
   portfolioOwnerId,
@@ -22,7 +22,7 @@ function ProjectCard({
     e.preventDefault();
     const user_id = portfolioOwnerId;
     await Api.delete(`projects/${current?.currentId}/delete`);
-    const res = await Api.get("projectlist", user_id);
+    const res = await Api.get('projectlist', user_id);
     setProjectList(res.data);
   };
 
@@ -40,24 +40,24 @@ function ProjectCard({
           <Card.Text>
             <div className="justify-content-between align-items-center mb-2 row">
               <div className="col">
-                {title} <br />
-                <span className="text-muted">{description}</span> <br />
-                <span className="text-muted">
-                  {from_data}~{to_data}
+                <span className="main"># {title}</span> <br />
+                <span className="sub text-muted">- {description}</span> <br />
+                <span className="sub text-muted">
+                  - {from_data}~{to_data}
                 </span>
               </div>
               {isEditable && (
                 <Col className="text-center col-2">
                   <Button
-                    variant="outline-info"
-                    size="sm"
+                    variant="outline-dark"
+                    size="s"
                     onClick={() => setIsEditing(true)}
                   >
                     편집
                   </Button>
                   <Button
-                    variant="outline-info"
-                    size="sm"
+                    variant="secondary"
+                    size="s"
                     onClick={(e) => {
                       handleSubmit(e);
                     }}
