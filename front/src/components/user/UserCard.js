@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router-dom";
-import { Card, Row, Button, Col } from "react-bootstrap";
-import { useState } from "react";
-import ExportToPdf from "../pdf/ExportToPdf";
+import { useNavigate } from 'react-router-dom';
+import { Card, Row, Button, Col } from 'react-bootstrap';
+import { useState } from 'react';
+import ExportToPdf from '../pdf/ExportToPdf';
 
 function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
   const navigate = useNavigate();
@@ -12,19 +12,21 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
   const saved = { savedName, savedEmail, savedDescription };
 
   return (
-    <Card className="mb-2 mr-5">
+    <Card className="mb-2 mr-5 ms-3">
       <Card.Body>
         <Row className="justify-content-md-center">
           <Card.Img
-            style={{ width: "10rem", height: "8rem" }}
+            style={{ width: '15rem', height: '14rem', borderRadius: '10rem' }}
             className="mb-3"
             src="http://placekitten.com/200/200"
             alt="랜덤 고양이 사진 (http://placekitten.com API 사용)"
           />
         </Row>
-        <Card.Title>{user?.name}</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">{user?.email}</Card.Subtitle>
-        <Card.Text>{user?.description}</Card.Text>
+        <Card.Title className="userName mb-3">{user?.name}</Card.Title>
+        <Card.Subtitle className="userEmail mb-3 text-muted">
+          {user?.email}
+        </Card.Subtitle>
+        <Card.Text className="userDescription">{user?.description}</Card.Text>
 
         {isPdf && (
           <ExportToPdf setIsPdf={setIsPdf} user_id={user.id} saved={saved} />
@@ -35,15 +37,15 @@ function UserCard({ user, setIsEditing, isEditable, isNetwork }) {
             <Row className="mt-3 text-center text-info">
               <Col sm={{ span: 20 }}>
                 <Button
-                  variant="outline-info"
-                  size="sm"
+                  variant="outline-dark"
+                  size="s"
                   onClick={() => setIsEditing(true)}
                 >
                   편집
                 </Button>
                 <Button
-                  variant="outline-info"
-                  size="sm"
+                  className="pdfBtn"
+                  size="s"
                   onClick={() => setIsPdf(true)}
                 >
                   Export to PDF
