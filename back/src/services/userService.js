@@ -56,6 +56,11 @@ class userAuthService {
     const id = user.id;
     const name = user.name;
     const description = user.description;
+    const admin = user.admin;
+    
+    if(admin === true){
+      console.log("관리자 로그인입니다",user.admin);
+    }
 
     const loginUser = {
       token,
@@ -63,6 +68,7 @@ class userAuthService {
       email,
       name,
       description,
+      admin,
       errorMessage: null,
     };
 

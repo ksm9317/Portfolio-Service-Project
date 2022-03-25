@@ -11,7 +11,6 @@ pdfRouter.post(
   async (req, res) => {
     try {
       const user_id = req.params.portfolioOwnerId;
-      console.log(user_id, "abc");
       const { name, email, tel, description } = req.body;
       const data = await pdfService.pdfConverter({
         user_id,
