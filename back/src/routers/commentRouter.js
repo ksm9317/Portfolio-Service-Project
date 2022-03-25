@@ -2,6 +2,7 @@ import { Router } from "express";
 
 import { commentService } from "../services/commentService";
 import { login_required } from "../middlewares/login_required";
+import { userAuthService } from "../services/userService";
 
 const commentRouter = Router();
 
@@ -16,7 +17,10 @@ commentRouter.post(
     const commenter = req.currentUserId;
     const content = req.body.content;
 
+    const userName = await userAuthService.getUserInfo({ user_id: commenter });
+
     const newComment = await commentService.addComment({
+      name: userName.name,
       commentTo,
       commenter,
       content,

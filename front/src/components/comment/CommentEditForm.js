@@ -25,6 +25,7 @@ function CommentEditForm({
     const res = await Api.get("commentList", user_id);
     setCommentList(res.data);
     console.log(res.data);
+
     setIsEditing(false);
   };
 

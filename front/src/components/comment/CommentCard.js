@@ -8,6 +8,7 @@ function CommentCard({
   currentUserId,
   comment,
   setCommentList,
+  isEditable,
 }) {
   const [isEditing, setIsEditing] = useState(false);
 
@@ -33,7 +34,7 @@ function CommentCard({
           <Card.Text>
             <div className="justify-content-between align-items-center mb-2 row">
               <div className="col">
-                {comment.content} <br />
+                {comment.name}:{comment.content} <br />
               </div>
               <div className="col - lg - 1 col">
                 {currentUserId === comment.commenter && (

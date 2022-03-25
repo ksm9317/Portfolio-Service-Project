@@ -24,7 +24,8 @@ function ProjectAddFrom({ setIsAddProject, portfolioOwnerId, setProjectList }) {
       from_data,
       to_data,
     });
-    // 유저 정보는 response의 data임.
+    // 프로젝트 정보는 response의 data임.
+    // 해당 프로젝트 정보로 education을 세팅함.
     const res = await Api.get('projectlist', user_id);
     setProjectList(res.data);
     console.log(res.data);

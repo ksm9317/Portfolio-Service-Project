@@ -7,7 +7,6 @@ import EducationCard from './EducationCard';
 function Education({ portfolioOwnerId, isEditable }) {
   const [isAddEducation, setIsAddEducation] = useState(false);
   const [educationlist, setEducationList] = useState([]);
-
   useEffect(() => {
     // "educationlist/유저id" 엔드포인트로 GET 요청을 하고, educationlist를 response의 data로 세팅함.
     Api.get('educationlist', portfolioOwnerId).then((res) =>
