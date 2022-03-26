@@ -1,18 +1,18 @@
-import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { Container, Col, Row, Form, Button } from "react-bootstrap";
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Container, Col, Row, Form, Button } from 'react-bootstrap';
 
-import * as Api from "../../api";
-import { DispatchContext } from "../../App";
+import * as Api from '../../api';
+import { DispatchContext } from '../../App';
 
 function LoginForm() {
   const navigate = useNavigate();
   const dispatch = useContext(DispatchContext);
 
   //useState로 email 상태를 생성함.
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
   //useState로 password 상태를 생성함.
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
 
   //이메일이 abc@example.com 형태인지 regex를 이용해 확인함.
   const validateEmail = (email) => {
@@ -36,7 +36,7 @@ function LoginForm() {
 
     try {
       // "user/login" 엔드포인트로 post요청함.
-      const res = await Api.post("user/login", {
+      const res = await Api.post('user/login', {
         email,
         password,
       });
@@ -45,17 +45,17 @@ function LoginForm() {
       // JWT 토큰은 유저 정보의 token임.
       const jwtToken = user.token;
       // sessionStorage에 "userToken"이라는 키로 JWT 토큰을 저장함.
-      sessionStorage.setItem("userToken", jwtToken);
+      sessionStorage.setItem('userToken', jwtToken);
       // dispatch 함수를 이용해 로그인 성공 상태로 만듦.
       dispatch({
-        type: "LOGIN_SUCCESS",
+        type: 'LOGIN_SUCCESS',
         payload: user,
       });
 
       // 기본 페이지로 이동함.
-      navigate("/", { replace: true });
+      navigate('/', { replace: true });
     } catch (err) {
-      console.log("로그인에 실패하였습니다.\n", err);
+      console.log('로그인에 실패하였습니다.\n', err);
     }
   };
 
@@ -96,7 +96,12 @@ function LoginForm() {
 
             <Form.Group as={Row} className="mt-3 text-center">
               <Col sm={{ span: 20 }}>
-                <Button variant="primary" type="submit" disabled={!isFormValid}>
+                <Button
+                  className="loginBtn"
+                  variant="primary"
+                  type="submit"
+                  disabled={!isFormValid}
+                >
                   로그인
                 </Button>
               </Col>
@@ -104,7 +109,7 @@ function LoginForm() {
 
             <Form.Group as={Row} className="mt-3 text-center">
               <Col sm={{ span: 20 }}>
-                <Button variant="light" onClick={() => navigate("/register")}>
+                <Button variant="light" onClick={() => navigate('/register')}>
                   회원가입하기
                 </Button>
               </Col>

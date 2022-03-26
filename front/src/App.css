@@ -96,3 +96,9 @@ div > button {
   border: none !important;
   font-weight: bold !important;
 }
+
+.loginBtn {
+  background-color: #2856ac !important;
+  border: none !important;
+  font-weight: bold !important;
+}
