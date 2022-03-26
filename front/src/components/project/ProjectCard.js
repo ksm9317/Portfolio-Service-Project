@@ -50,14 +50,12 @@ function ProjectCard({
                 <Col className="text-center col-2">
                   <Button
                     variant="outline-dark"
-                    size="s"
                     onClick={() => setIsEditing(true)}
                   >
                     편집
                   </Button>
                   <Button
                     variant="secondary"
-                    size="s"
                     onClick={(e) => {
                       handleSubmit(e);
                     }}

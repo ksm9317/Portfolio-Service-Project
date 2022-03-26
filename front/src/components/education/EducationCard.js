@@ -49,14 +49,12 @@ function EducationCard({
                   <Button
                     style={{ marginRight: '10px' }}
                     variant="outline-dark"
-                    size="s"
                     onClick={() => setIsEditing(true)}
                   >
                     편집
                   </Button>
                   <Button
                     variant="secondary"
-                    size="s"
                     onClick={(e) => {
                       handleSubmit(e);
                     }}

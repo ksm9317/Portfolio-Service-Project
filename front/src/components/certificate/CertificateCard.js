@@ -52,12 +52,11 @@ function CertificateCard({
                 <Col className="text-center col-2">
                   <Button
                     variant="outline-dark"
-                    size="s"
                     onClick={() => setIsEditing(true)}
                   >
                     편집
                   </Button>
-                  <Button variant="secondary" size="s" onClick={handleDelete}>
+                  <Button variant="secondary" onClick={handleDelete}>
                     삭제
                   </Button>
                 </Col>

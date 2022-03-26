@@ -36,7 +36,7 @@ function CommentCard({
               <div className="col">
                 {comment.name}:{comment.content} <br />
               </div>
-              <div className="col - lg - 1 col">
+              <div className="col-5">
                 {currentUserId === comment.commenter && (
                   <div style={{ display: "flex" }}>
                     <Button
