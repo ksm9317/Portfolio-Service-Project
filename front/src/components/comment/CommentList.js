@@ -36,7 +36,7 @@ function CommentList({ portfolioOwnerId, currentUserId, isEditable }) {
   return (
     <Card className="mb-3 ms-3">
       <Card.Body>
-        <Card.Title className="commentTitle">댓글</Card.Title>
+        <Card.Title className="commentTitle">COMMENT</Card.Title>
 
         {commentList !== null ? (
           commentList.map((comment) => (
@@ -63,12 +63,12 @@ function CommentList({ portfolioOwnerId, currentUserId, isEditable }) {
                 onChange={(e) => setContent(e.target.value)}
               />
               <Button
-                className="mt-2"
+                className="commentBtn mt-2"
                 variant="outline-dark"
                 type="submit"
                 style={{ margin: "10px auto", display: "flex" }}
               >
-                게시
+                등록
               </Button>
             </Form.Group>
           </Form>
