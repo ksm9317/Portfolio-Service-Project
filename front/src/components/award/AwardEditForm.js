@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Form, Col, Row } from 'react-bootstrap';
 import * as Api from '../../api';
 
-function AwardEditForm({ portfolioOwnerId, current, setUser, setIsEditing }) {
+function AwardEditForm({ portfolioOwnerId, current, setAwardList, setIsEditing }) {
   const [title, setTitle] = useState(current?.title);
   const [description, setDescription] = useState(current?.description);
 
@@ -15,7 +15,7 @@ function AwardEditForm({ portfolioOwnerId, current, setUser, setIsEditing }) {
       description,
     });
     const res = await Api.get('awardlist', user_id);
-    setUser(res.data);
+    setAwardList(res.data);
     console.log(res.data);
     setIsEditing(false);
   };

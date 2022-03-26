@@ -6,7 +6,7 @@ import * as Api from '../../api';
 function CertificateCard({
   portfolioOwnerId,
   certificate,
-  setUser,
+  setCertificateList,
   isEditable,
 }) {
   const currentId = certificate?.id;
@@ -19,7 +19,7 @@ function CertificateCard({
   const handleDelete = async () => {
     try {
       await Api.delete('certificates', certificate?.id);
-      setUser((current) => {
+      setCertificateList((current) => {
         const deleted = current.filter((e) => e.id !== certificate.id);
         return deleted;
       });
@@ -35,7 +35,7 @@ function CertificateCard({
           <CertificateEditForm
             portfolioOwnerId={portfolioOwnerId}
             current={current}
-            setUser={setUser}
+            setCertificateList={setCertificateList}
             setIsEditing={setIsEditing}
           />
         ) : (

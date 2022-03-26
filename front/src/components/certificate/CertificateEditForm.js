@@ -7,7 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 function CertificateEditForm({
   portfolioOwnerId,
   current,
-  setUser,
+  setCertificateList,
   setIsEditing,
 }) {
   const [title, setTitle] = useState(current?.title);
@@ -27,7 +27,7 @@ function CertificateEditForm({
       });
       // "certificatelist"에서 certificates 목록 다시 받아옴
       await Api.get('certificatelist', portfolioOwnerId).then((res) =>
-        setUser(res.data)
+        setCertificateList(res.data)
       );
       // isEditing을 false로 세팅함.
       setIsEditing(false);

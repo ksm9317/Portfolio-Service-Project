@@ -6,24 +6,23 @@ import AwardCard from './AwardCard';
 
 function Award({ portfolioOwnerId, isEditable }) {
   const [isAddAward, setIsAddAward] = useState(false);
-  const [user, setUser] = useState([]);
+  const [awardList, setAwardList] = useState([]);
 
   useEffect(() => {
-    // "users/유저id" 엔드포인트로 GET 요청을 하고, user를 response의 data로 세팅함.
-    Api.get('awardlist', portfolioOwnerId).then((res) => setUser(res.data));
+    Api.get('awardlist', portfolioOwnerId).then((res) => setAwardList(res.data));
   }, [portfolioOwnerId]);
 
   return (
     <Card className="mb-3 me-3">
       <Card.Body>
         <Card.Title className="comTitle">AWARDS</Card.Title>
-        {user !== null &&
-          user.map((award) => (
+        {awardList !== null &&
+          awardList.map((award) => (
             <AwardCard
               key={award.id}
               portfolioOwnerId={portfolioOwnerId}
               award={award}
-              setUser={setUser}
+              setAwardList={setAwardList}
               isEditable={isEditable}
             />
           ))}
@@ -31,7 +30,7 @@ function Award({ portfolioOwnerId, isEditable }) {
           <AwardAddForm
             setIsAddAward={setIsAddAward}
             portfolioOwnerId={portfolioOwnerId}
-            setUser={setUser}
+            setAwardList={setAwardList}
           />
         )}
         {isEditable && (
