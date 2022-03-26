@@ -41,7 +41,7 @@ function CommentCard({
                   <div style={{ display: "flex" }}>
                     <Button
                       style={{ margin: "auto" }}
-                      variant="outline-info"
+                      variant="outline-dark"
                       size="sm"
                       onClick={() => {
                         setIsEditing(true);
@@ -52,7 +52,7 @@ function CommentCard({
 
                     <Button
                       style={{ margin: "auto" }}
-                      variant="outline-info"
+                      variant="secondary"
                       size="sm"
                       onClick={(e) => {
                         handleSubmit(e);

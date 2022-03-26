@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import * as Api from '../../api';
-import { Button, Card, Form } from 'react-bootstrap';
-import CommentCard from './CommentCard';
+import React, { useState, useEffect } from "react";
+import * as Api from "../../api";
+import { Button, Card, Form } from "react-bootstrap";
+import CommentCard from "./CommentCard";
 
 function CommentList({ portfolioOwnerId, currentUserId, isEditable }) {
   const [commentList, setCommentList] = useState(null);
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState("");
   const [commenterName, setCommenterName] = useState(null);
 
   useEffect(() => {
     // "commentList/유저id" 엔드포인트로 GET 요청을 하고, commentList response의 data로 세팅함.
-    Api.get('commentList', portfolioOwnerId).then((res) =>
+    Api.get("commentList", portfolioOwnerId).then((res) =>
       setCommentList(res.data)
     );
-    Api.get('users', currentUserId).then((res) =>
+    Api.get("users", currentUserId).then((res) =>
       setCommenterName(res.data.name)
     );
   }, [portfolioOwnerId, currentUserId]);
@@ -29,9 +29,9 @@ function CommentList({ portfolioOwnerId, currentUserId, isEditable }) {
       content,
     });
 
-    const res = await Api.get('commentList', user_id);
+    const res = await Api.get("commentList", user_id);
     setCommentList(res.data);
-    setContent('');
+    setContent("");
   };
   return (
     <Card className="mb-3 ms-3">
@@ -64,9 +64,9 @@ function CommentList({ portfolioOwnerId, currentUserId, isEditable }) {
               />
               <Button
                 className="mt-2"
-                variant="outline-primary"
+                variant="outline-dark"
                 type="submit"
-                style={{ margin: '10px auto', display: 'flex' }}
+                style={{ margin: "10px auto", display: "flex" }}
               >
                 게시
               </Button>

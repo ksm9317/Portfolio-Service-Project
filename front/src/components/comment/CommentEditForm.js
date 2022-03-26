@@ -24,8 +24,6 @@ function CommentEditForm({
     // 유저 정보는 response의 data임.
     const res = await Api.get("commentList", user_id);
     setCommentList(res.data);
-    console.log(res.data);
-
     setIsEditing(false);
   };
 
@@ -42,10 +40,10 @@ function CommentEditForm({
 
       <Form.Group as={Row} className="mt-3 text-center">
         <Col sm={{ span: 20 }}>
-          <Button variant="primary" type="submit" className="me-3">
+          <Button variant="outline-success" type="submit" className="me-3">
             확인
           </Button>
-          <Button variant="secondary" onClick={() => setIsEditing(false)}>
+          <Button variant="outline-danger" onClick={() => setIsEditing(false)}>
             취소
           </Button>
         </Col>
