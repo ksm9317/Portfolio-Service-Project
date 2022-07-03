@@ -7,12 +7,12 @@ import CertificateCard from './CertificateCard';
 function Certificate({ portfolioOwnerId, isEditable }) {
   //isAddAward 항목 추가 상태를 결정
   const [isAddCertificate, setIsAddCertificate] = useState(false);
-  const [user, setUser] = useState([]);
+  const [certificateList, setCertificateList] = useState([]);
 
   useEffect(() => {
     const fetch = async () => {
       const res = await Api.get(`certificatelist/${portfolioOwnerId}`);
-      setUser(res.data);
+      setCertificateList(res.data);
     };
     fetch();
   }, [portfolioOwnerId]);
@@ -21,13 +21,13 @@ function Certificate({ portfolioOwnerId, isEditable }) {
     <Card className="mb-3 me-3">
       <Card.Body>
         <Card.Title className="comTitle">CERTIFICATE</Card.Title>
-        {user !== null &&
-          user.map((certificate) => (
+        {certificateList !== null &&
+          certificateList.map((certificate) => (
             <CertificateCard
               key={certificate.id}
               portfolioOwnerId={portfolioOwnerId}
               certificate={certificate}
-              setUser={setUser}
+              setCertificateList={setCertificateList}
               isEditable={isEditable}
             />
           ))}
@@ -35,7 +35,7 @@ function Certificate({ portfolioOwnerId, isEditable }) {
           <CertificateAddForm
             setIsAddCertificate={setIsAddCertificate}
             portfolioOwnerId={portfolioOwnerId}
-            setUser={setUser}
+            setCertificateList={setCertificateList}
           />
         )}
         {isEditable && (

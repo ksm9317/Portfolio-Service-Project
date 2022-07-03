@@ -3,7 +3,7 @@ import AwardEditForm from './AwardEditForm';
 import { useState } from 'react';
 import * as Api from '../../api';
 
-function AwardCard({ portfolioOwnerId, award, setUser, isEditable }) {
+function AwardCard({ portfolioOwnerId, award, setAwardList, isEditable }) {
   const currentId = award?.id;
   const title = award?.title;
   const description = award?.description;
@@ -13,7 +13,7 @@ function AwardCard({ portfolioOwnerId, award, setUser, isEditable }) {
   const handleDelete = async () => {
     try {
       await Api.delete('awardDelete', award?.id);
-      setUser((current) => {
+      setAwardList((current) => {
         const deleted = current.filter((e) => e.id !== award.id);
         return deleted;
       });
@@ -29,7 +29,7 @@ function AwardCard({ portfolioOwnerId, award, setUser, isEditable }) {
           <AwardEditForm
             portfolioOwnerId={portfolioOwnerId}
             current={current}
-            setUser={setUser}
+            setAwardList={setAwardList}
             setIsEditing={setIsEditing}
           />
         ) : (

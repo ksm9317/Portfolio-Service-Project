@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Form, Col, Row } from 'react-bootstrap';
 import * as Api from '../../api';
 
-function AwardAddForm({ setIsAddAward, portfolioOwnerId, setUser }) {
+function AwardAddForm({ setIsAddAward, portfolioOwnerId, setAwardList }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
@@ -16,7 +16,7 @@ function AwardAddForm({ setIsAddAward, portfolioOwnerId, setUser }) {
     });
 
     const res = await Api.get('awardlist', user_id);
-    setUser(res.data);
+    setAwardList(res.data);
     console.log(res.data);
     // isEditing을 false로 세팅함.
     setIsAddAward(false);
